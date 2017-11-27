@@ -154,7 +154,6 @@
           console.log(error);
           // [END_EXCLUDE]
         });
-        window.location.href = "add.html";
 
 
         var database = firebase.database();
@@ -162,7 +161,7 @@
         var uid = user.uid;
 
         firebase.database().ref().child('users').child(uid).set({
-          email:email,
+          email:email
           name:name
 
         });
