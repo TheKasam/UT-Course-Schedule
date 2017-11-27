@@ -108,6 +108,7 @@
           <button type="button" onclick="handleSignUp()" class="btn btn-primary">GET STARTED</button>
           <input id='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
           <input id='password' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+          <input id='name' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
 
 
         </div>
@@ -127,6 +128,8 @@
     function handleSignUp() {
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
+      var name = document.getElementById('name').value;
+
       if (email.length < 4) {
         alert('Please enter an email address.');
         return;
@@ -135,11 +138,39 @@
         alert('Please enter a password.');
         return;
         }
-      }
+
+        // Sign in with email and pass.
+        // [START createwithemail]
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode == 'auth/weak-password') {
+            alert('The password is too weak.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+          // [END_EXCLUDE]
+        });
+      }// [END authwithemail]
 
       </script>
 
-
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDwubUIaSZVmk4slijsHdxQSMIaUzFPnyk",
+          authDomain: "courseschedule-8a816.firebaseapp.com",
+          databaseURL: "https://courseschedule-8a816.firebaseio.com",
+          projectId: "courseschedule-8a816",
+          storageBucket: "courseschedule-8a816.appspot.com",
+          messagingSenderId: "386132172955"
+        };
+        firebase.initializeApp(config);
+      </script>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
