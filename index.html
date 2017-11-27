@@ -41,7 +41,7 @@
         <div id="navbar" class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a class="font-weight-light" href="../navbar-static-top/">Sign In</a></li>
+            <li><a  class="font-weight-light" href="../navbar-static-top/">Sign In</a></li>
             <li><a class="font-weight-light" href="./">Sign Up</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -51,7 +51,7 @@
 
     <div class='container b'>
       <div class='text-item'>
-          <p class='body-a'>Need To Stay Updated With<br>The Course Schedule?</p>
+          <p id='initial' class='body-a'>Need To Stay Updated With<br>The Course Schedule?</p>
       </div>
 
 
@@ -154,7 +154,6 @@
           console.log(error);
           // [END_EXCLUDE]
         });
-        window.location.href = "add.html";
 
 
         var database = firebase.database();
@@ -168,6 +167,21 @@
         });
 
 
+
+        return firebase.database().ref('/users/' + uid).once('value').then(function(snapshot) {
+          var username = snapshot.val().name ;
+          document.getElementById("initial").innerHTML = username;
+        });
+
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            window.location.href = 'add.html';
+          }
+          else{
+            document.write('bob');
+
+          }
+        });
 
       }// [END authwithemail]
 

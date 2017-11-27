@@ -50,15 +50,7 @@
 
 
     <div class='container b'>
-      <div class='text-item'>
-          <p class='body-a'>Need To Stay Updated With<br>The Course Schedule?</p>
-      </div>
 
-
-      <div class='spacer'>
-      </div>
-
-      <div class='form-item'>
 
     </div>
 
@@ -66,24 +58,16 @@
 
 
     <script>
-    /**
-     * Handles the sign up button press.
-     */
-    function changeInitital() {
-
-        var database = firebase.database();
-        var user = firebase.auth().currentUser;
-        var uid = user.uid;
-
-        firebase.database().ref().child('users').child(uid).set({
-          email:email
-          name:name
-
-        });
+      document.write('bob');
 
 
 
-      }// [END authwithemail]
+      return firebase.database().ref('/users/' + uid).once('value').then(function(snapshot) {
+        var username = snapshot.val().name ;
+        document.getElementById("initial").innerHTML = username;
+      });
+
+
 
       </script>
 
