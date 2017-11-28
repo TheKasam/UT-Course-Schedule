@@ -51,7 +51,10 @@
 
     <div class='container b'>
       <div class='text-item'>
-          <p id='initial' class='body-a'>Need To Stay Updated With<br>The Course Schedule?</p>
+          <p id='initial' class='body-a'>Need To Stay Updated With
+            <br>The Course Schedule?<br>
+            <br>Keep Track of Classes, Professors<br>
+            <br>And we’ll let know know if a class opens up or something changes.</p>
       </div>
 
 
@@ -172,7 +175,8 @@
          return firebase.database().ref().child('users').child(uid).set({
 
            email:email,
-           name:name
+           name:name,
+           uteid:19827
 
          }).then(() => {
                 document.location.href = 'add.html';
