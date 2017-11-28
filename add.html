@@ -79,8 +79,9 @@
                         });
                         document.location.href = 'index.html';
                 }
-                </script>
-                </a> </li>
+                </script></a>
+
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -89,15 +90,29 @@
 
     <div class='container b'>
 
+        <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="unique id">
+        <button id='add-btn'type="button" class="btn btn-primary">ADD</button>
 
     </div>
 
     </body>
 
+    <script>
 
+    function addClass(){
+        var classId = document.getElementById('unique-id').value;
+        var user = firebase.auth().currentUser;
+        var uid = user.uid;
+        var updates = {};
+        updates['/users/' + uid+"/uteid"] = classId;
 
+        return firebase.database().ref().update(updates);
 
+    }
 
+    document.getElementById('add-btn').addEventListener('click', addClass, false);
+
+    </script>
 
       <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
       <script>
