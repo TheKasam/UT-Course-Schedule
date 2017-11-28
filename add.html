@@ -41,8 +41,10 @@
         <div id="navbar" class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a class="font-weight-light" href="../navbar-static-top/">Following</a></li>
-            <li><a id='initial' class="font-weight-light" href="./">Sign Up</a></li>
+            <li><a class="font-weight-light">Following</a></li>
+            <li><a  class="font-weight-light">Sign Up</a></li>
+
+            <li><a id='initial' onclick="handleSignOut()"class="font-weight-light" >Sign Out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -58,18 +60,49 @@
 
 
     <script>
-      document.write('bob');
+
+
+      function initApp() {
+
+          firebase.auth().onAuthStateChanged(function(user) {
+
+            if (user) {
+              // User is signed in.
+              var uid = user.uid;
+
+              firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
+              var username = snapshot.val().name ;
+              document.getElementById("initial").textContent = username;
+            });
+
+            } else {
+            }
+
+          });
 
 
 
-      return firebase.database().ref('/users/' + uid).once('value').then(function(snapshot) {
-        var username = snapshot.val().name ;
-        document.getElementById("initial").innerHTML = username;
-      });
+
+        }
+
+      window.onload = function() {
+        initApp();
+      };
+
+        function handleSignOut(){
+            firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+            }, function(error) {
+            alert(error);
+            });
+            document.location.href = 'index.html';
+
+    //FirebaseAuth.getInstance().signOut();
+
+    }
+    </script>
 
 
-
-      </script>
 
       <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
       <script>
