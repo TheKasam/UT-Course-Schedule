@@ -7,7 +7,13 @@ import time
 
 
 def main():
+    browser = logIn()
+    page = browser.get_current_page()
+    with open("soup.html", "w") as file:
+        file.write(str(page))
 
+
+def logIn():
     # Connect to Google
     browser = mechanicalsoup.StatefulBrowser()
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/")
@@ -22,22 +28,20 @@ def main():
     browser.submit_selected(btnName="Login.Submit")
 
     stall(8)
-    #resp2 = requests.get("https://utdirect.utexas.edu/apps/registrar/course_schedule/20179/results/?ccyys=20179&fos_fl=ASE&level=L&search_type_main=FIELD&x=114&y=13")
+
+
     browser.select_form('form[name="Response"]')
     browser.submit_selected()
-    #browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/")
 
+    stall(8)
 
     browser.select_form('form[name="getform"]')
     browser.submit_selected()
 
-    start = time.time()
-    end = time.time()
-    while end - start < 8:
-        end = time.time()
-    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=FIELD&fos_fl=ASL&level=L&x=65&y=21")
+    stall(8)
 
-    print(browser.get_current_page())
+    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=FIELD&fos_fl=ASL&level=L&x=65&y=21")
+    return(browser)
 
 
 def stall(sec):
@@ -45,3 +49,10 @@ def stall(sec):
     end = time.time()
     while end - start < sec:
         end = time.time()
+
+
+
+
+
+
+main()

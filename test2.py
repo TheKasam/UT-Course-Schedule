@@ -1,6 +1,26 @@
+import re
+import mechanicalsoup
+import bs4 as bs
 
-import requests
 
 
-resp2 = requests.get("https://utdirect.utexas.edu/apps/registrar/course_schedule/20179/results/?ccyys=20179&fos_fl=ASE&level=L&search_type_main=FIELD&x=114&y=13")
-print(resp2.text)
+with open("soup.html") as f:
+  soup = bs.BeautifulSoup(f,'lxml')
+
+
+u = soup.find('a',{'title':"Unique number"})
+b = u.parent.parent
+print(b.get('class'))
+
+def fineUnique():
+    pass
+
+
+
+
+
+def findHeaders():
+    headers = []
+    for header in soup.find_all('td',{'class':'course_header'}):
+        headers.append(header)
+    return headers
