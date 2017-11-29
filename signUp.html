@@ -151,11 +151,11 @@
           var errorMessage = error.message;
           // [START_EXCLUDE]
           if (errorCode == 'auth/weak-password') {
-            document.getElementById('initial').textContent = 'The password is too weak';
+            //document.getElementById('initial').textContent = 'The password is too weak';
 
             return;
           } else if (errorMessage !=null || errorMessage !='') {
-            document.getElementById('initial').textContent = errorMessage;
+            //document.getElementById('initial').textContent = errorMessage;
             return;
           }
         console.log(error);
