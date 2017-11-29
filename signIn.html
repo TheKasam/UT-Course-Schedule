@@ -42,23 +42,24 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li><a  class="font-weight-light" >Sign In</a></li>
-            <li><a class="font-weight-light" href='index.html' >Sign Up</a></li>
+            <li><a class="font-weight-light" href='signUp.html' >Sign Up</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-
     <div class='container b'>
       <div class='text-item'>
-          <p id='initial' class='body-a'>Need To Stay Updated With<br>The Course Schedule?</p>
-      </div>
-
+          <p id='initial' class='body-a'><strong>Need To Stay Updated With
+            <br>The Course Schedule?</strong><br>
+            <br>Keep Track of Classes, Professors<br>
+            <br>And we’ll let know know if a class opens up or something changes.</p>
+        </div>
 
       <div class='spacer'>
       </div>
 
-      <div class='form-item'>
+      <div class='form-item2'>
 
         <div class='header'>
           <p>Sign In</p>
@@ -103,12 +104,13 @@
                 </g>
           </svg>
 
-          <p class='l1'>EMAIL ADDRESS</p>
-
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
-          <input id='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <input id='password' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+          <p class='l1'>EMAIL ADDRESS</p>
+          <input id='email' type="email" class="enter-email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <p class='l3'>PASSWORD</p>
+          <input id='password' type="email" class="enter-password" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
 
+          <small id="emailHelp" class="have-account">need an account <a href='signUp.html'> <button id='already-have-account' type="button" class='sign' > sign up here</button></a></small>
 
         </div>
 
@@ -176,10 +178,10 @@
          if (user) {
            // User is signed in.
            var uid = user.uid;
-           document.getElementById('initial').textContent = 'signed in';
+//           document.getElementById('initial').textContent = 'signed in';
 
          } else {
-             document.getElementById('initial').textContent = 'not signed in';
+//             document.getElementById('initial').textContent = 'not signed in';
 
          }
 
