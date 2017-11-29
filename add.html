@@ -104,9 +104,16 @@
         var user = firebase.auth().currentUser;
         var uid = user.uid;
         var updates = {};
-        updates['/users/' + uid+"/uteid"] = classId;
+        updates['/users/' + uid+"/following"] = [classId];
 
+        return firebase.database().ref().child('courses').child(classId).set({
+        followers:[uid]
+        }).then(() => {
         return firebase.database().ref().update(updates);
+        });
+
+
+
 
     }
 
