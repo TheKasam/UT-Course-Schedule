@@ -105,10 +105,11 @@
         var uid = user.uid;
         var dataBase = firebase.database();
 
-        dataBase.ref().child('courses').child(classId).child('followers').push(uid);
+        dataBase.ref().child('courses').child(classId).set({
+        l:'l'
+        });
         dataBase.ref('/users/' + uid+"/following").push(classId);
-
-
+        dataBase.ref().child('courses_subscribers').child(classId).push(uid);
     }
 
     document.getElementById('add-btn').addEventListener('click', addClass, false);
