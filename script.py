@@ -20,6 +20,9 @@ def main():
     with open("soup.html") as f:
       soup = bs.BeautifulSoup(f,'lxml')
 
+    ref = db.reference('courses')
+    print(ref.get())
+    print(type(ref.get()))
 
     #print(saveUnique('40350',soup))
 
