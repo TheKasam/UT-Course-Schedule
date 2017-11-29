@@ -104,15 +104,25 @@
         var user = firebase.auth().currentUser;
         var uid = user.uid;
         var updates = {};
-        updates['/users/' + uid+"/following"] = [classId];
+       // updates['/users/' + uid+"/following"] = [classId];
 
-        return firebase.database().ref().child('courses').child(classId).set({
-        followers:[uid]
-        }).then(() => {
-        return firebase.database().ref().update(updates);
-        });
+  /*      ref.child("rooms").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+
+        if snapshot.hasChild("room1"){
+
+            print("true rooms exist")
+
+        }else{
+
+            print("false room doesn't exist")
+        }
 
 
+    }) */
+        var dataBase = firebase.database();
+        dataBase.ref().child('courses').child(classId).child('followers').push(uid);
+
+        dataBase.ref('/users/' + uid+"/following").push(classId);
 
 
     }
