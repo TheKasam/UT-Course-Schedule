@@ -141,43 +141,18 @@
         console.log(error);
         });
 
-        nextPage();
 
     }
 
-
-
-    function nextPage(){
-        document.getElementById('initial').textContent = 'success';
-
-        firebase.auth().onAuthStateChanged(function(user) {
-
-          if (user) {
-            // User is signed in.
-            document.location.href = 'add.html';
-
-          } else {
-          }
-
-        });
-
-
-    }
-
-
-    function bob(){
-    //document.getElementById('initial').textContent = 'sdioafjoij'
-    }
 
     function initApp() {
        // Listening for auth state changes.
-       // [START authstatelistener]
        firebase.auth().onAuthStateChanged(function(user) {
-         // [START_EXCLUDE silent]
 
          if (user) {
            // User is signed in.
            var uid = user.uid;
+            document.location.href = 'add.html';
 //           document.getElementById('initial').textContent = 'signed in';
 
          } else {
@@ -185,12 +160,10 @@
 
          }
 
-         //document.getElementById('quickstart-sign-in').disabled = false;
          // [END_EXCLUDE]
        });
        // [END authstatelistener]
-       document.getElementById('sign-in-btn').addEventListener('click', handleSignUp, false);
-       document.getElementById('sign-in-btn').addEventListener('click', bob, false);
+       document.getElementById('sign-in-btn').addEventListener('click', handleSignIn, false);
 
 
      }
