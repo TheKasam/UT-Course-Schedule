@@ -56,7 +56,6 @@ body {
 
 .t1{
   margin-top: 20%;
-  background-color: gray;
 }
 
 .container.b{
@@ -65,18 +64,16 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
 }
 
 .text-item{
   order:1;
-  background-color: gray;
+  width: 70vh;
 }
 
 .spacer{
   order: 2;
-  width: 400px;
-  background-color: green;
+  width: 200px;
 }
 
 .form-item{
@@ -119,7 +116,7 @@ body {
   width: 80%;
 
   margin-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .l1{
@@ -132,17 +129,71 @@ body {
   padding-left: 27px;
 }
 
-.btn{
+.enter-email{
   order: 3;
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.l2{
+  order: 4;
+  align-self: flex-start;
+
+  color: black;
+  font-size: 10px;
+
+  padding-left: 27px;
+}
+
+.enter-name{
+  order: 5;
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.l3{
+  order: 6;
+  align-self: flex-start;
+
+  color: black;
+  font-size: 10px;
+
+  padding-left: 27px;
+}
+
+.enter-password{
+  order: 7;
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.btn{
+  order: 8;
 
   background-color: #D68745;
 
+  margin-top: 15px;
+
   border: none;
   border-radius: 32px;
-  width: 181px;
+  width: 80%;
   height: 32px;
 
   letter-spacing: 1px;
   font-size: 10px;
   font-weight: 300px;
+}
+
+.have-account{
+  order: 9;
+  width: 80%;
+
+  text-align: center;
+  margin-top: 5px;
+}
+
+.sign-in{
+  background-color: none;
+  border: none;
+  color: orange;
 }
