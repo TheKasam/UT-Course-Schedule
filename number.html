@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="index.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <style type='text/css'>
+        html,body{height:100% !important;width:100% !important; margin:0px; padding:0px;}
+    </style>
+        <!--  height = 100x no of pages -->
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a  class="font-weight-light" >Sign In</a></li>
+            <li><a class="font-weight-light" href='signUp.html' >Sign Up</a></li> <!-- cccccccccccccccccccccc -->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class='container b'>
+      <div class='text-item'>
+          <p id='initial' class='body-a'><strong>Need To Stay Updated With
+            <br>The Course Schedule?</strong><br>
+            <br>Keep Track of Classes, Professors<br>
+            <br>And we’ll let know know if a class opens up or something changes.</p>
+        </div>
+
+      <div class='spacer'>
+      </div>
+
+      <div class='form-item2'>
+
+        <div class='header2'>
+          <p>Add your phone number to be <br> notified through text</p>
+        </div>
+
+        <div class='item-body'>
+
+          <button id='sign-in-btn'type="button" class="btn btn-primary">Add Number</button>
+          <p class='l12'>Phone Number</p>
+          <input id='email' type="email" class="enter-number" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="512-645-5157">
+
+          <small id="emailHelp" class="have-account"><a href='signUp.html'> <button id='already-have-account' type="button" class='sign' > Skip </button></a> you can add it later </small>
+
+        </div>
+
+
+
+
+    </div>
+
+    </body>
+
+
+    <script>
+
+    function handleSignIn(){
+
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        });
+
+
+    }
+
+
+    function initApp() {
+       // Listening for auth state changes.
+       firebase.auth().onAuthStateChanged(function(user) {
+
+         if (user) {
+           // User is signed in.
+           var uid = user.uid;
+            document.location.href = 'add.html';
+//           document.getElementById('initial').textContent = 'signed in';
+
+         } else {
+//             document.getElementById('initial').textContent = 'not signed in';
+
+         }
+
+         // [END_EXCLUDE]
+       });
+       // [END authstatelistener]
+       document.getElementById('sign-in-btn').addEventListener('click', handleSignIn, false);
+
+
+     }
+     window.onload = function() {
+       initApp();
+     };
+
+    </script>
+
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDwubUIaSZVmk4slijsHdxQSMIaUzFPnyk",
+          authDomain: "courseschedule-8a816.firebaseapp.com",
+          databaseURL: "https://courseschedule-8a816.firebaseio.com",
+          projectId: "courseschedule-8a816",
+          storageBucket: "courseschedule-8a816.appspot.com",
+          messagingSenderId: "386132172955"
+        };
+        firebase.initializeApp(config);
+      </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+</html>
