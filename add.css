@@ -56,10 +56,11 @@ body {
 
 
 .header-text p{
-    font-size: 23pt;
+    font-size: 27pt;
     color: gray;
     font-weight: 300;
     text-align: center;
+    padding-bottom: 25px;
 }
 
 .mid-text{
@@ -85,7 +86,7 @@ body {
 .form-control{
 
     order: 2;
-    width: 150px;
+    width: 159px;
     margin-left: 15px;
     margin-right: 15px;
     align-self: center;
@@ -96,15 +97,19 @@ body {
 
     background-color: #D68745;
     border: none;
-    border-radius: 25px;
+    border-radius: 26px;
 
-    height: 25px;
-    line-height: 12.5px;
+    height: 26px;
+    line-height: 13px;
 
     letter-spacing: 1px;
     font-size: 15px;
     font-weight: 300px;
     text-align: center;
+}
+
+.btn-hidden{
+    visibility: hidden;
 }
 
 
@@ -147,5 +152,8 @@ body {
     align-items: center;
 
     background-color: white;
+}
 
+.two-two{
+    padding-top: 10px;
 }
