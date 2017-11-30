@@ -91,7 +91,10 @@
     <div class='container b'>
 
         <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="unique id">
-        <button id='add-btn'type="button" class="btn btn-primary">ADD</button>
+        <button id='add-unique-btn'type="button" class="btn btn-primary">ADD Unique</button>
+        <button id='add-course-btn'type="button" class="btn btn-primary">ADD Course</button>
+        <button id='add-prof-btn'type="button" class="btn btn-primary">ADD Prof</button>
+
 
     </div>
 
@@ -99,20 +102,32 @@
 
     <script>
 
-    function addClass(){
+    function addClass(type){
         var classId = document.getElementById('unique-id').value;
         var user = firebase.auth().currentUser;
         var uid = user.uid;
         var dataBase = firebase.database();
 
         dataBase.ref().child('courses').child(classId).update({
-        queryType:'unique'//change depedning on button
+        queryType: type//change depedning on button
         });
         dataBase.ref('/users/' + uid+"/following").push(classId);
         dataBase.ref().child('courses_subscribers').child(classId).push(uid);
     }
 
-    document.getElementById('add-btn').addEventListener('click', addClass, false);
+
+    document.getElementById("add-unique-btn").addEventListener("click", function() {
+        addClass('unique');
+    });
+
+    document.getElementById("add-course-btn").addEventListener("click", function() {
+        addClass('course');
+    });
+
+    document.getElementById("add-prof-btn").addEventListener("click", function() {
+        addClass('prof');
+    });
+
 
     </script>
 
