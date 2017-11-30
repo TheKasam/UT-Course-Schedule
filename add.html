@@ -21,7 +21,7 @@
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="index.css" rel="stylesheet">
+    <link href="add.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -90,10 +90,43 @@
 
     <div class='container b'>
 
-        <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="unique id">
-        <button id='add-unique-btn'type="button" class="btn btn-primary">ADD Unique</button>
-        <button id='add-course-btn'type="button" class="btn btn-primary">ADD Course</button>
-        <button id='add-prof-btn'type="button" class="btn btn-primary">ADD Prof</button>
+        <div class='header-text'>
+            <p class='header-a'>Add from <span class='mid-text'>spring 2018 courses</span></p>
+        </div>
+
+        <div class='unique-item item'>
+            <div class='item-header'>
+            <h2>1. unique number</h2>
+            </div>
+            <div class='item-items'>
+            <p class='form-label'>unique number</p>
+            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="unique id">
+            <button id='add-unique-btn'type="button" class="btn btn-primary">Follow</button>
+            </div>
+        </div>
+
+        <div class='course-item item'>
+            <div class='item-header'>
+            <h2>1. unique number</h2>
+            </div>
+            <div class='item-items'>
+            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="unique id">
+            <button id='add-course-btn'type="button" class="btn btn-primary">Follow</button>
+            </div>
+        </div>
+
+        <div class='prof-item item'>
+            <div class='item-header'>
+            <h2>1. unique number</h2>
+            </div>
+            <div class='item-items'>
+            <p class='form-label'>first initial</p>
+            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="unique id">
+            <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
+            </div>
+        </div>
+
+
 
 
     </div>
@@ -111,6 +144,7 @@
         dataBase.ref().child('courses').child(classId).update({
         queryType: type//change depedning on button
         });
+
         dataBase.ref('/users/' + uid+"/following").push(classId);
         dataBase.ref().child('courses_subscribers').child(classId).push(uid);
     }
