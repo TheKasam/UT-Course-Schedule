@@ -105,8 +105,9 @@
             <p class='form-label'>unique number</p>
             <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="19306">
             <button id='add-unique-btn'type="button" class="btn btn-primary">Follow</button>
-            <button id='btn-add'>Follow</button>
-
+            </div>
+            <div class="item-spacer2">
+                <p></p>
             </div>
         </div>
 
@@ -119,13 +120,13 @@
             </div>
             <div class='item-items'>
             <p class='form-label'>instructor last name</p>
-            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mcconaughey">
+            <input id='prof-id-last' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mcconaughey">
             <button id='add-course-btn'type="button" class="btn btn-primary btn-hidden">Follow</button>
             </div>
 
             <div class='item-items two-two'>
             <p class='form-label'>first initial</p>
-            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="M">
+            <input id='prof-id-first' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="M">
             <button id='add-course-btn'type="button" class="btn btn-primary">Follow</button>
             </div>
         </div>
@@ -977,7 +978,7 @@
             </div>
             <div class='item-items two-two'>
             <p class='form-label'>number</p>
-            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="301">
+            <input id='course-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="301">
             <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
             </div>
 
@@ -997,7 +998,7 @@ function handleSignUp(){
     alert('bob');
 }
 
-document.getElementById('add-unique-btn').addEventListener('click', handleSignUp, false);
+document.getElementById('add-uniue-btn').addEventListener('click', handleSignUp, false);
 </script>
 
     <script>
@@ -1016,17 +1017,12 @@ document.getElementById('add-unique-btn').addEventListener('click', handleSignUp
         dataBase.ref().child('courses_subscribers').child(classId).push(uid);
     }
 
-    function checkUnique(){
-
-        alert('bob');
-        var bob = select * from html where url="http://stackoverflow.com";
-        var titleList = $.getJSON(bob);
-        alert(titleList);
-
-    }
 
 
 
+    document.getElementById("add-unique-btn").addEventListener("click", function() {
+        addClass('unique');
+    });
 
 
     document.getElementById("add-course-btn").addEventListener("click", function() {

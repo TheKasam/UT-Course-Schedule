@@ -51,7 +51,7 @@ body {
    flex-direction: column;
    justify-content: center;
    align-items: stretch;
-   background-color: white;
+   background-color: green;
  }
 
 
@@ -60,7 +60,8 @@ body {
     color: gray;
     font-weight: 300;
     text-align: center;
-    padding-bottom: 25px;
+    margin-top: -70px;
+    background-color: blue;
 }
 
 .mid-text{
@@ -121,12 +122,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     margin-bottom: 15px;
-    padding-top: 2%;
-    padding-bottom: 5%;
 
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 6px .2px rgba(0, 0, 0, 0.19);
     background-color: white;
 
    /* border: 1px solid black;*/
@@ -138,9 +137,20 @@ body {
     align-self: flex-start;
     margin-left: 30%;
 }
-
+.item-header h2{
+  font-size: 25px;
+  line-height: 7px;
+  font-weight: 100;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .item-spacer{
     order:2;
+    width: 100px;
+}
+.item-spacer{
+    order:4;
     width: 100px;
 }
 
@@ -151,7 +161,6 @@ body {
     flex-direction: row;
     align-items: center;
 
-    background-color: white;
 }
 
 .two-two{
