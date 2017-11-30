@@ -105,8 +105,8 @@
         var uid = user.uid;
         var dataBase = firebase.database();
 
-        dataBase.ref().child('courses').child(classId).set({
-        l:'l'
+        dataBase.ref().child('courses').child(classId).update({
+        queryType:'unique'//change depedning on button
         });
         dataBase.ref('/users/' + uid+"/following").push(classId);
         dataBase.ref().child('courses_subscribers').child(classId).push(uid);

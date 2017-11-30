@@ -20,11 +20,11 @@ def main():
     with open("soup.html") as f:
       soup = bs.BeautifulSoup(f,'lxml')
 
-    ref = db.reference('courses')
-    print(ref.get())
-    print(type(ref.get()))
+    #ref = db.reference('courses')
+    #print(ref.get())
+    #print(type(ref.get()))
 
-    #print(saveUnique('40350',soup))
+    print(saveCourse('ASL  610D',soup))
 
 
 #gets data about course and saves it
@@ -40,7 +40,8 @@ def saveUnique(unique,soup):
     status = course_tr.find('td',{'data-th':'Status'}).text
 
 
-    db.reference().child('courses').child('1').update({
+    db.reference().child('courses').child(unique).update({
+        'unique':unique,
         'days':days,
         'hour':hour,
         'room':room,
@@ -48,6 +49,56 @@ def saveUnique(unique,soup):
         'status':status,
     })
     return(status)
+
+def saveCourse(courseId,soup):
+    course_a = soup.find('td',{'class':'course_header'}) #dont need
+
+
+    b = soup.find_all('a',{'title':'Unique number'})
+    for uniqueNum in b:
+        print(uniqueNum.text)
+        unique = uniqueNum.text
+        course_a = soup.find(text=unique).parent
+        course_tr = course_a.parent.parent
+
+        days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+        hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+        room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+        instructor = course_tr.find('td',{'data-th':'Instructor'}).text
+        status = course_tr.find('td',{'data-th':'Status'}).text
+
+        db.reference().child('courses').child(courseId).child(unique).update({
+            'unique':unique,
+            'days':days,
+            'hour':hour,
+            'room':room,
+            'instructor':instructor,
+            'status':status,
+        })
+
+
+def saveProf(prof,courseId):
+    b = soup.find_all('a',{'title':'Unique number'})
+    for uniqueNum in b:
+        print(uniqueNum.text)
+        unique = uniqueNum.text
+        course_a = soup.find(text=unique).parent
+        course_tr = course_a.parent.parent
+
+        days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+        hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+        room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+        instructor = course_tr.find('td',{'data-th':'Instructor'}).text
+        status = course_tr.find('td',{'data-th':'Status'}).text
+
+        db.reference().child('courses').child(prof).child(unique).update({
+            'unique':unique,
+            'days':days,
+            'hour':hour,
+            'room':room,
+            'instructor':instructor,
+            'status':status,
+        })
 
 
 def findHeaders():
