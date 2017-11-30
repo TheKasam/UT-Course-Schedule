@@ -40,7 +40,7 @@ def logIn():
 
     stall(8)
 
-    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=FIELD&fos_fl=ASL&level=L&x=65&y=21")
+    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=INSTR&instr_last_name=CONLEY&instr_first_initial=&x=40&y=9")
     return(browser)
 
 

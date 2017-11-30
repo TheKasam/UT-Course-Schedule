@@ -17,14 +17,21 @@ firebase_admin.initialize_app(cred, {
 
 def main():
 
+    ###put out most infinate loop ###
+
+    #getting my currently downloaded data
     with open("soup.html") as f:
       soup = bs.BeautifulSoup(f,'lxml')
 
-    #ref = db.reference('courses')
-    #print(ref.get())
+    #getting firebase data
+    ref = db.reference('courses')
+    data = ref.get())
     #print(type(ref.get()))
 
-    print(saveCourse('ASL  610D',soup))
+    #print(saveProf('CONLEY C',soup))
+
+
+
 
 
 #gets data about course and saves it
@@ -77,7 +84,7 @@ def saveCourse(courseId,soup):
         })
 
 
-def saveProf(prof,courseId):
+def saveProf(prof,soup):
     b = soup.find_all('a',{'title':'Unique number'})
     for uniqueNum in b:
         print(uniqueNum.text)
