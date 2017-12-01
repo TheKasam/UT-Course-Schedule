@@ -1020,16 +1020,21 @@ document.getElementById('add-uniqude-btn').addEventListener('click', handleSignU
         alert(postId);
 
         var starCountRef = firebase.database().ref().child('validate').child(postId)
-
+        var s;
         starCountRef.on('value', function(snapshot) {
         //updateStarCount(postElement, snapshot.val());
         var bob = snapshot.val();
+        alert(bob);
+        s = bob;
         if (bob =='1' || bob =='0'){
-            alert(bob);
+
             starCountRef.off()
+
             }
         });
-
+        alert("done");
+        alert(s);
+        alert("really donw");
     }
 
     function addClass(type){
