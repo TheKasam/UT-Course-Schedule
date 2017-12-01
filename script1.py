@@ -12,14 +12,15 @@ link = 'https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/32975/'
 browser.open(link)
 soup = browser.get_current_page()
 title = soup.title.text
-
+print(soup)
+print(soup.find('div',{'class':'error'}))
 
 ans = '0'
 
 if title == 'Page not found':
     pass
 
-elif soup.find('div',{'class':'error'}).text == 'No class was found for your input.':
+elif soup.find('div',{'class':'error'}) == 'No class was found for your input.':
 
     pass
 
@@ -31,7 +32,3 @@ dataToSendBack = ans
 print(dataToSendBack)
 
 sys.stdout.flush()
-
-
-
-print()

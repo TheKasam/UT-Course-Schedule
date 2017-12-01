@@ -1025,16 +1025,14 @@ document.getElementById('add-uniqude-btn').addEventListener('click', handleSignU
         //updateStarCount(postElement, snapshot.val());
         var bob = snapshot.val();
         alert(bob);
-        s = bob;
         if (bob =='1' || bob =='0'){
+            s = bob;
 
             starCountRef.off()
 
             }
         });
-        alert("done");
-        alert(s);
-        alert("really donw");
+ 
     }
 
     function addClass(type){
