@@ -46,12 +46,10 @@ body {
  }
 
 .container.b{
-   height: 80vh;
    display: flex;
    flex-direction: column;
    justify-content: center;
    align-items: stretch;
-   background-color: green;
  }
 
 
@@ -60,8 +58,7 @@ body {
     color: gray;
     font-weight: 300;
     text-align: center;
-    margin-top: -70px;
-    background-color: blue;
+    padding-bottom: 10px;
 }
 
 .mid-text{
@@ -136,14 +133,14 @@ body {
     order: 1;
     align-self: flex-start;
     margin-left: 30%;
+
 }
 .item-header h2{
   font-size: 25px;
-  line-height: 7px;
   font-weight: 100;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  text-align: center;
+  transform: translateY(-30%);
 }
 .item-spacer{
     order:2;

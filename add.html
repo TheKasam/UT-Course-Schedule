@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <title>Awesome Sauce</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -106,9 +106,7 @@
             <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="19306">
             <button id='add-unique-btn'type="button" class="btn btn-primary">Follow</button>
             </div>
-            <div class="item-spacer2">
-                <p></p>
-            </div>
+
         </div>
 
         <div class='course-item item'>
@@ -985,6 +983,7 @@
         </div>
 
 
+        <a href="https://www.google.com/" id="test1">Link1</a> <span id="result1"></span>
 
 
     </div>
@@ -993,12 +992,19 @@
 
 <script>
 function handleSignUp(){
+  alert("start")
+
+  var name = "codemzy";
+$.get('https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/12345/', function(response) {
+  console.log(response);
+});
+
+  alert("done")
 
 
-    alert('bob');
 }
 
-document.getElementById('add-uniue-btn').addEventListener('click', handleSignUp, false);
+document.getElementById('add-unique-btn').addEventListener('click', handleSignUp, false);
 </script>
 
     <script>
@@ -1020,7 +1026,7 @@ document.getElementById('add-uniue-btn').addEventListener('click', handleSignUp,
 
 
 
-    document.getElementById("add-unique-btn").addEventListener("click", function() {
+    document.getElementById("add-uniqsue-btn").addEventListener("click", function() {
         addClass('unique');
     });
 
