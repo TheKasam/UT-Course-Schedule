@@ -26,17 +26,28 @@ console.log("bob the builder")
 
 ref.on("child_added", function(snapshot, prevChildKey) {
   var value = snapshot.val();
-  var key = Object.keys(snapshot.val());
+  var key = snapshot.key
   console.log(snapshot.key);
 
 
-});
 
-var spawn = require("child_process").spawn;
-var process = spawn('python',["./script1.py"]);
+  var spawn = require("child_process").spawn;
+  var process = spawn('python',["./script1.py"]);
 
 
-process.stdout.on('data', function (data){
+  process.stdout.on('data', function (data){
 
-    console.log(data.toString());
+      console.log(data.toString());
+      dataString = data.toString().trim();
+      //var postsRef = ref.child(key);
+      var ref = db.ref("validate").child(key);
+
+       ref.set(dataString);
+
+  });
+
+
+
+
+
 });

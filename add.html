@@ -1013,10 +1013,22 @@ document.getElementById('add-uniqude-btn').addEventListener('click', handleSignU
 
 
         var dataBase = firebase.database();
-        dataBase.ref().child('validate').push(input);
 
 
+        var newV = dataBase.ref().child('validate').push(input);
+        var postId = newV.key;
+        alert(postId);
 
+        var starCountRef = firebase.database().ref().child('validate').child(postId)
+
+        starCountRef.on('value', function(snapshot) {
+        //updateStarCount(postElement, snapshot.val());
+        var bob = snapshot.val();
+        if (bob =='1' || bob =='0'){
+            alert(bob);
+            starCountRef.off()
+            }
+        });
 
     }
 
