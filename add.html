@@ -1004,13 +1004,30 @@ $.get('https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/12345/',
 
 }
 
-document.getElementById('add-unique-btn').addEventListener('click', handleSignUp, false);
+document.getElementById('add-uniqude-btn').addEventListener('click', handleSignUp, false);
 </script>
 
     <script>
 
+    function validate(input){
+
+
+        var dataBase = firebase.database();
+        dataBase.ref().child('validate').push(input);
+
+
+
+
+    }
+
     function addClass(type){
+
+
+
         var classId = document.getElementById('unique-id').value;
+
+        validate(classId)
+
         var user = firebase.auth().currentUser;
         var uid = user.uid;
         var dataBase = firebase.database();
@@ -1026,7 +1043,7 @@ document.getElementById('add-unique-btn').addEventListener('click', handleSignUp
 
 
 
-    document.getElementById("add-uniqsue-btn").addEventListener("click", function() {
+    document.getElementById("add-unique-btn").addEventListener("click", function() {
         addClass('unique');
     });
 
