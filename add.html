@@ -63,6 +63,8 @@
                           document.getElementById("initial").textContent = name;
                         });
                         } else {
+                             document.location.href = 'signIn.html';
+
                         }
                       });
                     }
@@ -1014,8 +1016,6 @@
         vid.play();
         vid.addEventListener("timeupdate", function(){
         if(vid.currentTime > 2.6 && vid.currentTime < 3.0){
-
-
             vid.pause();
         }
         }, false);
