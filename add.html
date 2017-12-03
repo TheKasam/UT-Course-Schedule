@@ -955,7 +955,7 @@
                 <option value="YOR">YOR - Yoruba</option>
             </select>
             <button id='add-course-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
-            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/sinner.mov"></video>
+            <video width="20" id='spinner-course-hidden' class="spinner spinner-hidden" height="20" src="assets/sinner.mov"></video>
             </div>
             <div class='item-items two-two'>
             <p class='form-label'>number</p>
@@ -975,16 +975,16 @@
             </div>
             <div class='item-items'>
             <p class='form-label'>instructor last name</p>
-            <input id='prof-id-last' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mcconaughey">
+            <input id='prof-id-last' type="email" class="form-control" aria-describedby="emailHelp" placeholder="Mcconaughey">
             <button id='add-prof-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
-            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
+            <video width="20" id='spinner-prof-hidden' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
             </div>
 
             <div class='item-items two-two'>
             <p class='form-label'>first initial</p>
-            <input id='prof-id-first' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="M">
+            <input id='prof-id-first' type="email" class="form-control prof-form"  aria-describedby="emailHelp" placeholder="M">
             <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
-            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
+            <video width="20" id='spinner-prof' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
             </div>
         </div>
 
@@ -1016,8 +1016,6 @@
         }
         }, false);
 
-
-
        // var start = new Date().getTime() / 1000;
 
         var dataBase = firebase.database();
@@ -1041,21 +1039,31 @@
                }
 
             else if (ans == '0') {
-
+                vid.pause();
                 document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
-
-
                 document.getElementById('test1').innerHTML = 'sucks';
-                document.getElementById("unique-id").className = document.getElementById("unique-id").className + " error";  // this adds the error class
+                borderRed(type);
                 validateRef.off();
                 validateRef.remove();
             }
 
             });
         });
+    }
 
+    function borderRed(type){
+        if (type == 'prof'){
+            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
+            document.getElementById('prof-id-last').className = document.getElementById('prof-id-first').className + ' error';
+        }
+        else if (type == 'course'){
+            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
+            document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
+        }
+        else if (type =='unique'){
+            document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
 
-
+        }
     }
 
     function addClass(type,classId){
@@ -1078,12 +1086,17 @@
 
 
     document.getElementById("add-unique-btn").addEventListener("click", function() {
+        document.getElementById('unique-id').className = 'form-control';
+
         var input = document.getElementById('unique-id').value;
         validate('unique',input);
     });
 
 
     document.getElementById("add-course-btn").addEventListener("click", function() {
+        document.getElementById('course-id').className = 'form-control';
+        document.getElementById('sel1').className = 'form-control';
+
         var feild = document.getElementById('sel1');
         var feildVal = feild.options[feild.selectedIndex].value;
         var number = document.getElementById('course-id').value;
@@ -1093,10 +1106,15 @@
     });
 
     document.getElementById("add-prof-btn").addEventListener("click", function() {
+
+        document.getElementById('prof-id-first').className = 'form-control';
+        document.getElementById('prof-id-last').className ='form-control';
+
         var last = document.getElementById('prof-id-last').value;
         var first = document.getElementById('prof-id-first').value;
         var input = last + " " + first;
         validate('prof',input);
+
     });
 
 
