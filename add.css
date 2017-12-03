@@ -90,6 +90,10 @@ body {
     align-self: center;
 }
 
+.error {
+  border-color: red;
+}
+
 .btn{
     order:3;
 

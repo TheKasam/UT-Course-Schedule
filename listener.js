@@ -25,14 +25,14 @@ var ref = db.ref("validate");
 console.log("bob the builder")
 
 ref.on("child_added", function(snapshot, prevChildKey) {
-  var value = snapshot.val();
+  var value = String(snapshot.val().input);
   var key = snapshot.key
-  console.log(snapshot.key);
+  //console.log(snapshot.val().input);
 
 
 
   var spawn = require("child_process").spawn;
-  var process = spawn('python',["./script1.py"]);
+  var process = spawn('python3',["./script1.py",value]);
 
 
   process.stdout.on('data', function (data){
