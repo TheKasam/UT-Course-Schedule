@@ -1009,30 +1009,50 @@ document.getElementById('add-uniqude-btn').addEventListener('click', handleSignU
 
     <script>
 
-    function validate(input){
+    function validate(){
 
+        var input = document.getElementById('unique-id').value;
 
         var dataBase = firebase.database();
+        var user = firebase.auth().currentUser;
+        var uid = user.uid;
 
 
-        var newV = dataBase.ref().child('validate').push(input);
-        var postId = newV.key;
-        alert(postId);
+        var newV = dataBase.ref().child('validate').child(uid).set({input:input}).then(function() {
 
-        var starCountRef = firebase.database().ref().child('validate').child(postId)
-        var s;
-        starCountRef.on('value', function(snapshot) {
-        //updateStarCount(postElement, snapshot.val());
-        var bob = snapshot.val();
-        alert(bob);
-        if (bob =='1' || bob =='0'){
-            s = bob;
 
-            starCountRef.off()
+            var validateRef = firebase.database().ref().child('validate').child(uid);
+            validateRef.on('value', function(snapshot) {
+            var ans = snapshot.val();
 
+            if (ans =='1'){
+
+               document.getElementById('test1').innerHTML = 'sucks';
+
+
+
+                validateRef.off();
+                }
+
+
+            else if (ans == '0') {
+
+
+                 validateRef.off();
             }
+
+
+
+
+
+
+            });
+
+
         });
- 
+
+
+
     }
 
     function addClass(type){
@@ -1041,8 +1061,7 @@ document.getElementById('add-uniqude-btn').addEventListener('click', handleSignU
 
         var classId = document.getElementById('unique-id').value;
 
-        validate(classId)
-
+        alert(classId);
         var user = firebase.auth().currentUser;
         var uid = user.uid;
         var dataBase = firebase.database();
@@ -1059,7 +1078,7 @@ document.getElementById('add-uniqude-btn').addEventListener('click', handleSignU
 
 
     document.getElementById("add-unique-btn").addEventListener("click", function() {
-        addClass('unique');
+        validate();
     });
 
 

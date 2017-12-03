@@ -12,8 +12,7 @@ link = 'https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/32975/'
 browser.open(link)
 soup = browser.get_current_page()
 title = soup.title.text
-print(soup)
-print(soup.find('div',{'class':'error'}))
+
 
 ans = '0'
 
