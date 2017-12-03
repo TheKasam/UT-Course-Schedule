@@ -142,9 +142,13 @@ body {
 .item-header{
     order: 1;
     align-self: flex-start;
+    display: flex;
+    flex-direction: row;
     margin-left: 30%;
 
+
 }
+
 .item-header h2{
   font-size: 25px;
   font-weight: 100;
@@ -152,6 +156,15 @@ body {
   text-align: center;
   transform: translateY(-30%);
 }
+
+.item-header p{
+    margin-left: 10px;
+    position: relative;
+    text-align: center;
+    transform: translateY(38%);
+    color: red;
+    }
+
 .item-spacer{
     order:2;
     width: 100px;

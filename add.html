@@ -97,13 +97,14 @@
         <div class='unique-item item'>
             <div class='item-header'>
             <h2>1. unique number</h2>
+            <p id='unique-error'></p>
             </div>
             <div class="item-spacer">
                 <p></p>
             </div>
             <div class='item-items'>
             <p class='form-label'>unique number</p>
-            <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="19306">
+            <input id='unique-id' type="text" class="form-control"  placeholder="19306">
             <button id='add-unique-btn'type="button" class="btn btn-primary">Follow</button>
             <video width="20" id='spinner-unique' class='spinner spinner-hidden' height="20" src="assets/spinner.mov"></video>
 
@@ -114,6 +115,7 @@
         <div class='course-item item'>
             <div class='item-header'>
             <h2>2. course number</h2>
+            <p id='course-error'></p>
             </div>
             <div class="item-spacer">
                 <p></p>
@@ -959,7 +961,7 @@
             </div>
             <div class='item-items two-two'>
             <p class='form-label'>number</p>
-            <input id='course-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="301">
+            <input id='course-id' type="text" class="form-control"  placeholder="301">
             <button id='add-course-btn'type="button" class="btn btn-primary">Follow</button>
             <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
             </div>
@@ -969,20 +971,21 @@
         <div class='prof-item item'>
             <div class='item-header'>
             <h2>3. primary instructor</h2>
+            <p id='prof-error'></p>
             </div>
             <div class="item-spacer">
                 <p></p>
             </div>
             <div class='item-items'>
             <p class='form-label'>instructor last name</p>
-            <input id='prof-id-last' type="email" class="form-control" aria-describedby="emailHelp" placeholder="Mcconaughey">
+            <input id='prof-id-last' type="text" class="form-control"  placeholder="Mcconaughey">
             <button id='add-prof-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
             <video width="20" id='spinner-prof-hidden' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
             </div>
 
             <div class='item-items two-two'>
             <p class='form-label'>first initial</p>
-            <input id='prof-id-first' type="email" class="form-control prof-form"  aria-describedby="emailHelp" placeholder="M">
+            <input id='prof-id-first' type="text" class="form-control prof-form" placeholder="M">
             <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
             <video width="20" id='spinner-prof' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
             </div>
@@ -1007,6 +1010,7 @@
     function validate(type,input){
         document.getElementById("spinner-"+type).className = 'spinner';
         var vid = document.getElementById("spinner-"+type);
+        vid.currentTime=0;
         vid.play();
         vid.addEventListener("timeupdate", function(){
         if(vid.currentTime > 2.6 && vid.currentTime < 3.0){
@@ -1016,13 +1020,11 @@
         }
         }, false);
 
-       // var start = new Date().getTime() / 1000;
-
+        var time = new Date().getTime() % 100000;
         var dataBase = firebase.database();
         var user = firebase.auth().currentUser;
-        var uid = user.uid;
-        input = input + type.charAt(0)
-
+        var uid = user.uid + time.toString();
+        input = input + type.charAt(0);
         var newV = dataBase.ref().child('validate').child(uid).set({input:input}).then(function() {
 
 
@@ -1055,13 +1057,18 @@
         if (type == 'prof'){
             document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
             document.getElementById('prof-id-last').className = document.getElementById('prof-id-first').className + ' error';
+            document.getElementById('prof-error').innerHTML = 'Could not find professor';
+
         }
         else if (type == 'course'){
             document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
             document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
+            document.getElementById('course-error').innerHTML = 'Could not find course';
+
         }
         else if (type =='unique'){
             document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
+            document.getElementById('unique-error').innerHTML = 'Unique number could not be found';
 
         }
     }
@@ -1083,37 +1090,91 @@
     }
 
 
-
-
     document.getElementById("add-unique-btn").addEventListener("click", function() {
+        //resetting error
         document.getElementById('unique-id').className = 'form-control';
+        document.getElementById('unique-error').innerHTML = ''
 
         var input = document.getElementById('unique-id').value;
+
+        //error checking
+        if (input.length != 5){
+            document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
+            document.getElementById('unique-error').innerHTML = 'Unique number must be 5 digits';
+            return
+        }
+        else if (isNaN(Number(input))){
+            document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
+            document.getElementById('unique-error').innerHTML = 'Unique number must contain only digits';
+            return
+        }
         validate('unique',input);
     });
 
-
     document.getElementById("add-course-btn").addEventListener("click", function() {
+        //resetting error
         document.getElementById('course-id').className = 'form-control';
         document.getElementById('sel1').className = 'form-control';
+        document.getElementById('course-error').innerHTML = '';
 
         var feild = document.getElementById('sel1');
         var feildVal = feild.options[feild.selectedIndex].value;
         var number = document.getElementById('course-id').value;
         var input = feildVal + " " + number;
+
+        if (feildVal == ""){
+            document.getElementById('course-error').innerHTML = 'Can not leave feilds empty';
+            document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
+            return
+        }
+        else if (number=="") {
+            document.getElementById('course-error').innerHTML = 'Can not leave feilds empty';
+            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
+        }
+        else if (number.length > 5) {
+            document.getElementById('course-error').innerHTML = 'Number must be less than 5 characters';
+            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
+
+            return
+        }
+
+
         validate('course',input);
 
     });
 
     document.getElementById("add-prof-btn").addEventListener("click", function() {
-
+        //error resetting
         document.getElementById('prof-id-first').className = 'form-control';
         document.getElementById('prof-id-last').className ='form-control';
+        document.getElementById('prof-error').innerHTML = '';
 
         var last = document.getElementById('prof-id-last').value;
         var first = document.getElementById('prof-id-first').value;
         var input = last + " " + first;
+
+        if (last == "" ){
+
+            document.getElementById('prof-id-last').className = document.getElementById('prof-id-last').className + ' error';
+            document.getElementById('prof-error').innerHTML = 'Can not leave feild empty';
+            return
+        }
+         else if (first =="") {
+            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
+            document.getElementById('prof-error').innerHTML = 'Can not leave feild empty';
+            return
+         }
+
+        else if (first.length != 1) {
+            document.getElementById('prof-error').innerHTML = 'Only one character for first initial';
+            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
+
+            return
+        }
+
         validate('prof',input);
+
+
 
     });
 
