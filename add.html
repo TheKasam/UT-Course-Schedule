@@ -105,7 +105,7 @@
             <p class='form-label'>unique number</p>
             <input id='unique-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="19306">
             <button id='add-unique-btn'type="button" class="btn btn-primary">Follow</button>
-            <video width="20" id = 'spinner' height="20" src="assets/spinner.mov"></video>
+            <video width="20" id='spinner-unique' class='spinner spinner-hidden' height="20" src="assets/spinner.mov"></video>
 
             </div>
 
@@ -955,11 +955,13 @@
                 <option value="YOR">YOR - Yoruba</option>
             </select>
             <button id='add-course-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
+            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/sinner.mov"></video>
             </div>
             <div class='item-items two-two'>
             <p class='form-label'>number</p>
             <input id='course-id' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="301">
             <button id='add-course-btn'type="button" class="btn btn-primary">Follow</button>
+            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
             </div>
 
         </div>
@@ -975,12 +977,14 @@
             <p class='form-label'>instructor last name</p>
             <input id='prof-id-last' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mcconaughey">
             <button id='add-prof-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
+            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
             </div>
 
             <div class='item-items two-two'>
             <p class='form-label'>first initial</p>
             <input id='prof-id-first' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="M">
             <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
+            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
             </div>
         </div>
 
@@ -1001,8 +1005,8 @@
 
 
     function validate(type,input){
-
-        var vid = document.getElementById("spinner");
+        document.getElementById("spinner-"+type).className = 'spinner';
+        var vid = document.getElementById("spinner-"+type);
         vid.play();
         vid.addEventListener("timeupdate", function(){
         if(vid.currentTime > 2.6 && vid.currentTime < 3.0){
@@ -1038,12 +1042,13 @@
 
             else if (ans == '0') {
 
-                vid.style.display = 'none';
+                document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
+
 
                 document.getElementById('test1').innerHTML = 'sucks';
                 document.getElementById("unique-id").className = document.getElementById("unique-id").className + " error";  // this adds the error class
-
                 validateRef.off();
+                validateRef.remove();
             }
 
             });

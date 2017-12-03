@@ -114,7 +114,13 @@ body {
     visibility: hidden;
 }
 
-
+.spinner{
+    order:4;
+    margin-left: 13px;
+}
+.spinner-hidden{
+    visibility: hidden;
+}
 .item h2{
     color: gray;
 }
@@ -156,7 +162,7 @@ body {
 }
 
 .item-items{
-    margin-left: -100px;
+    margin-left: -20px;
     order: 3;
     display: flex;
     flex-direction: row;
