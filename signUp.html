@@ -32,7 +32,7 @@
 
   <body>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-static-top">
+    <nav class="navbar navbar-static-top navbar-custom">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Project name</a>
@@ -41,8 +41,8 @@
         <div id="navbar" class="navbar-collapse collapse">
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a  class="font-weight-light" href='signIn.html'>Sign In</a></li>
-            <li><a class="font-weight-light" >Sign Up</a></li>
+            <li class='non-active'><a  class="font-weight-light" href='signIn.html' >Sign In</a></li>
+            <li class='active'><a class="font-weight-light" >Sign Up</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -107,11 +107,11 @@
           </svg>
 
           <p class='l1'>EMAIL ADDRESS</p>
-          <input id='email' type="email" class="enter-email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <input id='email' type="email" class="enter-email enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="julie@gmail.com">
           <p class='l2'>NAME</p>
-          <input id='name' type="email" class="enter-name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name">
+          <input id='name' type="email" class="enter-name enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Julie Appleseed">
           <p class='l3'>PASSWORD</p>
-          <input id='password' type="email" class="enter-password" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+          <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="5 + characters">
 
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
           <small id="emailHelp" class="have-account">have an account <a href='signIn.html'> <button id='already-have-account' type="button" class='sign'> sign in here</button></a></small>
