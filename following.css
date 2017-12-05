@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Show it is fixed to the top */
+.navbar-static-top.navbar{
+   background-color: #333F48;
+ }
+
+.nav.navbar-nav li a  {
+
+  color: white;
+  letter-spacing: 1px;
+  font-size: 13pt;
+  font-weight: 100;
+
+ }
+
+
+
+ /* Remove Border */
+.navbar.navbar-default {
+     background-color: #99ccff;
+     border: 0;
+     -webkit-box-shadow: none;
+     box-shadow: none;
+ }
+.navbar.navbar-default .navbar-collapse {
+     border: 0;
+     -webkit-box-shadow: none;
+     box-shadow: none;
+ }
+
+
+ .navbar-custom .navbar-nav > .non-active > a:hover,
+ .navbar-custom .navbar-nav > .non-active > a:focus,
+ .navbar-custom .navbar-nav > .open >a {
+    background-color: grey;
+    border-bottom: 2px solid grey;
+ }
+
+ .navbar-custom .navbar-nav > .active > a:hover,
+ .navbar-custom .navbar-nav > .active > a:focus,
+ .navbar-custom .navbar-nav > .open >a {
+    background-color: grey;
+ }
+
+.navbar-custom .active {
+    border-bottom: 1.5px solid white;
+}
+
+.hi {
+    background: url(assets/circle.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+}
+#initial{
+    letter-spacing: -1px;
+
+}
+/* done with nav bar */
+body {
+
+   background-color: white;
+  /* background-image: url("assets/longhorn.png");
+   background-repeat: no-repeat;
+   background-size: 75%;
+   background-position: center;*/
+ }
+
+.container.one{
+   display: flex;
+   flex-direction: column;
+    border-bottom: 1px solid darkgrey;
+
+ }
+
+
+.header-text p{
+    order: 1;
+    font-size: 27pt;
+    color: gray;
+    font-weight: 300;
+    text-align: center;
+}
+
+.btn.delete-all{
+    order: 2;
+    align-self: flex-end;
+    border: none;
+    background-color: white;
+
+}
+
+.btn.delete-all p{
+    color: black;
+    line-height:10px;
+    font-size: 27px;
+}
+
+.container.two{
+   display: flex;
+   flex-direction: column;
+ }
+
+.item{
+
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    align-items: center;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 6px .2px rgba(0, 0, 0, 0.19);
+}
+.textFollowing{
+    order:1;
+    color: black;
+    weight: 300;
+    margin-top: 10px;
+    text-align: center;
+    width: 70px;
+}
+.delete{
+order:2;
+background-color: red;
+margin-left: 43%;
+length: 100%;
+padding: 10px 10px 10px 10px;
+border: None;
+border-radius: 0px;
+color: white;
+letter-spacing: .5px;
+weight: 100px;
+}
+
+.none{
+  text-align: center;
+  font-size: 30px;
+  weight: 100;
+}
+.none a{
+    color: orange;
+}

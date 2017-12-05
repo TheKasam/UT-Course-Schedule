@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Awesome Sauce</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="following.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <style type='text/css'>
+        html,body{height:100% !important;width:100% !important; margin:0px; padding:0px;}
+    </style>
+        <!--  height = 100x no of pages -->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-static-top navbar-custom">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class='active'><a class="font-weight-light">Following</a></li>
+            <li class='non-active'><a  class="font-weight-light" href='add.html'>Add</a></li>
+            <li class='hi non-active'><a id='initial' onclick="handleSignOut()"class="font-weight-light" ></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+    <div class='container one' id='a'>
+
+        <div class='header-text'>
+            <p class='header-a'>Following</p>
+        </div>
+        <button id='delete-all-btn' class="btn btn-primary delete-all"><p>Delete All</p></button>
+    </div>
+
+    <div class='container two' id='b'>
+
+
+
+    </div>
+
+<a href="https://www.google.com/" id="test1">Link1</a> <span id="result1"></span>
+    </body>
+
+
+
+    <script>
+
+   function initApp() {
+
+       return firebase.auth().onAuthStateChanged(function(user) {
+         if (user) {
+           // User is signed in.
+           var uid = user.uid;
+           firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
+           var username = snapshot.val().name.split(" ") ;
+           var name = username[0].charAt(0) + " " + username[1].charAt(0);
+           document.getElementById("initial").textContent = name.toUpperCase();
+         });
+         otherStuff();
+
+         } else {
+              document.location.href = 'signIn.html';
+
+         }
+       });
+     }
+
+   window.onload = function() {
+     initApp();
+   };
+
+     function handleSignOut(){
+         firebase.auth().signOut().then(function() {
+   //n-out successful.
+         }, function(error) {
+         alert(error);
+         });
+         document.location.href = 'signin.html';
+    }
+
+    function otherStuff(){
+        var user = firebase.auth().currentUser;
+        var uid = user.uid;
+        firebase.database().ref('users/' + uid+'/following').once('value').then(function(snapshot) {
+                var count = 0;
+                snapshot.forEach(function(item) {
+                   var itemVal = item.val();
+                   var div = document.createElement("div");
+                   var divId = "item"+String(count);
+                   div.id =  divId;
+                   div.className = 'item';
+                   div.style.marginBottom = '5px';
+                   div.style.marginTop = '5px';
+                   document.getElementById("b").appendChild(div);
+
+                   var para = document.createElement("p");
+                   para.className = 'textFollowing';
+                   para.innerHTML =  itemVal;
+                   //para.style.textAlign = 'center';
+                   document.getElementById(divId).appendChild(para);
+
+
+                   var btn = document.createElement("button");
+                   btn.className = 'delete';
+                   btn.innerHTML='Delete';
+                   //btn.style.textAlign = 'right';
+                   document.getElementById(divId).appendChild(btn);
+
+                   count = count + 1;
+               });
+                if (count == 0){
+                    var para = document.createElement("p");
+                    para.innerHTML =  "You are currently not following any items on the course schedule click <a href='add.html'>here</a> to start following some!";
+                    para.className = 'none';
+                    document.getElementById('b').appendChild(para);
+                }
+               //test(count);
+        });
+    }
+
+    function test(count){
+    alert(count);
+    }
+
+    </script>
+
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDwubUIaSZVmk4slijsHdxQSMIaUzFPnyk",
+          authDomain: "courseschedule-8a816.firebaseapp.com",
+          databaseURL: "https://courseschedule-8a816.firebaseio.com",
+          projectId: "courseschedule-8a816",
+          storageBucket: "courseschedule-8a816.appspot.com",
+          messagingSenderId: "386132172955"
+        };
+        firebase.initializeApp(config);
+      </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+</html>
