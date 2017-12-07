@@ -105,57 +105,81 @@ class MultiwayTree:
 #[2,[]],    [3,[[5,[]],[6,[[10,[]]]]]],    [4,[[7,[]],[8,[]],[9,[]]]]
 
 
-        def __init__(self,pyTree):
-            tree = LinkedList()
+    def __init__(self,pyTree):
+        self.tree = LinkedList()
+        self.preOrderLst = []
 
-            def getChildren(children):
-                childrenLst = []
-                child = ''
-                outer = False
-                inner = 0
-                for x in children:
-                    if x == '[':
-                        outer = True
-                        continue
-
-                    if outer:
-                        if x == '[':
-                            inner +=1
-                        elif inner > 0 and x == ']':
-                            inner -= 1
-                        elif inner == 0 and x == ']':
-                            childrenLst.append(child)
-                            child = ''
-                            outer = False
-
-                    child += x
-                return childrenLst
-
-                            #how to split and get head and child
-            def getNodesTree(pyTree,tree):
-                if pyTree == '':
-                    return
-                else:
-                    pyTree = pyTree[1:-1]
-                    tree.head = pyTree[0]
-                    childrenLst = pyTree[2:]
-                    #1. layer
-                    #2. head
-                    #3. if children
-                    if len(childrenLst) > 2:
-                        #get children
-                        children = childrenLst[1:-1]
-                        childrenLst = getChildren(children)
-                        #loop
-                        for child in childrenLst:
-                            childTree = LinkedList()
-                            tree.add(childTree)
-                            getNodesTree(child,childTree)
-                        #recurse
+        self.getNodesTree(pyTree,self.tree)
 
 
+    def getNodesTree(self,pyTree,tree):
+        if pyTree == '':
+            return
+        else:
+            pyTree = pyTree[1:-1]
+            currentNode = tree.addLast(pyTree[0])
+            #tree.head = pyTree[0]
+            childrenLst = pyTree[2:]
+            #1. layer
+            #2. head
+            #3. if children
+            if len(childrenLst) > 2:
+                #get children
+                childTree = LinkedList()
+                currentNode.setSubTree(childTree)
 
-        #def preOrder(self):  print out the node-and-pointer representation of a tree using preorder.
+                children = childrenLst[1:-1]
+                childrenLst = self.getChildren(children)
+                #loop
+                for child in childrenLst:
+                    print('child  ' + child )
+                    self.getNodesTree(child,childTree)
+                print('for loop returned')
+                return
+
+            else:
+                print('returned')
+                return
+
+    def getChildren(self,children):
+        childrenLst = []
+        child = ''
+        outer = False
+        inner = 0
+        for x in children:
+
+            if outer:
+                child += x
+                if x == '[':
+                    inner +=1
+                elif inner > 0 and x == ']':
+                    inner -= 1
+                elif inner == 0 and x == ']':
+                    childrenLst.append(child)
+                    child = ''
+                    outer = False
+
+            elif x == '[':
+                outer = True
+                child += x
+
+        return childrenLst
+
+    def preOrder(self):
+        self.preOrderCall(self.tree,self.tree.head)
+        return self.preOrderLst
+
+    def preOrderCall(self,tree,current):
+
+        if current == None:
+            return
+        else:
+            data = current.getData()
+            self.preOrderLst.append(data)
+            if current.getSubTree() != None:
+                subTree = current.getSubTree()
+                self.preOrderCall(subTree,subTree.head)
+            self.preOrderCall(tree,current.getNext())
 
         #def isIsomorphicTo(self,other):  return True if the tree "self" has the same structure as the
          #    tree "other", "False" otherwise.
@@ -167,99 +191,18 @@ def removeSpaces(stringu):
     return newStringu
 
 
-
 def main():
     inputFile = open('MultiwayTreeInput.txt','r')
     treeOne = inputFile.readline()
     treeOne = removeSpaces(treeOne)
 
-    #treeOne = treeOne[1:-1].split(', ')
-    #print(treeOne)
-    tOne = LinkedList()
-    getNodesTree(treeOne,tOne)
-    #print(tOne.head.getData())
-    print(tOne.head.getSubTree().head.getData())
-   # preOrder(tOne)
-   # print(preOrderLst)
+
+    tOne = MultiwayTree(treeOne)
+    lst = tOne.preOrder()
+    print(lst)
+
 #[2,[]],    [3,[  [5,[]]  , [6,[[10,[]]]] ]],    [4,[[7,[]],[8,[]],[9,[]]]]
-[2,[]], [3, [ [5,[]], [6, [ [10,[]] ] ] ]], [4, [ [7,[]], [8,[]], [9,[]] ]]
-
-
-def getChildren(children):
-    childrenLst = []
-    child = ''
-    outer = False
-    inner = 0
-    for x in children:
-
-        if outer:
-            child += x
-            if x == '[':
-                inner +=1
-            elif inner > 0 and x == ']':
-                inner -= 1
-            elif inner == 0 and x == ']':
-                childrenLst.append(child)
-                child = ''
-                outer = False
-
-        elif x == '[':
-            outer = True
-            child += x
-
-
-    return childrenLst
-
-                            #how to split and get head and child
-def getNodesTree(pyTree,tree):
-    if pyTree == '':
-        return
-    else:
-        pyTree = pyTree[1:-1]
-        currentNode = tree.addLast(pyTree[0])
-        #tree.head = pyTree[0]
-        childrenLst = pyTree[2:]
-        #1. layer
-        #2. head
-        #3. if children
-        if len(childrenLst) > 2:
-            #get children
-            childTree = LinkedList()
-            currentNode.setSubTree(childTree)
-
-            children = childrenLst[1:-1]
-            childrenLst = getChildren(children)
-            #loop
-            for child in childrenLst:
-                print('child  ' + child )
-                #childTree
-
-                #childTree = LinkedList()
-                #tree.add(childTree)
-                getNodesTree(child,childTree)
-            print('for loop returned')
-            return
-        else:
-            print('returned')
-            return
-preOrderLst = []
-def preOrder(tree):
-
-    current = tree.head
-    if current.getSubTree == None:
-        return
-
-    else:
-        while current != None:
-
-
-            data = current.getData()
-            print(data)
-            preOrderLst.append(data)
-            subTree = current.getSubTree()
-            preOrder(subTree)
-
-            current = current.getNext()
+#[1,[[2,[]],[3,[[5,[]],[6,[[10,[]]]]]],[4,[[7,[]],[8,[]],[9,[]]]]]]
 
 
 
