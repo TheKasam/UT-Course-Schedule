@@ -111,17 +111,32 @@ class MultiwayTree:
 
         self.getNodesTree(pyTree,self.tree)
 
+    def getHeadElement(self,pyTree):
+        element = ''
+        childLst = ''
+        addElement = True
+        for x in pyTree:
+            if x == ',' and addElement == True:
+                addElement = False
+                continue
+            if addElement:
+                element += x
+            else:
+                childLst += x
+        print(element,'asdf',childLst)
+        return (element,childLst)
+#[1,[[2,[]],[3,[[5,[]],[6,[[10,[]]]]]],[4,[[7,[]],[8,[]],[9,[]]]]]]
 
     def getNodesTree(self,pyTree,tree):
         if pyTree == '':
             return
         else:
-            pyTree = pyTree[1:-1]
-            currentNode = tree.addLast(pyTree[0])
-            #tree.head = pyTree[0]
-            childrenLst = pyTree[2:]
             #1. layer
+            pyTree = pyTree[1:-1]
             #2. head
+            elementHead,childrenLst = self.getHeadElement(pyTree)
+            currentNode = tree.addLast(elementHead)
+
             #3. if children
             if len(childrenLst) > 2:
                 #get children
@@ -172,16 +187,48 @@ class MultiwayTree:
     def preOrderCall(self,tree,current):
 
         if current == None:
+            print('up')
             return
         else:
             data = current.getData()
             self.preOrderLst.append(data)
+            print(data)
             if current.getSubTree() != None:
                 subTree = current.getSubTree()
+                print('down left')
                 self.preOrderCall(subTree,subTree.head)
             self.preOrderCall(tree,current.getNext())
 
-        #def isIsomorphicTo(self,other):  return True if the tree "self" has the same structure as the
+
+    def getTreeStruct(self,tree):
+        self.preOrderCall(self.tree,self.tree.head)
+        return self.preOrderLst
+
+    def getTreeStructCall(self,tree,current):
+        if current == None:
+            print('up')
+            return
+        else:
+            data = current.getData()
+            self.preOrderLst.append(data)
+            print(data)
+            if current.getSubTree() != None:
+                subTree = current.getSubTree()
+                print('down left')
+                self.preOrderCall(subTree,subTree.head)
+            self.preOrderCall(tree,current.getNext())
+
+    def isIsomorphicTo(self,other):  #return True if the tree "self" has the same structure as the
+        isoOne = getTreeStruct(other)
+        isoTwo = getTreeStruct(self.tree)
+
+        if len(isoOne) != len(isoTwo):
+            return False
+        else:
+            if len(isoOne) > len(isoTwo):
+                #for x in
+                pass
+
          #    tree "other", "False" otherwise.
 def removeSpaces(stringu):
     newStringu = ''
@@ -193,16 +240,18 @@ def removeSpaces(stringu):
 
 def main():
     inputFile = open('MultiwayTreeInput.txt','r')
-    treeOne = inputFile.readline()
-    treeOne = removeSpaces(treeOne)
-
+    treeOne = removeSpaces(inputFile.readline())
+    treeTwo = removeSpaces(inputFile.readline())
 
     tOne = MultiwayTree(treeOne)
-    lst = tOne.preOrder()
-    print(lst)
+    tOneLst = tOne.preOrder()
+    print(tOneLst)
+
+    tTwo = MultiwayTree(treeTwo)
+    tTwoLst = tTwo.preOrder()
+    print(tTwoLst)
 
 #[2,[]],    [3,[  [5,[]]  , [6,[[10,[]]]] ]],    [4,[[7,[]],[8,[]],[9,[]]]]
-#[1,[[2,[]],[3,[[5,[]],[6,[[10,[]]]]]],[4,[[7,[]],[8,[]],[9,[]]]]]]
 
 
 
