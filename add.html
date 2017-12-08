@@ -1024,8 +1024,8 @@
         var dataBase = firebase.database();
         var user = firebase.auth().currentUser;
         var uid = user.uid + time.toString();
-        input = input + type.charAt(0);
-        var newV = dataBase.ref().child('validate').child(uid).set({input:input}).then(function() {
+        inputC = input + type.charAt(0);
+        var newV = dataBase.ref().child('validate').child(uid).set({input:inputC}).then(function() {
 
 
             var validateRef = firebase.database().ref().child('validate').child(uid);
@@ -1097,6 +1097,7 @@
 
         var input = document.getElementById('unique-id').value;
 
+
         //error checking
         if (input.length != 5){
             document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
@@ -1119,6 +1120,9 @@
 
         var feild = document.getElementById('sel1');
         var feildVal = feild.options[feild.selectedIndex].value;
+        if (feildVal.substring(1,2) == ' '){
+        feildVal = feildVal.substring(0,1) + '+'+ feildVal.substring(2,3);
+        }
         var number = document.getElementById('course-id').value;
         var input = feildVal + " " + number;
 
