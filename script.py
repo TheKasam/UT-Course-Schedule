@@ -33,7 +33,7 @@ def main():
     #getting firebase data
     ref = db.reference('courses')
     data = ref.get()
-
+    print(data)
     #getting a list of keys
     dataKeysList = data.keys()
 
