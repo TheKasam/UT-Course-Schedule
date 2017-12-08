@@ -241,22 +241,24 @@ def removeSpaces(stringu):
 def main():
     inputFile = open('MultiwayTreeInput.txt','r')
 
+    print()
     line = inputFile.readline()
     count = 1
     while line != '':
 
-        print('Tree '+str(count)+':  '+line)
+        print('Tree '+str(count)+':  '+line, end='')
         treeOne = MultiwayTree(removeSpaces(line))
         print('Tree '+str(count)+' preorder:   ' + str(treeOne.preOrder()))
-
         print()
+
+
         line = inputFile.readline()
         count +=1
-        print('Tree '+str(count)+':  '+line)
+        print('Tree '+str(count)+':  '+line, end='')
         treeTwo = MultiwayTree(removeSpaces(line))
-        print('Tree '+str(count)+' preorder:   ' + str(treeOne.preOrder()))
-
+        print('Tree '+str(count)+' preorder:   ' + str(treeTwo.preOrder()))
         print()
+
         if treeOne.isIsomorphicTo(treeTwo.tree):
             print('Tree ' + str(count-1) + ' is isomorphic to Tree ' + str(count))
         else:
@@ -264,27 +266,6 @@ def main():
 
         count +=1
         line = inputFile.readline()
-
-    # treeOne = removeSpaces(inputFile.readline())
-    # treeTwo = removeSpaces(inputFile.readline())
-    #
-    # tOne = MultiwayTree(treeOne)
-    # tOneLst = tOne.preOrder()
-    # print(tOneLst)
-    #
-    # tTwo = MultiwayTree(treeTwo)
-    # #tTwoLst = tTwo.preOrder()
-    #
-    # treeThree = removeSpaces(inputFile.readline())
-    # print(treeThree)
-    # tThree = MultiwayTree(treeThree)
-    # tThreeLst = tThree.preOrder()
-    # print(tThreeLst)
-    # ans = tOne.isIsomorphicTo(tTwo.tree)
-    # print(ans)
-
-
-
-
+        print()
 
 main()
