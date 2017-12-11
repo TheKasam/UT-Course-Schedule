@@ -1,9 +1,19 @@
-#defining node class
+#  File: ERsim.py
+#  Description:  simulating the environment of a busy Emergency Room (ER) for a hospital
+#  Student's Name: Sai Kasam
+#  Student's UT EID: spk585
+#  Course Name: CS 313E
+#  Unique Number: 51465
+#
+#  Date Created: Dec 5th
+#  Date Last Modified: Dec 8th
+
 class Node:
 
   def __init__ (self,initdata):
     self.data = initdata
     self.next = None  #pointer to a Node (or None if node not needed)
+    #stores child tree
     self.subTree = None
 
   def getData(self):
@@ -21,6 +31,7 @@ class Node:
   def setNext(self, newNext):
     self.next = newNext
 
+    #sets the child tree
   def setSubTree(self, newSubTree):
     self.subTree = newSubTree
 
@@ -42,24 +53,6 @@ class LinkedList:
     return temp
 
 
-  def __str__(self):
-
-    #initing variables
-    string = ""
-    current = self.head
-    count = 0
-
-    #traversing though linked list
-    while current != None:
-      #adding next elements data to string to return
-      string += current.getData() + "  "
-      #adding to count for formatting purposes
-      count += 1
-      if count % 10 == 0:
-        string += "\n"
-      current = current.getNext()
-    return string
-
   def addLast (self, item):
   # Add an item to the end of a list
   #Follow the add first method except set next at the end of the list.
@@ -78,20 +71,22 @@ class LinkedList:
     return(temp)
 
 class MultiwayTree:
-#[2,[]], [3, [ [5,[]], [6, [ [10,[]] ] ] ]], [4, [ [7,[]], [8,[]], [9,[]] ]]
-#[1, [[2,[]], [3, [ [5,[]], [6, [ [10,[]] ] ] ]], [4, [ [7,[]], [8,[]], [9,[]] ]] ]]
-#[2,[]],    [3,[[5,[]],[6,[[10,[]]]]]],    [4,[[7,[]],[8,[]],[9,[]]]]
 
-
+    #sets up tree
     def __init__(self,pyTree):
         self.tree = LinkedList()
+        #preorder values are stored here
         self.preOrderLst = []
+        #iso helper values
         self.isoLst = []
 
+        #function that populats tree
         self.getNodesTree(pyTree,self.tree)
+        #populates elemtes into isoLst
         self.getTreeStruct(self.tree)
         self.isoLst.append('done')
 
+        #gets head and childLst from pyTree
     def getHeadElement(self,pyTree):
         element = ''
         childLst = ''
@@ -104,10 +99,9 @@ class MultiwayTree:
                 element += x
             else:
                 childLst += x
-        #print(element,'asdf',childLst)
         return (element,childLst)
-#[1,[[2,[]],[3,[[5,[]],[6,[[10,[]]]]]],[4,[[7,[]],[8,[]],[9,[]]]]]]
 
+    #gets ppopulates chlildren recursively
     def getNodesTree(self,pyTree,tree):
         if pyTree == '':
             return
@@ -117,7 +111,6 @@ class MultiwayTree:
             #2. head
             elementHead,childrenLst = self.getHeadElement(pyTree)
             currentNode = tree.addLast(elementHead)
-
             #3. if children
             if len(childrenLst) > 2:
                 #get children
@@ -126,17 +119,15 @@ class MultiwayTree:
 
                 children = childrenLst[1:-1]
                 childrenLst = self.getChildren(children)
-                #loop
+                #looping though children
                 for child in childrenLst:
-                    #print('child  ' + child )
+                    #recursively popultes children
                     self.getNodesTree(child,childTree)
-                #print('for loop returned')
                 return
 
             else:
-                #print('returned')
                 return
-
+    #gets indiviual children from a pyTree
     def getChildren(self,children):
         childrenLst = []
         child = ''
@@ -161,6 +152,7 @@ class MultiwayTree:
 
         return childrenLst
 
+    #gets preorder values and populates preOrderLst
     def preOrder(self):
         self.preOrderCall(self.tree,self.tree.head)
         return self.preOrderLst
@@ -168,22 +160,22 @@ class MultiwayTree:
     def preOrderCall(self,tree,current):
 
         if current == None:
-            #print('up')
             return
         else:
             data = current.getData()
+            #save head
             self.preOrderLst.append(data)
-            #print(data)
+            #if child go though child
             if current.getSubTree() != None:
                 subTree = current.getSubTree()
-                #print('down left')
                 self.preOrderCall(subTree,subTree.head)
+            #go to siblig
             self.preOrderCall(tree,current.getNext())
 
-
+    #populates isoList with structural elements to compare between trees
     def getTreeStruct(self,tree):
         self.getTreeStructCall(tree,tree.head)
-
+    #helper for getTreeStruct that recurives go though tree muck like preorder
     def getTreeStructCall(self,tree,current):
         if current == None:
             self.isoLst.append('up ')
@@ -194,15 +186,15 @@ class MultiwayTree:
             self.isoLst.append('node ')
             if current.getSubTree() != None:
                 subTree = current.getSubTree()
-                #print('down left')
                 self.isoLst.append('downleft ')
                 self.getTreeStructCall(subTree,subTree.head)
             self.getTreeStructCall(tree,current.getNext())
 
     def isIsomorphicTo(self,other):  #return True if the tree "self" has the same structure as the
-
+        #getting other tree elemtes
         self.getTreeStruct(other)
 
+        #populating lists
         newIsoLst = []
         otherLst = []
         addToOther = False
@@ -210,15 +202,15 @@ class MultiwayTree:
             if x == 'done':
                 addToOther = True
                 continue
-
             if addToOther:
                 otherLst.append(x)
             else:
                 newIsoLst.append(x)
 
-
+        #comparing lists length to see if they're same
         if len(newIsoLst) != len(otherLst):
             return False
+        #comparing list elements
         else:
             if len(newIsoLst) > len(otherLst):
                 for x in len(newIsoLst):
@@ -230,6 +222,7 @@ class MultiwayTree:
                         return False
         return True
 
+#removing spaces from pyTree
 def removeSpaces(stringu):
     newStringu = ''
     for x in stringu:
@@ -239,18 +232,19 @@ def removeSpaces(stringu):
 
 
 def main():
+    #opening file
     inputFile = open('MultiwayTreeInput.txt','r')
 
     print()
     line = inputFile.readline()
     count = 1
     while line != '':
-
+        #printing pyTree
         print('Tree '+str(count)+':  '+line, end='')
         treeOne = MultiwayTree(removeSpaces(line))
+        #print preOrder
         print('Tree '+str(count)+' preorder:   ' + str(treeOne.preOrder()))
         print()
-
 
         line = inputFile.readline()
         count +=1
@@ -259,6 +253,7 @@ def main():
         print('Tree '+str(count)+' preorder:   ' + str(treeTwo.preOrder()))
         print()
 
+        #checking if elements are the same
         if treeOne.isIsomorphicTo(treeTwo.tree):
             print('Tree ' + str(count-1) + ' is isomorphic to Tree ' + str(count))
         else:
