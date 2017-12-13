@@ -243,7 +243,7 @@ def logIn():
     browser.submit_selected()
 
     stall(8)
-    with open("sp500tickers.pickle","wb") as f:
+    with open("browser.pickle","wb") as f:
         pickle.dump(browser,f)
     #browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=INSTR&instr_last_name=CONLEY&instr_first_initial=&x=40&y=9")
     return(browser)

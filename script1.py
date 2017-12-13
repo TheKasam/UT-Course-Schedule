@@ -5,7 +5,7 @@ import sys
 
 
 
-with open("sp500tickers.pickle","rb") as f:
+with open("browser.pickle","rb") as f:
     browser = pickle.load(f)
 
 

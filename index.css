@@ -52,6 +52,13 @@
     border-bottom: 2px solid white;
 }
 
+.navbar-brand{
+  background-image: url("assets/logo.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
 /*done with nav bar*/
 
 body {
