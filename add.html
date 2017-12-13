@@ -1080,7 +1080,10 @@
         var dataBase = firebase.database();
 
         //adding a couse child and initing with type
-        dataBase.ref().child('courses').child(classId).update({
+        if (classId.substring(1,2) == '+'){
+                newId = classId.replace('+',' ');}
+
+        dataBase.ref().child('courses').child(newId).update({
         queryType: type
         });
         //adding class to following list for user

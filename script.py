@@ -145,7 +145,15 @@ def saveUnique(unique,browser):
     return(status)
 
 def saveCourse(courseId,browser):
+    newCouseId = ""
+    for x in range(len(courseId)):
 
+        if x == 1 and courseId[x] == " ":
+            newCouseId += '+'
+            continue
+        else:
+            newCouseId += courseId[x]
+    courseId = newCouseId
     courseIdLst= courseId.split(" ")
     feild = courseIdLst[0]
     number = courseIdLst[1]
