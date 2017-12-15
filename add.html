@@ -1007,6 +1007,8 @@
 
     <script>
 
+    var exists = exists(input);
+
 
 
     function validate(type,input){
@@ -1025,6 +1027,9 @@
         var user = firebase.auth().currentUser;
         var uid = user.uid + time.toString();
         inputC = input + type.charAt(0);
+
+
+
         var newV = dataBase.ref().child('validate').child(uid).set({input:inputC}).then(function() {
 
 
@@ -1033,11 +1038,16 @@
             var ans = snapshot.val();
 
             if (ans =='1'){
+
+
                vid.currentTime=3.1; //check animation
                document.getElementById('test1').innerHTML = 'not sucks';
                validateRef.off();
+
                validateRef.remove();
+
                addClass(type, input);
+
                }
 
             else if (ans == '0') {
@@ -1051,6 +1061,23 @@
 
             });
         });
+    }
+
+    function exists(classId){
+        var userId = firebase.auth().currentUser.uid;
+        var result = false;
+            return firebase.database().ref('/courses_subscribers/' + classId.toString()).once('value').then(function(snapshot) {
+           // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+           snapshot.forEach(function(child){
+                var key = child.key;
+                var value = child.val();
+
+                if (value.toString() == userId.toString()){
+                    result = false;
+                }
+                });
+            });
+        return result;
     }
 
     function borderRed(type){
@@ -1081,11 +1108,12 @@
 
         //adding a couse child and initing with type
         if (classId.substring(1,2) == '+'){
-                newId = classId.replace('+',' ');}
+                classId = classId.replace('+',' ');}
 
-        dataBase.ref().child('courses').child(newId).update({
+        dataBase.ref().child('courses').child(classId).update({
         queryType: type
         });
+
         //adding class to following list for user
         dataBase.ref('/users/' + uid+"/following").push(classId);
         //updating list of people who follow the class

@@ -28,6 +28,7 @@
         html,body{height:100% !important;width:100% !important; margin:0px; padding:0px;}
     </style>
         <!--  height = 100x no of pages -->
+
   </head>
 
   <body>
@@ -67,8 +68,8 @@
 
         <div class='item-body'>
 
-        <button id='google_signin'>
-            <svg class='google' width="270px" height="44px" viewBox="0 0 270 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+            <svg class='google' id='google-sign-in' width="270px" height="44px" viewBox="0 0 270 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
                 <desc>Created with Sketch.</desc>
                 <defs>
@@ -104,7 +105,7 @@
                     </g>
                 </g>
           </svg>
-         </button>
+
 
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
           <p class='l1'>EMAIL ADDRESS</p>
@@ -140,34 +141,14 @@
         } else {
           alert(errorMessage);
         }
-        console.log(error);
-        });
+        }).then(() => {
+               document.location.href = 'add.html';
+           });
 
 
     }
 
-    function auth_google(){
-      var provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().getRedirectResult().then(function(result) {
-        if (result.credential) {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          var token = result.credential.accessToken;
-          // ...
-        }
-        // The signed-in user info.
-        var user = result.user;
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
 
-    }
 
     function initApp() {
        // Listening for auth state changes.
@@ -175,8 +156,8 @@
 
          if (user) {
            // User is signed in.
-           var uid = user.uid;
-            document.location.href = 'add.html';
+          // var uid = user.uid;
+            //document.location.href = 'add.html';
 //           document.getElementById('initial').textContent = 'signed in';
 
          } else {
@@ -191,7 +172,7 @@
 
 
        document.getElementById('sign-in-btn').addEventListener('click', handleSignIn, false);
-       document.getElementById('google_signin').addEventListener('click', auth_google, false);
+       document.getElementById('google-sign-in').addEventListener('click', google, false);
 
 
      }
@@ -199,6 +180,44 @@
        initApp();
      };
 
+
+    function google(){
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+        provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        //alert(user.displayName);
+
+        var email = user.email;
+        var name = user.displayName;
+        var uid = user.uid;
+
+        return firebase.database().ref().child('users').child(uid).update({
+
+          email:email,
+          name:name
+        }).then(() => {
+               document.location.href = 'add.html';
+           });
+
+
+    // ...
+    }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+    });
+
+    }
     </script>
 
       <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>

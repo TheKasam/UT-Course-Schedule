@@ -133,7 +133,9 @@
                    var btn = document.createElement("button");
                    btn.className = 'delete';
                    btn.innerHTML='Delete';
-                   //btn.style.textAlign = 'right';
+                   btn.id="delete"+count;
+                    btn.setAttribute("onclick","deletes("+count.toString()+")");
+                    //btn.style.textAlign = 'right';
                    document.getElementById(divId).appendChild(btn);
 
                    count = count + 1;
@@ -151,6 +153,16 @@
     function test(count){
     alert(count);
     }
+
+    function deletes(num){
+    var div = document.getElementById("item"+num);
+    document.getElementById("b").removeChild(div);
+    //delete functionnnnnnnojdsfio oijsd aka pain in the ass
+    //var user = firebase.auth().currentUser;
+    //var uid = user.uid;
+    //firebase.database().ref('/users/' + uid+"/following")
+}
+       // document.getElementById('delete').addEventListener('click', deletes, false);
 
     </script>
 
