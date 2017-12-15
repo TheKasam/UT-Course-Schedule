@@ -1033,11 +1033,15 @@
             var ans = snapshot.val();
 
             if (ans =='1'){
+
                vid.currentTime=3.1; //check animation
                document.getElementById('test1').innerHTML = 'not sucks';
                validateRef.off();
+
                validateRef.remove();
+
                addClass(type, input);
+
                }
 
             else if (ans == '0') {
@@ -1081,11 +1085,12 @@
 
         //adding a couse child and initing with type
         if (classId.substring(1,2) == '+'){
-                newId = classId.replace('+',' ');}
+                classId = classId.replace('+',' ');}
 
-        dataBase.ref().child('courses').child(newId).update({
+        dataBase.ref().child('courses').child(classId).update({
         queryType: type
         });
+
         //adding class to following list for user
         dataBase.ref('/users/' + uid+"/following").push(classId);
         //updating list of people who follow the class
