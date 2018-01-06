@@ -195,7 +195,7 @@ border: 1px solid rgba(0,0,0,0);
 
 
     font-size: 12px;
-    
+
 }
 
 
@@ -287,14 +287,34 @@ border: 1px solid rgba(0,0,0,0);
 
 
 
+.btn2{
 
-.l12{
-  order: 1;
-  align-self: left;
+  background-color: #D68745;
 
-  color: black;
-  font-size: 12px;
+  margin-top: 15px;
+
+  border: none;
+  border-radius: 32px;
+  width: 100%;
+  height: 32px;
+
+  letter-spacing: 1px;
+  font-size: 10px;
+  font-weight: 300px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

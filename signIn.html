@@ -107,13 +107,16 @@
           </svg>
 
 
-          <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
           <p class='l1'>EMAIL ADDRESS</p>
           <input id='email' type="email" class="enter-email enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="julie@gmail.com">
-          <p class='l3'>PASSWORD</p>
-          <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="5 + characters">
+          <p class='e12 e' id='e12'><p>
 
-          <small id="emailHelp" class="have-account">need an account <a href='signUp.html'> <button id='already-have-account' type="button" class='sign' > sign up here</button></a></small>
+          <p class='l3'>PASSWORD</p>
+          <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="6 + characters">
+          <p class='e22 e' id='e22'><p>
+          <button id='sign-in-btn'type="button" class="btn2 btn-primary">GET STARTED</button>
+
+          <small id="emailHelp" class="have-account"><br> need an account <a href='signUp.html'> <button id='already-have-account' type="button" class='sign' > sign up here</button></a></small>
 
         </div>
 
@@ -131,16 +134,62 @@
 
         var email = document.getElementById('email').value;
         var password = document.getElementById('password').value;
+        var isError = false;
+
+        if (email.length <1) {
+          document.getElementById("e12").style.display = "initial";
+          document.getElementById('e12').innerHTML = "Please enter an email address.";
+          isError = true;
+        } else {
+          document.getElementById("e12").style.display = "none";
+        }
+
+        if (password.length <1) {
+          document.getElementById("e22").style.display = "initial";
+          document.getElementById('e22').innerHTML = "Please enter an password.";
+          isError = true;
+        } else {
+          document.getElementById("e22").style.display = "none";
+        }
+        if (isError){
+           return;
+        }
 
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
+          document.getElementById("e22").style.display = "initial";
+          document.getElementById('e22').innerHTML = "Wrong password."
+          isError = true;
         } else {
-          alert(errorMessage);
+          document.getElementById("e22").style.display = "none";
         }
+
+        if(errorCode ==='auth/user-not-found') {
+            document.getElementById("e12").style.display = "initial";
+            document.getElementById('e12').innerHTML = "User not found.";
+            isError = true;
+        } else {
+            document.getElementById("e12").style.display = "none";
+        }
+
+        if (errorCode) {
+          document.getElementById("e22").style.display = "initial";
+          document.getElementById('e22').innerHTML = errorCode
+          isError = true;
+        } else {
+          document.getElementById("e22").style.display = "none";
+        }
+
+
+        if (isError){
+            return;
+        }
+
+
+
         }).then(() => {
                document.location.href = 'add.html';
            });
@@ -155,17 +204,17 @@
        firebase.auth().onAuthStateChanged(function(user) {
 
          if (user) {
-           // User is signed in.
+          // User is signed in.
           // var uid = user.uid;
-            //document.location.href = 'add.html';
-//           document.getElementById('initial').textContent = 'signed in';
+          //document.location.href = 'add.html';
+          //document.getElementById('initial').textContent = 'signed in';
 
          } else {
-//             document.getElementById('initial').textContent = 'not signed in';
+          //document.getElementById('initial').textContent = 'not signed in';
 
          }
 
-         // [END_EXCLUDE]
+          // [END_EXCLUDE]
        });
        // [END authstatelistener]
 

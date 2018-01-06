@@ -114,7 +114,7 @@
           <input id='name' type="text" class="enter-name enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Julie Appleseed">
           <p class='e2 e' id="e2"></p>
           <p class='l3'>PASSWORD</p>
-          <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="5 + characters">
+          <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="6 + characters">
           <p class='e3 e' id="e3"></p>
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
           <small id="emailHelp" class="have-account">have an account <a href='signIn.html'> <button id='already-have-account' type="button" class='sign'> sign in here</button></a></small>
@@ -157,7 +157,7 @@
         document.getElementById("e2").style.display = "none";
         }
 
-      if (password.length < 5) {
+      if (password.length < 6) {
         document.getElementById("e3").style.display = "initial";
         document.getElementById("e3").innerHTML = 'More than five characters needed.';
         isError = true;
