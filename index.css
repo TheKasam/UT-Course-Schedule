@@ -105,7 +105,7 @@ body {
 
   background-color: white;
   border-radius: 2px;
-  height: 450px;
+
   width: 250px;
 }
 
@@ -136,6 +136,7 @@ body {
   padding-bottom: 10px;
   padding-top: 13px;
 
+
 }
 
 .header2 p{
@@ -149,6 +150,7 @@ body {
   padding-bottom: 10px;
   padding-top: 15px;
 
+
 }
 
 .item-body{
@@ -156,10 +158,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   }
 
 .google{
-  order: 1;
+  flex: 1;
   width: 80%;
 
   margin-top: 10px;
@@ -171,7 +174,7 @@ border: 1px solid rgba(0,0,0,0);
 }
 
 .l1{
-  order: 2;
+  flex: 2;
   align-self: flex-start;
 
   color: black;
@@ -180,24 +183,26 @@ border: 1px solid rgba(0,0,0,0);
   padding-left: 27px;
 }
 
-.l12{
-  order: 1;
-  align-self: left;
-
-  color: black;
-  font-size: 12px;
-}
-
-.enter-number{
-  order: 2;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
 .enter-email{
-  order: 3;
+  flex: 3;
   margin-bottom: 15px;
 }
+
+
+.e{
+    color: red;
+    margin-top: -10px;
+
+
+    font-size: 12px;
+    
+}
+
+
+.e1{
+  flex: 4;
+}
+
 
 .enter{
     padding-left: 10px;
@@ -211,11 +216,11 @@ border: 1px solid rgba(0,0,0,0);
 }
 .enter::placeholder{
     font-weight: 100;
-
-
 }
+
+
 .l2{
-  order: 4;
+  flex: 5;
   align-self: flex-start;
 
   color: black;
@@ -225,13 +230,17 @@ border: 1px solid rgba(0,0,0,0);
 }
 
 .enter-name{
-  order: 5;
+  flex: 6;
   width: 80%;
   margin-bottom: 15px;
 }
 
+.e2{
+    flex: 7;
+}
+
 .l3{
-  order: 6;
+  flex: 8;
   align-self: flex-start;
 
   color: black;
@@ -241,13 +250,17 @@ border: 1px solid rgba(0,0,0,0);
 }
 
 .enter-password{
-  order: 7;
+  flex: 9;
   width: 80%;
   margin-bottom: 15px;
 }
 
+.e3{
+    flex: 10;
+}
+
 .btn{
-  order: 8;
+  flex: 11;
 
   background-color: #D68745;
 
@@ -264,12 +277,36 @@ border: 1px solid rgba(0,0,0,0);
 }
 
 .have-account{
-  order: 9;
+  flex: 12;
   width: 90%;
 
   text-align: center;
   margin-top: 5px;
+  padding-bottom: 20px;
 }
+
+
+
+
+.l12{
+  order: 1;
+  align-self: left;
+
+  color: black;
+  font-size: 12px;
+}
+
+
+
+
+.enter-number{
+  order: 2;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+
+
 
 .sign{
   background-color: none;

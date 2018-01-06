@@ -52,7 +52,7 @@
                 <script>
 
                   function initApp() {
-
+			alert("yesss");
                       return firebase.auth().onAuthStateChanged(function(user) {
                         if (user) {
                           // User is signed in.
@@ -982,7 +982,7 @@
             <p class='form-label'>instructor last name</p>
             <input id='prof-id-last' type="text" class="form-control"  placeholder="Mcconaughey">
             <button id='add-prof-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
-            <video width="20" id='spinner-prof-hidden' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
+            <video width="20" id='spinner-prof-hidden' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
             </div>
 
             <div class='item-items two-two'>
@@ -1007,7 +1007,7 @@
 
     <script>
 
-
+    var exists = exists(input);
 
 
 
@@ -1021,7 +1021,7 @@
             vid.pause();
         }
         }, false);
-
+	alert('hi');
         var time = new Date().getTime() % 100000;
         var dataBase = firebase.database();
         var user = firebase.auth().currentUser;
@@ -1063,9 +1063,23 @@
         });
     }
 
+    function exists(classId){
+        var userId = firebase.auth().currentUser.uid;
+        var result = false;
+            return firebase.database().ref('/courses_subscribers/' + classId.toString()).once('value').then(function(snapshot) {
+           // var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+           snapshot.forEach(function(child){
+                var key = child.key;
+                var value = child.val();
 
+                if (value.toString() == userId.toString()){
+                    result = false;
+                }
+                });
+            });
+        return result;
+    }
 
-    //tunns border red
     function borderRed(type){
         if (type == 'prof'){
             document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
@@ -1107,11 +1121,12 @@
     }
 
 
-    document.getElementById("add-unique-btn").addEventListener("click", function() {
+    document.getElementById("add-unique-btn").addEventListener('touchstart click', function() {
+
+	alert("elemnt by id");
         //resetting error
         document.getElementById('unique-id').className = 'form-control';
         document.getElementById('unique-error').innerHTML = ''
-
         var input = document.getElementById('unique-id').value;
 
 

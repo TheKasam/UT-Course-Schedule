@@ -69,6 +69,7 @@
 
         <div class='item-body'>
 
+          <!-- google svg -->
           <svg class='google' id='google-sign-in' width="270px" height="44px" viewBox="0 0 270 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
                 <desc>Created with Sketch.</desc>
@@ -108,11 +109,13 @@
 
           <p class='l1'>EMAIL ADDRESS</p>
           <input id='email' type="email" class="enter-email enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="julie@gmail.com">
+          <p class='e1 e' id="e1"></p>
           <p class='l2'>NAME</p>
           <input id='name' type="text" class="enter-name enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Julie Appleseed">
+          <p class='e2 e' id="e2"></p>
           <p class='l3'>PASSWORD</p>
           <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="5 + characters">
-
+          <p class='e3 e' id="e3"></p>
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
           <small id="emailHelp" class="have-account">have an account <a href='signIn.html'> <button id='already-have-account' type="button" class='sign'> sign in here</button></a></small>
 
@@ -133,17 +136,39 @@
       var email = document.getElementById('email').value;
       var password = document.getElementById('password').value;
       var name = document.getElementById('name').value;
+      var isError = false
       var worked = false;
       name = name.trim;
       if (email.length < 4) {
-        alert('Please enter an email address.');
-        return;
+
+        //alert('Please enter an email address.');
+        document.getElementById("e1").style.display = "initial";
+        document.getElementById('e1').innerHTML = 'Please enter a valid email address.';
+        isError = true;
+      } else {
+        document.getElementById("e1").style.display = "none";
       }
-      if (password.length < 4) {
-        alert('Please enter a password.');
-        return;
+
+      if (email.length < 1) {
+        document.getElementById("e2").style.display = "initial";
+        document.getElementById("e2").innerHTML = 'Please enter a last name.';
+        isError = true;
+      } else {
+        document.getElementById("e2").style.display = "none";
         }
 
+      if (password.length < 5) {
+        document.getElementById("e3").style.display = "initial";
+        document.getElementById("e3").innerHTML = 'More than five characters needed.';
+        isError = true;
+        } else {
+       document.getElementById("e3").style.display = "none";
+
+        }
+      if (isError){
+        isError = false;
+        return;
+        }
 
         // Sign in with email and pass.
         // [START createwithemail]
@@ -153,15 +178,19 @@
           var errorMessage = error.message;
           // [START_EXCLUDE]
           if (errorCode == 'auth/weak-password') {
-            //document.getElementById('initial').textContent = 'The password is too weak';
+            document.getElementById("e1").style.display = "none";
+            document.getElementById('e3').innerHTML = 'The password is too weak.';
+          } else {
+            document.getElementById("e3").style.display = "none";
+           }
 
-            alert(errorCode);
-            return;
-          } else if (errorMessage !=null || errorMessage !='') {
-            //document.getElementById('initial').textContent = errorMessage;
-            alert(errorMessage);
-            return;
-          }
+          if (errorMessage !=null || errorMessage !='') {
+            document.getElementById("e1").style.display = "initial";
+            document.getElementById('e1').innerHTML = errorMessage;
+          } else {
+            document.getElementById("e1").style.display = "none";
+            }
+
         console.log(error);
           // [END_EXCLUDE]
 
@@ -190,34 +219,26 @@
 
     }
 
-   /* // Always change the value of "/hello" to "world!"
-    exports.hello = functions.database.ref('/hello').onWrite(event => {
-      // set() returns a promise. We keep the function alive by returning it.
-      return event.data.ref.set('world!').then(() => {
-        console.log('Write succeeded!');
-      });
-    }); */
-
     var usedGoogle = false;
     function initApp() {
        // Listening for auth state changes.
-       firebase.auth().onAuthStateChanged(function(user) {
+            firebase.auth().onAuthStateChanged(function(user) {
 
-         if (user || usedGoogle) {
-           // User is signed in.
+            if (user || usedGoogle) {
+            // User is signed in.
             //saves user data after they sign up to realtime db
             saveData();
 
-         } else {
-  //           document.getElementById('initial').textContent = 'not signed in';
-         }
+            } else {
+            //           document.getElementById('initial').textContent = 'not signed in';
+            }
 
-         //document.getElementById('quickstart-sign-in').disabled = false;
-         // [END_EXCLUDE]
-       });
-       // [END authstatelistener]
-       document.getElementById('sign-in-btn').addEventListener('click', handleSignUp, false);
-       document.getElementById('google-sign-in').addEventListener('click', google, false);
+            //document.getElementById('quickstart-sign-in').disabled = false;
+            // [END_EXCLUDE]
+                });
+            // [END authstatelistener]
+            document.getElementById('sign-in-btn').addEventListener('click', handleSignUp, false);
+            document.getElementById('google-sign-in').addEventListener('click', google, false);
 
 
      }
@@ -225,7 +246,7 @@
        initApp();
      };
 
-     function google(){
+    function google(){
          var provider = new firebase.auth.GoogleAuthProvider();
          provider.addScope('https://www.googleapis.com/auth/userinfo.email');
          provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
@@ -249,8 +270,8 @@
             });
 
 
-     // ...
-     }).catch(function(error) {
+        // ...
+        }).catch(function(error) {
          // Handle Errors here.
          var errorCode = error.code;
          var errorMessage = error.message;
@@ -258,8 +279,8 @@
          var email = error.email;
          // The firebase.auth.AuthCredential type that was used.
          var credential = error.credential;
-         // ...
-     });
+            // ...
+        });
 
      }
 
