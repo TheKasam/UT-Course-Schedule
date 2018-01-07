@@ -21,59 +21,59 @@ firebase_admin.initialize_app(cred, {
 
 
 def main():
+    while(True):
+        ###put out most infinate loop ###
 
-    ###put out most infinate loop ###
+        #logging in to course schedule
+        browser = logIn()
 
-    #logging in to course schedule
-    browser = logIn()
-
-    #    with open("soup.html") as f:
-    #      soup = bs.BeautifulSoup(f,'lxml')
-
-
-    #getting firebase data
-    ref = db.reference('courses')
-    data = ref.get()
-    print(data)
-    #getting a list of keys
-    dataKeysList = data.keys()
-
-    for outerKey in dataKeysList:
-        outerDict = data[outerKey]
-        try:
-            int(outerKey)
-        #checking if there are inner courses
-        except ValueError:
+        #    with open("soup.html") as f:
+        #      soup = bs.BeautifulSoup(f,'lxml')
 
 
-            #checking if values have been uploaded
-            if len(outerDict) < 2:
-                #uploading values
-                queryType = data[outerKey]['queryType']
+        #getting firebase data
+        ref = db.reference('courses')
+        data = ref.get()
+        print(data)
+        #getting a list of keys
+        dataKeysList = data.keys()
 
-                if queryType == 'course':
-                    saveCourse(outerKey,browser)
-                elif queryType == 'prof':
-                    saveProf(outerKey,browser)
+        for outerKey in dataKeysList:
+            outerDict = data[outerKey]
+            try:
+                int(outerKey)
+            #checking if there are inner courses
+            except ValueError:
 
+
+                #checking if values have been uploaded
+                if len(outerDict) < 2:
+                    #uploading values
+                    queryType = data[outerKey]['queryType']
+
+                    if queryType == 'course':
+                        saveCourse(outerKey,browser)
+                    elif queryType == 'prof':
+                        saveProf(outerKey,browser)
+
+                    continue
+
+                innerKeys = data[outerKey].keys()
+                for innerKey in innerKeys:
+                    if innerKey == 'queryType':
+                        continue
+                    innerDict = data[outerKey][innerKey]
+                    checkForUpdates(innerDict,browser)
                 continue
 
-            innerKeys = data[outerKey].keys()
-            for innerKey in innerKeys:
-                if innerKey == 'queryType':
-                    continue
-                innerDict = data[outerKey][innerKey]
-                checkForUpdates(innerDict,browser)
-            continue
+            if len(outerDict) < 7:
+                saveUnique(outerKey,browser)
+                continue
 
-        if len(outerDict) < 7:
-            saveUnique(outerKey,browser)
-            continue
-
-        checkForUpdates(outerDict,browser)
+            checkForUpdates(outerDict,browser)
 
 
-    print(dataKeysList)
+        print(dataKeysList)
 
 def checkForUpdates(checkDict,browser):
     unique = checkDict['unique']
@@ -102,9 +102,9 @@ def checkForUpdates(checkDict,browser):
     for key in webDict:
         if webDict[key] != checkDict[key]:
             changed.append(key)
-    sendUpdate(unique)
+
     if changed:
-        #sendUpdate(unique) ### send emails ###
+        sendUpdate(unique) ### send emails ###
         print(changed)
 
 def sendUpdate(unique):
@@ -114,11 +114,17 @@ def sendUpdate(unique):
     print(values)
     for each in values:
         refe = db.reference('users/' + each + "/email")
+        print(refe.get())
         recept = refe.get()
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
         service.login("saikasam98@gmail.com", "BetterMan")
-        service.sendmail("saikasam98@gmail.com", recept, "Your mom")
+        try:
+            service.sendmail("saikasam98@gmail.com", recept, "Your mom")
+        except:
+            service.quit()
+            print("This didn't work")
+            continue
         service.quit()
 
 def instructorName(instructorLst):
