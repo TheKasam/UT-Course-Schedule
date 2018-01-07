@@ -109,12 +109,16 @@ def checkForUpdates(checkDict,browser):
 
 def sendUpdate(unique):
     ref = db.reference('courses_subscribers/' + unique)
-    print(ref.get())
-    service = smtplib.SMTP('smtp.gmail.com', 587)
-    service.starttls()
-    service.login("saikasam98@gmail.com", "BetterMan")
-    service.sendmail("saikasam98@gmail.com", receptemail, msg)
-    service.quit()
+    #print(ref.get())
+    keys = ref.get().keys()
+    for each in keys:
+        refe = db.reference('users/' + each + "/email")
+        recept = refe.get()
+        service = smtplib.SMTP('smtp.gmail.com', 587)
+        service.starttls()
+        service.login("saikasam98@gmail.com", "BetterMan")
+        service.sendmail("saikasam98@gmail.com", recept, "Your mom")
+        service.quit()
 
 def instructorName(instructorLst):
 
