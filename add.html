@@ -1028,9 +1028,24 @@
         var uid = user.uid + time.toString();
         inputC = input + type.charAt(0);
 
+        alert("a");
+
+        var uid2 = user.uid;
+        var ref = dataBase.ref("users/"+uid2+"/following");
+
+        ref.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+              alert(childData);
+            });
+          });
+
+
 
 
         var newV = dataBase.ref().child('validate').child(uid).set({input:inputC}).then(function() {
+
 
 
             var validateRef = firebase.database().ref().child('validate').child(uid);
@@ -1058,6 +1073,9 @@
                 validateRef.off();
                 validateRef.remove();
             }
+
+
+
 
             });
         });
