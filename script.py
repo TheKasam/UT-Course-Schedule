@@ -7,6 +7,7 @@ import mechanicalsoup
 import time
 import pickle
 import sys
+import smtplib
 sys.setrecursionlimit(50000)
 
 #firebase-adminsdk-jgy6n@courseschedule-8a816.iam.gserviceaccount.com
@@ -26,8 +27,8 @@ def main():
     #logging in to course schedule
     browser = logIn()
 
-#    with open("soup.html") as f:
-#      soup = bs.BeautifulSoup(f,'lxml')
+    #    with open("soup.html") as f:
+    #      soup = bs.BeautifulSoup(f,'lxml')
 
 
     #getting firebase data
@@ -106,7 +107,13 @@ def checkForUpdates(checkDict,browser):
         #sendUpdate() ### send emails ###
         print(changed)
 
-
+def sendUpdate(receptemail, msg):
+    
+    service = smtplib.SMTP('smtp.gmail.com', 587)
+    service.starttls()
+    service.login("saikasam98@gmail.com", "BetterMan")
+    service.sendmail("saikasam98@gmail.com", receptemail, msg)
+    service.quit()
 
 def instructorName(instructorLst):
 
