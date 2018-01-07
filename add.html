@@ -1028,7 +1028,7 @@
         var uid = user.uid + time.toString();
         inputC = input + type.charAt(0);
 
-        alert("a");
+
 
         var uid2 = user.uid;
         var ref = dataBase.ref("users/"+uid2+"/following");
@@ -1037,7 +1037,11 @@
             snapshot.forEach(function(childSnapshot) {
               var childKey = childSnapshot.key;
               var childData = childSnapshot.val();
-              alert(childData);
+              if (input === childData){
+                  var ans2 = '2';
+
+              }
+
             });
           });
 
@@ -1052,7 +1056,20 @@
             validateRef.on('value', function(snapshot) {
             var ans = snapshot.val();
 
-            if (ans =='1'){
+
+
+
+
+            if (ans == '0' || ans2 =='2') {
+                vid.pause();
+                document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
+                document.getElementById('test1').innerHTML = 'sucks';
+                borderRed(type);
+                validateRef.off();
+                validateRef.remove();
+            }
+
+            else if (ans =='1'){
 
 
                vid.currentTime=3.1; //check animation
@@ -1063,15 +1080,6 @@
 
                addClass(type, input);
 
-               }
-
-            else if (ans == '0') {
-                vid.pause();
-                document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
-                document.getElementById('test1').innerHTML = 'sucks';
-                borderRed(type);
-                validateRef.off();
-                validateRef.remove();
             }
 
 
