@@ -4,7 +4,7 @@ import time
 
 def main():
     start = time.time()
-    service = smtplib.SMTP('smtp.gmail.com', 587)
+    service = smtplib.SMTP_SSl('smtp.gmail.com', 587)
     service.starttls()
     service.login("saikasam98@gmail.com", "BetterMan")
     service.sendmail("saikasam98@gmail.com", "aj280598@gmail.com", "hello my love is gone")
