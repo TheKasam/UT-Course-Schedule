@@ -1009,7 +1009,26 @@
 
 
 
+    function checkDup(type, input){
+        var uid2 = user.uid;
+        var ref = dataBase.ref("users/"+uid2+"/following");
 
+        ref.once('value', function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+              if (input === childData){
+                  var ans2 = '2';
+                  vid.pause();
+                  document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
+                  document.getElementById('test1').innerHTML = 'sucks';
+                  borderRed(type);
+                  return;
+              }
+
+            });
+          });
+    }
 
     function validate(type,input){
         document.getElementById("spinner-"+type).className = 'spinner';
@@ -1029,38 +1048,14 @@
         inputC = input + type.charAt(0);
 
 
-
-        var uid2 = user.uid;
-        var ref = dataBase.ref("users/"+uid2+"/following");
-
-        ref.once('value', function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-              var childKey = childSnapshot.key;
-              var childData = childSnapshot.val();
-              if (input === childData){
-                  var ans2 = '2';
-
-              }
-
-            });
-          });
-
-
-
-
         var newV = dataBase.ref().child('validate').child(uid).set({input:inputC}).then(function() {
-
-
 
             var validateRef = firebase.database().ref().child('validate').child(uid);
             validateRef.on('value', function(snapshot) {
             var ans = snapshot.val();
 
 
-
-
-
-            if (ans == '0' || ans2 =='2') {
+            if (ans == '0') {
                 vid.pause();
                 document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
                 document.getElementById('test1').innerHTML = 'sucks';
@@ -1110,6 +1105,7 @@
             document.getElementById('unique-error').innerHTML = 'Unique number could not be found';
 
         }
+
     }
 
     function addClass(type,classId){
