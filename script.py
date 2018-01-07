@@ -119,7 +119,12 @@ def sendUpdate(unique):
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
         service.login("saikasam98@gmail.com", "BetterMan")
-        service.sendmail("saikasam98@gmail.com", recept, "Your mom")
+        try:
+            service.sendmail("saikasam98@gmail.com", recept, "Your mom")
+        except:
+            service.quit()
+            print("This didn't work")
+            continue
         service.quit()
 
 def instructorName(instructorLst):
