@@ -1010,27 +1010,37 @@
 
 
     function checkDup(type, input){
+        var dataBase = firebase.database();
+        var user = firebase.auth().currentUser;
+
         var uid2 = user.uid;
         var ref = dataBase.ref("users/"+uid2+"/following");
 
         ref.once('value', function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
+            var bob =  snapshot.forEach(function(childSnapshot) {
               var childKey = childSnapshot.key;
               var childData = childSnapshot.val();
               if (input === childData){
                   var ans2 = '2';
-                  vid.pause();
+
                   document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
                   document.getElementById('test1').innerHTML = 'sucks';
                   borderRed(type);
-                  return;
+                  var dup = true;
+                  return dup;
+
               }
 
             });
+            alert(bob);
+
           });
+
     }
 
     function validate(type,input){
+
+
         document.getElementById("spinner-"+type).className = 'spinner';
         var vid = document.getElementById("spinner-"+type);
         vid.currentTime=0;
@@ -1048,6 +1058,29 @@
         inputC = input + type.charAt(0);
 
 
+
+
+        var uid2 = user.uid;
+        var ref = dataBase.ref("users/"+uid2+"/following");
+
+        ref.once('value', function(snapshot) {
+            var dup2 =  snapshot.forEach(function(childSnapshot) {
+              var childKey = childSnapshot.key;
+              var childData = childSnapshot.val();
+              if (input === childData){
+                  var ans2 = '2';
+
+                  document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
+                  document.getElementById('test1').innerHTML = 'sucks';
+                  borderRed(type+'d');
+                  var dup = true;
+                  return dup;
+
+              }
+
+            });
+
+        if (dup2 != true) {
         var newV = dataBase.ref().child('validate').child(uid).set({input:inputC}).then(function() {
 
             var validateRef = firebase.database().ref().child('validate').child(uid);
@@ -1077,11 +1110,11 @@
 
             }
 
-
-
-
             });
         });
+        }
+
+    });
     }
 
 
@@ -1103,6 +1136,24 @@
         else if (type =='unique'){
             document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
             document.getElementById('unique-error').innerHTML = 'Unique number could not be found';
+
+        }
+
+        else if (type == 'profd'){
+            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
+            document.getElementById('prof-id-last').className = document.getElementById('prof-id-first').className + ' error';
+            document.getElementById('prof-error').innerHTML = 'Professor is already added.';
+
+        }
+        else if (type == 'coursed'){
+            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
+            document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
+            document.getElementById('course-error').innerHTML = 'Course is already added.';
+
+        }
+        else if (type =='uniqued'){
+            document.getElementById('unique-id').className = document.getElementById('unique-id').className + ' error';
+            document.getElementById('unique-error').innerHTML = 'Unique number is already added.';
 
         }
 
@@ -1148,6 +1199,8 @@
             document.getElementById('unique-error').innerHTML = 'Unique number must contain only digits';
             return
         }
+        //checkDup('unique',input);
+
         validate('unique',input);
     });
 
