@@ -111,6 +111,7 @@ def sendUpdate(unique):
     ref = db.reference('courses_subscribers/' + unique)
     #print(ref.get())
     keys = ref.get().keys()
+    print(keys)
     for each in keys:
         refe = db.reference('users/' + each + "/email")
         recept = refe.get()
