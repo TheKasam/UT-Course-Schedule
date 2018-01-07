@@ -102,9 +102,9 @@ def checkForUpdates(checkDict,browser):
     for key in webDict:
         if webDict[key] != checkDict[key]:
             changed.append(key)
-    sendUpdate(unique)
+
     if changed:
-        #sendUpdate(unique) ### send emails ###
+        sendUpdate(unique) ### send emails ###
         print(changed)
 
 def sendUpdate(unique):
