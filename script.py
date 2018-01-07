@@ -104,11 +104,12 @@ def checkForUpdates(checkDict,browser):
             changed.append(key)
 
     if changed:
-        #sendUpdate() ### send emails ###
+        sendUpdate(unique) ### send emails ###
         print(changed)
 
-def sendUpdate(receptemail, msg):
-    
+def sendUpdate(unique):
+    ref = db.reference('courses_subscribers/' + unique)
+    print(ref.get())
     service = smtplib.SMTP('smtp.gmail.com', 587)
     service.starttls()
     service.login("saikasam98@gmail.com", "BetterMan")
