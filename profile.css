@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  -webkit-user-select: initial;
+  user-select: initial;
+}
+
+/* Show it is fixed to the top */
+.navbar-static-top.navbar{
+   background-color: #333F48;
+ }
+
+.nav.navbar-nav li a  {
+
+  color: white;
+  letter-spacing: 1px;
+  font-size: 13pt;
+  font-weight: 100;
+
+ }
+
+ .navbar-brand{
+   background-image: url("assets/logo.png");
+   background-repeat: no-repeat;
+   background-size: 100%;
+   background-position: center;
+ }
+
+
+ /* Remove Border */
+.navbar.navbar-default {
+     background-color: #99ccff;
+     border: 0;
+     -webkit-box-shadow: none;
+     box-shadow: none;
+ }
+.navbar.navbar-default .navbar-collapse {
+     border: 0;
+     -webkit-box-shadow: none;
+     box-shadow: none;
+ }
+
+
+ .navbar-custom .navbar-nav > .non-active > a:hover,
+ .navbar-custom .navbar-nav > .non-active > a:focus,
+ .navbar-custom .navbar-nav > .open >a {
+    background-color: grey;
+    border-bottom: 2px solid grey;
+ }
+
+ .navbar-custom .navbar-nav > .active > a:hover,
+ .navbar-custom .navbar-nav > .active > a:focus,
+ .navbar-custom .navbar-nav > .open >a {
+    background-color: grey;
+ }
+
+.navbar-custom .active {
+    border-bottom: 1.5px solid white;
+}
+
+.hi {
+    background: url(assets/circle.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+}
+#initial{
+    letter-spacing: -1px;
+
+}
+/* done with nav bar */
+body {
+
+   background-color: white;
+  /* background-image: url("assets/longhorn.png");
+   background-repeat: no-repeat;
+   background-size: 75%;
+   background-position: center;*/
+ }
+
+.container.b{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: stretch;
+ }
+
+
+.header-text p{
+    font-size: 27pt;
+    color: gray;
+    font-weight: 300;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.mid-text{
+
+    color: orange;
+}
+
+
+
+.form-label {
+    order:1;
+
+
+    white-space: nowrap;
+    color: #4A4A4A;
+    text-align: right;
+    margin-bottom: 0px;
+    width: 150px;
+
+}
+
+
+.form-control{
+
+    order: 2;
+    width: 159px;
+    margin-left: 15px;
+    margin-right: 15px;
+    align-self: center;
+}
+
+.error {
+  border-color: red;
+}
+
+.btn{
+    order:3;
+
+    background-color: #D68745;
+    border: none;
+    border-radius: 26px;
+
+    height: 26px;
+    line-height: 13px;
+
+    letter-spacing: 1px;
+    font-size: 15px;
+    font-weight: 300px;
+    text-align: center;
+}
+
+.btn-hidden{
+    visibility: hidden;
+}
+
+.spinner{
+    order:4;
+    margin-left: 13px;
+}
+.spinner-hidden{
+    visibility: hidden;
+}
+.item h2{
+    color: gray;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+
+
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 6px .2px rgba(0, 0, 0, 0.19);
+    background-color: white;
+
+   /* border: 1px solid black;*/
+}
+
+
+.item-header{
+    order: 1;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    margin-left: 30%;
+
+
+}
+
+.item-header h2{
+  font-size: 25px;
+  font-weight: 100;
+  position: relative;
+  text-align: center;
+  transform: translateY(-30%);
+}
+
+.item-header p{
+    margin-left: 10px;
+    position: relative;
+    text-align: center;
+    transform: translateY(38%);
+    color: red;
+    }
+
+.item-spacer{
+    order:2;
+    width: 100px;
+}
+.item-spacer{
+    order:4;
+    width: 100px;
+}
+
+.item-items{
+    margin-left: -20px;
+    order: 3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.two-two{
+    padding-top: 10px;
+}
