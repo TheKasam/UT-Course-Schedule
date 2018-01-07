@@ -58,9 +58,11 @@
                           // User is signed in.
                           var uid = user.uid;
                           firebase.database().ref('users/' + uid).once('value').then(function(snapshot) {
-                          var username = snapshot.val().name.split(" ") ;
-                          var name = username[0].charAt(0) + " " + username[1].charAt(0);
+
+                          var username = snapshot.val().name.trim().split(" ");
+                          var name = username[0].trim().charAt(0) + " " + username[1].trim().charAt(0);
                           document.getElementById("initial").textContent = name.toUpperCase();
+
                         });
                         } else {
                              document.location.href = 'signIn.html';

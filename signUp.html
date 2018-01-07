@@ -108,13 +108,13 @@
           </svg>
 
           <p class='l1'>EMAIL ADDRESS</p>
-          <input id='email' type="email" class="enter-email enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="julie@gmail.com">
+          <input id='email' type="email" class="enter-email enter"  aria-describedby="emailHelp" placeholder="julie@gmail.com">
           <p class='e1 e' id="e1"></p>
           <p class='l2'>NAME</p>
-          <input id='name' type="text" class="enter-name enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Julie Appleseed">
+          <input id='name' type="text" class="enter-name enter"  aria-describedby="emailHelp" placeholder="Julie Appleseed">
           <p class='e2 e' id="e2"></p>
           <p class='l3'>PASSWORD</p>
-          <input id='password' type="password" class="enter-password enter" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="6 + characters">
+          <input id='password' type="password" class="enter-password enter"  aria-describedby="emailHelp" placeholder="6 + characters">
           <p class='e3 e' id="e3"></p>
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
           <small id="emailHelp" class="have-account">have an account <a href='signIn.html'> <button id='already-have-account' type="button" class='sign'> sign in here</button></a></small>
@@ -138,7 +138,7 @@
       var name = document.getElementById('name').value;
       var isError = false
       var worked = false;
-      name = name.trim;
+      name = name.trim();
       if (email.length < 4) {
 
         //alert('Please enter an email address.');
@@ -149,9 +149,10 @@
         document.getElementById("e1").style.display = "none";
       }
 
-      if (email.length < 1) {
+      if (name.length == 0) {
+        alert(name)
         document.getElementById("e2").style.display = "initial";
-        document.getElementById("e2").innerHTML = 'Please enter a last name.';
+        document.getElementById("e2").innerHTML = 'Please enter a name.';
         isError = true;
       } else {
         document.getElementById("e2").style.display = "none";
