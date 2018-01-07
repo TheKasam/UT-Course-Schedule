@@ -115,7 +115,7 @@ def sendUpdate(unique):
     for each in values:
         refe = db.reference('users/' + each + "/email")
         print(refe.get())
-        recept = refe.get().values()
+        recept = refe.get()
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
         service.login("saikasam98@gmail.com", "BetterMan")
