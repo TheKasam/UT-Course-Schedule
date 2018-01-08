@@ -106,20 +106,7 @@ body {
   background-color: white;
   border-radius: 2px;
 
-  width: 250px;
-}
-
-.form-item2{
-  order:3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: white;
-  border-radius: 2px;
-
-  height: 400px;
-  width: 250px;
+  width: 500px;
 }
 
 
@@ -128,15 +115,12 @@ body {
 }
 .header p{
 
-  font-size: 20pt;
-  border-bottom: .1px solid lightgrey;
+  font-size: 13pt;
 
-  padding-left: 68px;
-  padding-right: 68px;
-  padding-bottom: 10px;
-  padding-top: 13px;
-
-
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
 }
 
 .header2 p{
@@ -153,192 +137,17 @@ body {
 
 }
 
-.item-body{
-  order: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  }
-
-.google{
-  flex: 1;
-  width: 80%;
-
-  margin-top: 10px;
-  margin-bottom: 15px;
-}
-.google:active{
-border: 1px solid rgba(0,0,0,0);
-
-}
-
-.l1{
-  flex: 2;
-  align-self: flex-start;
-
-  color: black;
-  font-size: 10px;
-
-  padding-left: 27px;
-}
-
-.enter-email{
-  flex: 3;
-  margin-bottom: 15px;
-}
-
-
-.e{
-    color: red;
-    margin-top: -10px;
-
-
-    font-size: 12px;
-
-}
-
-
-.e1{
-  flex: 4;
-}
-
-
-.enter{
-    padding-left: 10px;
-    width: 80%;
-    length: 50px;
-    font-size: 15px;
-    line-height: 25px;
-    color: black;
-    font-weight: 300;
-
-}
-.enter::placeholder{
-    font-weight: 100;
-}
-
-
-.l2{
-  flex: 5;
-  align-self: flex-start;
-
-  color: black;
-  font-size: 10px;
-
-  padding-left: 27px;
-}
-
-.enter-name{
-  flex: 6;
-  width: 80%;
-  margin-bottom: 15px;
-}
-
-.e2{
-    flex: 7;
-}
-
-.l3{
-  flex: 8;
-  align-self: flex-start;
-
-  color: black;
-  font-size: 10px;
-
-  padding-left: 27px;
-}
-
-.enter-password{
-  flex: 9;
-  width: 80%;
-  margin-bottom: 15px;
-}
-
-.e3{
-    flex: 10;
-}
-
 .btn{
-  flex: 11;
-
   background-color: #D68745;
 
   margin-top: 15px;
-
+  padding-bottom: 15px;
+  margin-bottom: 10px;
   border: none;
   border-radius: 32px;
-  width: 80%;
+  width: 50%;
   height: 32px;
-
+  margin-left: 25%;
   letter-spacing: 1px;
-  font-size: 10px;
   font-weight: 300px;
-}
-
-.have-account{
-  flex: 12;
-  width: 90%;
-
-  text-align: center;
-  margin-top: 5px;
-  padding-bottom: 20px;
-}
-
-.have-account2{
-  flex: 12;
-  width: 90%;
-
-  text-align: center;
-  margin-top: 5px;
-}
-
-
-
-
-.btn2{
-
-  background-color: #D68745;
-
-  margin-top: 15px;
-
-  border: none;
-  border-radius: 32px;
-  width: 100%;
-  height: 32px;
-
-  letter-spacing: 1px;
-  font-size: 10px;
-  font-weight: 300px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.enter-number{
-  order: 2;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-
-
-
-.sign{
-  background-color: none;
-  border: none;
-  color: orange;
 }

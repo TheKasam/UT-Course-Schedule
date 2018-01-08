@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="emailVerification.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <style type='text/css'>
+        html,body{height:100% !important;width:100% !important; margin:0px; padding:0px;}
+    </style>
+        <!--  height = 100x no of pages -->
+  </head>
+
+  <body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-static-top navbar-custom">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class='non-active'><a  class="font-weight-light" href='signIn.html' >Sign In</a></li>
+            <li class='active'><a class="font-weight-light" >Sign Up</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+    <div class='container b'>
+
+
+      <div class='text-item'>
+          <p id='initial' class='body-a'><strong>Need To Stay Updated With
+            <br>The Course Schedule?</strong><br>
+            <br>Keep Track of Classes, Professors<br>
+            <br>And we’ll let know know if a class opens up or something changes.</p>
+      </div>
+
+
+      <div class='spacer'>
+      </div>
+
+      <div class='form-item1'>
+
+        <div class='header'>
+          <p>Refresh page after email is verified to continue.</p>
+          <button id='resendEmail'type="button" class="btn btn-primary">Resend Email</button>
+          <button id='logOut'type="button" class="btn btn-primary">Log out</button>
+
+        </div>
+
+
+
+
+
+    </div>
+
+    </body>
+
+    <script>
+
+
+//saves user daata to realtime datrabse
+    function saveData(){
+        var email = document.getElementById('email').value;
+        var name = document.getElementById('name').value;
+
+        var user = firebase.auth().currentUser;
+        var uid = user.uid;
+
+
+         return firebase.database().ref().child('users').child(uid).update({
+
+           email:email,
+           name:name
+         }).then(() => {
+                document.location.href = 'add.html';
+            });
+
+
+
+    }
+
+    var usedGoogle = false;
+    function initApp() {
+       // Listening for auth state changes.
+
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user){
+                 var emailVerified = user.emailVerified;
+
+                 if (emailVerified == true){
+
+                 document.location.href = 'add.html';
+                 }
+
+             } else {
+                 
+             }
+
+
+
+
+        });
+
+        function handleSignOut(){
+
+            firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            }, function(error) {
+
+            });
+            document.location.href = 'signin.html';
+        }
+
+        function resend(){
+        user.sendEmailVerification().then(function() {
+          // Email sent.
+          saveData('emailVerification.html');
+
+        }).catch(function(error) {
+          // An error happened.
+        }); }
+
+        // [END authstatelistener]
+       document.getElementById('resendEmail').addEventListener('click', resend, false);
+       document.getElementById('logOut').addEventListener('click', handleSignOut, false);
+
+
+     }
+     window.onload = function() {
+       initApp();
+     };
+
+    function google(){
+         var provider = new firebase.auth.GoogleAuthProvider();
+         provider.addScope('https://www.googleapis.com/auth/userinfo.email');
+         provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
+         firebase.auth().signInWithPopup(provider).then(function(result) {
+         // This gives you a Google Access Token. You can use it to access the Google API.
+         var token = result.credential.accessToken;
+         // The signed-in user info.
+         var user = result.user;
+         //alert(user.displayName);
+        usedGoogle = true;
+         var email = user.email;
+         var name = user.displayName;
+         var uid = user.uid;
+
+         return firebase.database().ref().child('users').child(uid).update({
+
+           email:email,
+           name:name
+         }).then(() => {
+                document.location.href = 'add.html';
+            });
+
+
+        // ...
+        }).catch(function(error) {
+         // Handle Errors here.
+         var errorCode = error.code;
+         var errorMessage = error.message;
+         // The email of the user's account used.
+         var email = error.email;
+         // The firebase.auth.AuthCredential type that was used.
+         var credential = error.credential;
+            // ...
+        });
+
+     }
+
+    </script>
+
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyDwubUIaSZVmk4slijsHdxQSMIaUzFPnyk",
+          authDomain: "courseschedule-8a816.firebaseapp.com",
+          databaseURL: "https://courseschedule-8a816.firebaseio.com",
+          projectId: "courseschedule-8a816",
+          storageBucket: "courseschedule-8a816.appspot.com",
+          messagingSenderId: "386132172955"
+        };
+        firebase.initializeApp(config);
+      </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+
+</html>

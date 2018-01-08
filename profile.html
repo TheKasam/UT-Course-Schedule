@@ -21,7 +21,7 @@
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="add.css" rel="stylesheet">
+    <link href="profile.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -46,7 +46,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li class='non-active'><a class="font-weight-light" href='following.html'>Following</a></li>
-            <li class='active'><a  class="font-weight-light">Add</a></li>
+            <li class='active'><a  class="font-weight-light" href='add.html'>Add</a></li>
             <li class='hi non-active'><a id='initial' onclick="handleSignOut()"class="font-weight-light" >
 
                 <script>
@@ -62,6 +62,9 @@
                           var username = snapshot.val().name.trim().split(" ");
                           var name = username[0].trim().charAt(0) + " " + username[1].trim().charAt(0);
                           document.getElementById("initial").textContent = name.toUpperCase();
+                          document.getElementById("name").placeholder = snapshot.val().name;
+                          document.getElementById("email").innerHTML = snapshot.val().email;
+
 
                         });
                         } else {
@@ -69,20 +72,16 @@
 
                         }
                       });
+
+
+
                     }
 
                   window.onload = function() {
                     initApp();
                   };
 
-                    function handleSignOut(){
-                        firebase.auth().signOut().then(function() {
-                  // Sign-out successful.
-                        }, function(error) {
-                        alert(error);
-                        });
-                        document.location.href = 'signin.html';
-                }
+
                 </script></a>
 
             </li>
@@ -95,75 +94,37 @@
     <div class='container b'>
 
         <div class='header-text'>
-            <p class='header-a'>Add from <a href='https://registrar.utexas.edu/schedules/182' class='mid-text' target="_blank">spring 2018 courses</a></p>
+            <p class='header-a'>Settings</a></p>
         </div>
 
         <div class='unique-item item'>
-            <div class='item-header'>
-            <h2>1. unique number</h2>
-            <p id='unique-error'></p>
+
+            <div class='item1 item-items'>
+            <p class='form-label'>Full Name</p>
+            <input id='name' type="text" class="form-control"  placeholder="">
             </div>
-            <div class="item-spacer">
-                <p></p>
+
+            <div class='item2 item-items'>
+            <p class='form-label'>Email</p>
+            <label id='email' type="text" class="form-control" > </label>
+
+
             </div>
-            <div class='item-items'>
-            <p class='form-label'>unique number</p>
-            <input id='unique-id' type="text" class="form-control"  placeholder="19306">
-            <button id='add-unique-btn'type="button" class="btn btn-primary">Follow</button>
-            <video width="20" id='spinner-unique' class='spinner spinner-hidden' height="20" src="assets/spinner.mov"></video>
+            <div class='item2 item-items'>
+                <label id='email' type="text" class='emailLabel'> To update email please create a new account.</label>
+            </div>
+            <div class='item3 item-items'>
+                <p class='form-label'></p>
+
+                <button id='save-btn'type="button" class="btn btn-primary">Update</button>
 
             </div>
 
         </div>
 
-        <div class='course-item item'>
-            <div class='item-header'>
-            <h2>2. course number</h2>
-            <p id='course-error'></p>
-            </div>
-            <div class="item-spacer">
-                <p></p>
-            </div>
-            <div class='item-items'>
-            <p class='form-label'>feild</p>
-
-            <button id='add-course-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
-            <video width="20" id='spinner-course-hidden' class="spinner spinner-hidden" height="20" src="assets/sinner.mov"></video>
-            </div>
-            <div class='item-items two-two'>
-            <p class='form-label'>number</p>
-            <input id='course-id' type="text" class="form-control"  placeholder="301">
-            <button id='add-course-btn'type="button" class="btn btn-primary">Follow</button>
-            <video width="20" id='spinner-course' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
-            </div>
-
+        <div class = "btn2class">
+        <button id='logout-btn'type="button" class="btn2 btn-primary">Logout</button>
         </div>
-
-        <div class='prof-item item'>
-            <div class='item-header'>
-            <h2>3. primary instructor</h2>
-            <p id='prof-error'></p>
-            </div>
-            <div class="item-spacer">
-                <p></p>
-            </div>
-            <div class='item-items'>
-            <p class='form-label'>instructor last name</p>
-            <input id='prof-id-last' type="text" class="form-control"  placeholder="Mcconaughey">
-            <button id='add-prof-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
-            <video width="20" id='spinner-prof-hidden' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
-            </div>
-
-            <div class='item-items two-two'>
-            <p class='form-label'>first initial</p>
-            <input id='prof-id-first' type="text" class="form-control prof-form" placeholder="M">
-            <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
-            <video width="20" id='spinner-prof' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
-            </div>
-        </div>
-
-
-        <a href="https://www.google.com/" id="test1">Link1</a> <span id="result1"></span>
 
 
     </div>
@@ -173,117 +134,6 @@
 
 
     <script>
-
-
-
-    function checkDup(type, input){
-        var dataBase = firebase.database();
-        var user = firebase.auth().currentUser;
-
-        var uid2 = user.uid;
-        var ref = dataBase.ref("users/"+uid2+"/following");
-
-        ref.once('value', function(snapshot) {
-            var bob =  snapshot.forEach(function(childSnapshot) {
-              var childKey = childSnapshot.key;
-              var childData = childSnapshot.val();
-              if (input === childData){
-                  var ans2 = '2';
-
-                  document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
-                  document.getElementById('test1').innerHTML = 'sucks';
-                  borderRed(type);
-                  var dup = true;
-                  return dup;
-
-              }
-
-            });
-            alert(bob);
-
-          });
-
-    }
-
-    function validate(type,input){
-
-
-        document.getElementById("spinner-"+type).className = 'spinner';
-        var vid = document.getElementById("spinner-"+type);
-        vid.currentTime=0;
-        vid.play();
-        vid.addEventListener("timeupdate", function(){
-        if(vid.currentTime > 2.6 && vid.currentTime < 3.0){
-            vid.pause();
-        }
-        }, false);
-
-        var time = new Date().getTime() % 100000;
-        var dataBase = firebase.database();
-        var user = firebase.auth().currentUser;
-        var uid = user.uid + time.toString();
-        inputC = input + type.charAt(0);
-
-
-
-
-        var uid2 = user.uid;
-        var ref = dataBase.ref("users/"+uid2+"/following");
-
-        ref.once('value', function(snapshot) {
-            var dup2 =  snapshot.forEach(function(childSnapshot) {
-              var childKey = childSnapshot.key;
-              var childData = childSnapshot.val();
-              if (input === childData){
-                  var ans2 = '2';
-
-                  document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
-                  document.getElementById('test1').innerHTML = 'sucks';
-                  borderRed(type+'d');
-                  var dup = true;
-                  return dup;
-
-              }
-
-            });
-
-        if (dup2 != true) {
-        var newV = dataBase.ref().child('validate').child(uid).set({input:inputC}).then(function() {
-
-            var validateRef = firebase.database().ref().child('validate').child(uid);
-            validateRef.on('value', function(snapshot) {
-            var ans = snapshot.val();
-
-
-            if (ans == '0') {
-                vid.pause();
-                document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
-                document.getElementById('test1').innerHTML = 'sucks';
-                borderRed(type);
-                validateRef.off();
-                validateRef.remove();
-            }
-
-            else if (ans =='1'){
-
-
-               vid.currentTime=3.1; //check animation
-               document.getElementById('test1').innerHTML = 'not sucks';
-               validateRef.off();
-
-               validateRef.remove();
-
-               addClass(type, input);
-
-            }
-
-            });
-        });
-        }
-
-    });
-    }
-
 
 
     //tunns border red
@@ -326,30 +176,18 @@
 
     }
 
-    function addClass(type,classId){
-
-        var user = firebase.auth().currentUser;
-        var uid = user.uid;
-        var dataBase = firebase.database();
-
-        //adding a couse child and initing with type
-        if (classId.substring(1,2) == '+'){
-                classId = classId.replace('+',' ');}
-
-        dataBase.ref().child('courses').child(classId).update({
-        queryType: type
+    function handleSignOut(){
+        firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+        }, function(error) {
+        alert(error);
         });
+        document.location.href = 'signin.html';
+}
 
-        //adding class to following list for user
-        dataBase.ref('/users/' + uid+"/following").push(classId);
-        //updating list of people who follow the class
-        dataBase.ref().child('courses_subscribers').child(classId).push(uid);
-    }
-
-
-    document.getElementById("add-unique-btn").addEventListener("click", function() {
+    document.getElementById("save-btn").addEventListener("click", function() {
         //resetting error
-        document.getElementById('unique-id').className = 'form-control';
+        document.getElementById('name').className = 'form-control';
         document.getElementById('unique-error').innerHTML = ''
 
         var input = document.getElementById('unique-id').value;
@@ -370,76 +208,11 @@
 
         validate('unique',input);
     });
-
-    document.getElementById("add-course-btn").addEventListener("click", function() {
-        //resetting error
-        document.getElementById('course-id').className = 'form-control';
-        document.getElementById('sel1').className = 'form-control';
-        document.getElementById('course-error').innerHTML = '';
-
-        var feild = document.getElementById('sel1');
-        var feildVal = feild.options[feild.selectedIndex].value;
-        if (feildVal.substring(1,2) == ' '){
-        feildVal = feildVal.substring(0,1) + '+'+ feildVal.substring(2,3);
-        }
-        var number = document.getElementById('course-id').value;
-        var input = feildVal + " " + number;
-
-        if (feildVal == ""){
-            document.getElementById('course-error').innerHTML = 'Can not leave feilds empty';
-            document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
-            return
-        }
-        else if (number=="") {
-            document.getElementById('course-error').innerHTML = 'Can not leave feilds empty';
-            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
-        }
-        else if (number.length > 5) {
-            document.getElementById('course-error').innerHTML = 'Number must be less than 5 characters';
-            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
-
-            return
-        }
-
-        validate('course',input);
+    document.getElementById("logout-btn").addEventListener("click", function() {
+        //logout
+        handleSignOut();
 
     });
-
-    document.getElementById("add-prof-btn").addEventListener("click", function() {
-        //error resetting
-        document.getElementById('prof-id-first').className = 'form-control';
-        document.getElementById('prof-id-last').className ='form-control';
-        document.getElementById('prof-error').innerHTML = '';
-
-        var last = document.getElementById('prof-id-last').value;
-        var first = document.getElementById('prof-id-first').value;
-        var input = last + " " + first;
-
-        if (last == "" ){
-
-            document.getElementById('prof-id-last').className = document.getElementById('prof-id-last').className + ' error';
-            document.getElementById('prof-error').innerHTML = 'Can not leave feild empty';
-            return
-        }
-         else if (first =="") {
-            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
-            document.getElementById('prof-error').innerHTML = 'Can not leave feild empty';
-            return
-         }
-
-        else if (first.length != 1) {
-            document.getElementById('prof-error').innerHTML = 'Only one character for first initial';
-            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
-
-            return
-        }
-
-        validate('prof',input);
-
-
-
-    });
-
 
     </script>
 

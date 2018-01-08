@@ -28,6 +28,9 @@
         html,body{height:100% !important;width:100% !important; margin:0px; padding:0px;}
     </style>
         <!--  height = 100x no of pages -->
+    <!-- <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="386132172955-hel7ageht19pjfj8dqdrksbji2o473cg.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 
   </head>
 
@@ -116,7 +119,7 @@
           <p class='e22 e' id='e22'><p>
           <button id='sign-in-btn'type="button" class="btn2 btn-primary">GET STARTED</button>
 
-          <small id="emailHelp" class="have-account"><br> need an account <a href='signUp.html'> <button id='already-have-account' type="button" class='sign' > sign up here</button></a></small>
+          <small id="emailHelp" class="have-account"><br> Need an account <a href='signUp.html'> <button id='already-have-account' type="button" class='sign' > sign up here</button></a></small>
 
         </div>
 
@@ -191,7 +194,23 @@
 
 
         }).then(() => {
-               document.location.href = 'add.html';
+                firebase.auth().onAuthStateChanged(function(user) {
+
+                if (user){
+                var emailVerified = user.emailVerified;
+                    if (emailVerified == false){
+                        document.location.href = 'emailVerification.html';
+                    } else {
+                        document.location.href = 'add.html';
+                    }
+
+
+                } else {
+                    alert("error");
+                }
+
+
+                 });
            });
 
 
@@ -204,10 +223,7 @@
        firebase.auth().onAuthStateChanged(function(user) {
 
          if (user) {
-          // User is signed in.
-          // var uid = user.uid;
-          //document.location.href = 'add.html';
-          //document.getElementById('initial').textContent = 'signed in';
+
 
          } else {
           //document.getElementById('initial').textContent = 'not signed in';

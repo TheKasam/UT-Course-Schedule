@@ -28,6 +28,12 @@
         html,body{height:100% !important;width:100% !important; margin:0px; padding:0px;}
     </style>
         <!--  height = 100x no of pages -->
+
+
+    <!-- <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="386132172955-e8bsl5pbisq1lvodha75geaf7bqie542.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+
   </head>
 
   <body>
@@ -117,7 +123,8 @@
           <input id='password' type="password" class="enter-password enter"  aria-describedby="emailHelp" placeholder="6 + characters">
           <p class='e3 e' id="e3"></p>
           <button id='sign-in-btn'type="button" class="btn btn-primary">GET STARTED</button>
-          <small id="emailHelp" class="have-account">have an account <a href='signIn.html'> <button id='already-have-account' type="button" class='sign'> sign in here</button></a></small>
+          <small id="emailHelp" class="have-account2">By clicking "Get Started", you agree to our<a href='Terms.html'> <button id='already-have-account' type="button" class='sign'>terms of service</button></a> and <a href='PrivacyPolicy.html'> <button id='already-have-account' type="button" class='sign'>privacy policy.</button></a></small>
+          <small id="emailHelp" class="have-account">Have an account <a href='signIn.html'> <button id='already-have-account' type="button" class='sign'> sign in here</button></a></small>
 
         </div>
 
@@ -200,7 +207,7 @@
 
       }// [END authwithemail]
 //saves user daata to realtime datrabse
-    function saveData(){
+    function saveData(link){
         var email = document.getElementById('email').value;
         var name = document.getElementById('name').value;
 
@@ -213,7 +220,7 @@
            email:email,
            name:name
          }).then(() => {
-                document.location.href = 'add.html';
+                document.location.href = link;
             });
 
 
@@ -225,10 +232,31 @@
        // Listening for auth state changes.
             firebase.auth().onAuthStateChanged(function(user) {
 
-            if (user || usedGoogle) {
+            if (user) {
+
+                user.providerData.forEach(function (profile) {
+
+                var provider = profile.providerId;
+                var emailVerified = user.emailVerified;
+                if (provider == 'password' && emailVerified == false){
+
+                    user.sendEmailVerification().then(function() {
+                      // Email sent.
+                      saveData('emailVerification.html');
+
+                    }).catch(function(error) {
+                      // An error happened.
+                    });
+
+                } else {
+                      //saveData('add.html');
+                }
+
+            });
+
             // User is signed in.
             //saves user data after they sign up to realtime db
-            saveData();
+
 
             } else {
             //           document.getElementById('initial').textContent = 'not signed in';
@@ -247,7 +275,7 @@
        initApp();
      };
 
-    function google(){
+     function google(){
          var provider = new firebase.auth.GoogleAuthProvider();
          provider.addScope('https://www.googleapis.com/auth/userinfo.email');
          provider.addScope('https://www.googleapis.com/auth/userinfo.profile');
@@ -257,10 +285,10 @@
          // The signed-in user info.
          var user = result.user;
          //alert(user.displayName);
-        usedGoogle = true;
          var email = user.email;
          var name = user.displayName;
          var uid = user.uid;
+
 
          return firebase.database().ref().child('users').child(uid).update({
 
@@ -271,8 +299,8 @@
             });
 
 
-        // ...
-        }).catch(function(error) {
+     // ...
+     }).catch(function(error) {
          // Handle Errors here.
          var errorCode = error.code;
          var errorMessage = error.message;
@@ -280,8 +308,10 @@
          var email = error.email;
          // The firebase.auth.AuthCredential type that was used.
          var credential = error.credential;
-            // ...
-        });
+         alert(errorCode);
+            alert(errorMessage);
+         // ...
+     });
 
      }
 
