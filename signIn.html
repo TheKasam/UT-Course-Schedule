@@ -178,10 +178,20 @@
             document.getElementById("e12").style.display = "none";
         }
 
-        if (errorCode) {
+        if (errorCode && errorCode !='auth/user-not-found') {
+          firebase.auth().fetchProvidersForEmail(email.trim()).then(function(providers) {
+          if (providers[0] == "google.com"){
+              document.getElementById("e22").style.display = "initial";
+              document.getElementById('e22').innerHTML = "Please continue with google.";
+              isError = true;
+          } else {
           document.getElementById("e22").style.display = "initial";
-          document.getElementById('e22').innerHTML = errorCode
+          document.getElementById('e22').innerHTML = errorCode;
           isError = true;
+          }
+
+
+        });
         } else {
           document.getElementById("e22").style.display = "none";
         }
@@ -206,7 +216,7 @@
 
 
                 } else {
-                    alert("error");
+                    console.log("error");
                 }
 
 

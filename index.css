@@ -295,7 +295,6 @@ border: 1px solid rgba(0,0,0,0);
 
 
 
-
 .btn2{
 
   background-color: #D68745;
@@ -314,31 +313,20 @@ border: 1px solid rgba(0,0,0,0);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.enter-number{
-  order: 2;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-
-
-
 .sign{
   background-color: none;
   border: none;
   color: orange;
+}
+.sign2{
+    background-color: #F3903C;
+  border: none;
+  color: white;
+
+}
+
+.contact{
+text-align: right;
+padding-right: .5%;
+padding-top: 5%;
 }
