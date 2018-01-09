@@ -30,7 +30,6 @@ ans = '0'
 
 if title == 'Page not found':
     pass
-
 elif soup.find('div',{'class':'error'}) != None:
     pass
 elif title == 'Session Timeout' or title == 'UT EID Login':
