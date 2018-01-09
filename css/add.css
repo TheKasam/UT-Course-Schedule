@@ -23,7 +23,7 @@
  }
 
  .navbar-brand{
-   background-image: url("assets/logo.png");
+   background-image: url("../assets/logo.png");
    background-repeat: no-repeat;
    background-size: 100%;
    background-position: center;
@@ -62,7 +62,7 @@
 }
 
 .hi {
-    background: url(assets/circle.svg);
+    background: url(../assets/circle.svg);
     background-repeat: no-repeat;
     background-position: center;
     margin-left: 10px;
@@ -75,7 +75,7 @@
 body {
 
    background-color: white;
-  /* background-image: url("assets/longhorn.png");
+  /* background-image: url("../assets/longhorn.png");
    background-repeat: no-repeat;
    background-size: 75%;
    background-position: center;*/
