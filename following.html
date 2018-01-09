@@ -108,10 +108,11 @@
                 var count = 0;
                 snapshot.forEach(function(item) {
                    var itemVal = item.val();
+                   var key = item.key.toString();
                    var div = document.createElement("div");
                    var divId = "item"+String(count);
                    div.id =  divId;
-                   div.className = 'item';
+                   div.className = 'item '+key;
                    div.style.marginBottom = '5px';
                    div.style.marginTop = '5px';
                    document.getElementById("b").appendChild(div);
@@ -127,7 +128,9 @@
                    btn.className = 'delete';
                    btn.innerHTML='Delete';
                    btn.id="delete"+count;
-                    btn.setAttribute("onclick","deletes("+count.toString()+")");
+                   var sendToDelete = [count.toString(),2];
+
+                   btn.setAttribute("onclick","deletes("+count.toString()+")");
                     //btn.style.textAlign = 'right';
                    document.getElementById(divId).appendChild(btn);
 
@@ -146,13 +149,17 @@
 
 
     function deletes(num){
+    alert("a");
     var div = document.getElementById("item"+num);
+    var key2 = div.className.split(" ")[1];
+    alert(key2);
     document.getElementById("b").removeChild(div);
 
     var user = firebase.auth().currentUser;
     var uid = user.uid;
-    alert(uid);
-    //firebase.database().ref('/users/' + uid+"/following")
+    var list = firebase.database().ref('/users/' + uid+"/following");
+
+    list.child(key2).remove();
 
 }
        // document.getElementById('delete').addEventListener('click', deletes, false);
