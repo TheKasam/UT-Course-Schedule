@@ -69,6 +69,10 @@
     </div>
 
 <a href="https://www.google.com/" id="test1">Link1</a> <span id="result1"></span>
+
+<div class = 'footer'>
+<p class="contact"><small id="emailHelp" >Contact us at<a href='mailto:utcourseupdates@gmail.com' class="aContact"> <button id='already-have-account' type="button" class='sign2'>here</button></a></small></p>
+</div>
     </body>
 
 
@@ -156,7 +160,7 @@
     var user = firebase.auth().currentUser;
     var uid = user.uid;
     var list = firebase.database().ref('/users/' + uid+"/following");
-    
+
     list.child(key2).remove();
 
 }

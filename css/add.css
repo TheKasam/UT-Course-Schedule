@@ -222,3 +222,30 @@ body {
 .two-two{
     padding-top: 10px;
 }
+
+
+.sign2{
+    background-color: #F3903C;
+  border: none;
+  color: darkorange;
+  background: none;
+}
+
+.contact{
+text-align: right;
+padding-right: .5%;
+border: none;
+}
+
+.sign2:hover{
+    color: blue;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+}
