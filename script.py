@@ -110,7 +110,7 @@ def checkForUpdates(checkDict,browser):
             prev.append(checkDict[key])
     if changed:
         sendUpdate(unique, changed, webDict, checkDict) ### send emails ###
-        print(changed)
+        print(changed, prev, new)
 
 def sendUpdate(unique, changed, prev, new):
     ref = db.reference('courses_subscribers/' + unique)
