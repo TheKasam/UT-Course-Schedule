@@ -144,6 +144,7 @@ def sendUpdate(unique, changed, prev, new):
 
 def instructorName(instructorLst):
     for x in range(len(instructorLst)):
+        print(instructorLst)
         if instructorLst[x] == " " or instructorLst[x] == "" :
             del instructorLst[x]
     if len(instructorLst) > 1:
