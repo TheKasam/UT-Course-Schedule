@@ -172,9 +172,8 @@
     var refCheck = firebase.database().ref('/courses_subscribers/' + val);
     refCheck.on('value', function(snapshot) {
         if (snapshot.exists()){
-      alert ("exist");}
+        }
         else {
-      alert ("not exist");
       var refDel = firebase.database().ref('/courses/' + val).remove();
         }
     });
