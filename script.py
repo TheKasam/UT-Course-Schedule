@@ -149,7 +149,7 @@ def instructorName(instructorLst):
     for x in range(len(instructorLst)):
 
         if instructorLst[x] != " " or instructorLst[x] != "" :
-            instructorLstLocal.append(x.replace(",",""))
+            instructorLstLocal.append(instructorLst[x].replace(",",""))
             print(instructorLstLocal)
 
     if len(instructorLstLocal) > 1:
