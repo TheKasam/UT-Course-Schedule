@@ -8,6 +8,8 @@ import time
 import pickle
 import sys
 import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
 sys.setrecursionlimit(50000)
 
 #firebase-adminsdk-jgy6n@courseschedule-8a816.iam.gserviceaccount.com
@@ -116,9 +118,16 @@ def sendUpdate(unique):
         refe = db.reference('users/' + each + "/email")
         print(refe.get())
         recept = refe.get()
+        msg = MIMEMultipart()
+        msg['From'] = "saikasam98@gmail.com"
+        msg['To'] = recept
+        msg['Subject'] = "COURSE CHANGED!"
+        body = "A course has changed! Please log in to check your status."
+        msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
         service.login("saikasam98@gmail.com", "BetterMan")
+        text = msg.as_string()
         try:
             service.sendmail("saikasam98@gmail.com", recept, "Your mom")
         except:
