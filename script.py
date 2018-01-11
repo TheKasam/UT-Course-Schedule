@@ -29,16 +29,19 @@ def main():
         ###put out most infinate loop ###
 
         #logging in to course schedule
-        browser = logIn()
+        with open("browser.pickle","rb") as f:
+            browser = pickle.load(f)
+            checkBrowserBool = checkBrowser(browser)
+            if  checkBrowserBool == False:
+                browser = logIn()
 
-        #    with open("soup.html") as f:
-        #      soup = bs.BeautifulSoup(f,'lxml')
+
 
 
         #getting firebase data
         ref = db.reference('courses')
         data = ref.get()
-        print(data)
+        #print(data)
         #getting a list of keys
         dataKeysList = data.keys()
 
@@ -94,8 +97,9 @@ def checkForUpdates(checkDict,browser):
     webDict['hour'] = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
     webDict['room'] = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
     instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split()
-    print(instructorLst)
-    webDict['instructor'] = instructorName(instructorLst)
+    instructor = instructorName(instructorLst)
+
+    webDict['instructor'] = instructor
 
 
     webDict['status'] = course_tr.find('td',{'data-th':'Status'}).text
@@ -128,8 +132,8 @@ def sendUpdate(unique, changed, prev, new):
         msg['To'] = recept
         msg['Subject'] = "Your Course Unique has changed"
         body = "Your course " + unique + " has changed. "
-        for i, key in changed.items():
-            body = body + changed[key] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
+        for i in range(len(changed)):
+            body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
         body = body + "Please log in to check your status."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
@@ -149,7 +153,7 @@ def instructorName(instructorLst):
     instructorLstLocal = []
     for x in range(len(instructorLst)):
 
-        if instructorLst[x] != " " or instructorLst[x] != "" :
+        if instructorLst[x] != " " and instructorLst[x] != "" :
             instructorLstLocal.append(instructorLst[x].replace(",",""))
             print(instructorLstLocal)
 
@@ -303,8 +307,17 @@ def stall(sec):
     while end - start < sec:
         end = time.time()
 
-def checkBrowser(b):
-    pass
+def checkBrowser(browser):
 
+    ### GET SOUP ###
+    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/" + '12345'  + "/")
+    soup = browser.get_current_page()
+    try:
+        course_a = soup.find(text='12345').parent
+        print(True)
+        return True
+    except:
+        print(False)
+        return False
 
 main()
