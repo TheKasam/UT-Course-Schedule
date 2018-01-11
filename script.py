@@ -24,12 +24,13 @@ firebase_admin.initialize_app(cred, {
 
 
 def main():
-    totalTime = 5 * 60
+    totalTime = 20
     startTime = 0
-    endTime = 5 * 60
+    endTime = 0
     while(True):
 
         timeToSleep = totalTime - (endTime - startTime)
+        print(endTime,startTime)
         print(timeToSleep,"sec")
         if timeToSleep > 0:
             time.sleep(timeToSleep)
@@ -58,6 +59,7 @@ def main():
         try:
             dataKeysList = data.keys()
         except:
+            endTime = time.time()
             continue
 
 
@@ -78,19 +80,22 @@ def main():
                         saveCourse(outerKey,browser)
                     elif queryType == 'prof':
                         saveProf(outerKey,browser)
-
+                    endTime = time.time()
                     continue
 
                 innerKeys = data[outerKey].keys()
                 for innerKey in innerKeys:
                     if innerKey == 'queryType':
+                        endTime = time.time()
                         continue
                     innerDict = data[outerKey][innerKey]
                     checkForUpdates(innerDict,browser)
+                endTime = time.time()
                 continue
 
             if len(outerDict) < 7:
                 saveUnique(outerKey,browser)
+                endTime = time.time()
                 continue
 
             checkForUpdates(outerDict,browser)
