@@ -110,8 +110,8 @@ def checkForUpdates(checkDict,browser):
             new.append(webDict[key])
             prev.append(checkDict[key])
     if changed:
-        print(changed, prev, new)
         sendUpdate(unique, changed, webDict, checkDict) ### send emails ###
+        print(changed, prev, new)
 
 def sendUpdate(unique, changed, prev, new):
     ref = db.reference('courses_subscribers/' + unique)
@@ -127,8 +127,8 @@ def sendUpdate(unique, changed, prev, new):
         msg['To'] = recept
         msg['Subject'] = "Your Course Unique has changed"
         body = "Your course " + unique + " has changed. "
-        for i in range(len(changed)):
-            body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
+        for i, key in changed.items():
+            body = body + changed[key] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
         body = body + "Please log in to check your status."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
