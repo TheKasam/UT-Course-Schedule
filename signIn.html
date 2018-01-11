@@ -239,7 +239,11 @@
        firebase.auth().onAuthStateChanged(function(user) {
 
          if (user) {
+             var emailVerified = user.emailVerified;
+             if (emailVerified == false){
+                 document.location.href = 'signIn.html';
 
+            }
 
          } else {
           //document.getElementById('initial').textContent = 'not signed in';
