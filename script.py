@@ -100,16 +100,18 @@ def checkForUpdates(checkDict,browser):
     webDict['unique'] = unique
 
     changed = []
-
+    prev = []
+    new = []
     for key in webDict:
         if webDict[key] != checkDict[key]:
             changed.append(key)
-
+            new.append(webDict[key])
+            prev.append(checkDict[key])
     if changed:
         sendUpdate(unique, changed, webDict, checkDict) ### send emails ###
         print(changed)
 
-def sendUpdate(unique, changed):
+def sendUpdate(unique, changed, prev , new):
     ref = db.reference('courses_subscribers/' + unique)
     #print(ref.get())
     values = ref.get().values()
