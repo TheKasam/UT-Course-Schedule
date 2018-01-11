@@ -125,7 +125,10 @@ def sendUpdate(unique, changed, prev, new):
         msg['From'] = "saikasam98@gmail.com"
         msg['To'] = recept
         msg['Subject'] = "Your Course Unique has changed"
-        body = "Your course " + unique + ", its " + changed + " has changed from " + prev + " to " + new + "! Please log in to check your status."
+        body = "Your course " + unique + " has changed. "
+        for i in range(len(changed)):
+            body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
+        body = body + "Please log in to check your status."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
