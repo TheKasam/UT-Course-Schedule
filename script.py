@@ -149,15 +149,17 @@ def instructorName(instructorLst):
     for x in range(len(instructorLst)):
 
         if instructorLst[x] != " " or instructorLst[x] != "" :
-
-            instructorLstLocal.append(x)
+            instructorLstLocal.append(x.replace(",",""))
+            print(instructorLstLocal)
 
     if len(instructorLstLocal) > 1:
+        print(instructorLstLocal)
+
         return (instructorLstLocal[0] + " " + instructorLstLocal[1][0])
-        print(instructorLstLocal)
     else:
-        return  (instructorLstLocal[0])
         print(instructorLstLocal)
+        return  (instructorLstLocal[0])
+
 
 #gets data about course and saves it
 def saveUnique(unique,browser):
@@ -300,6 +302,7 @@ def stall(sec):
     while end - start < sec:
         end = time.time()
 
+def checkBrowser(b)
 
 
 main()
