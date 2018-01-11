@@ -8,8 +8,9 @@ import time
 import pickle
 import sys
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+from email.mime.text import MIMEText
 sys.setrecursionlimit(50000)
 
 #firebase-adminsdk-jgy6n@courseschedule-8a816.iam.gserviceaccount.com
