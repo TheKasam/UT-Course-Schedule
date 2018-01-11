@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Awesome Sauce</title>
+    <title>UT Course Updates</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -116,7 +116,7 @@
                    var div = document.createElement("div");
                    var divId = "item"+String(count);
                    div.id =  divId;
-                   div.className = 'item '+key;
+                   div.className = 'item '+key + ' '+itemVal;
                    div.style.marginBottom = '5px';
                    div.style.marginTop = '5px';
                    document.getElementById("b").appendChild(div);
@@ -154,14 +154,32 @@
 
     function deletes(num){
     var div = document.getElementById("item"+num);
-    var key2 = div.className.split(" ")[1];
+    var numlst = div.className.split(" ");
+    var key2 = numlst[1];
     document.getElementById("b").removeChild(div);
 
     var user = firebase.auth().currentUser;
     var uid = user.uid;
-    var list = firebase.database().ref('/users/' + uid+"/following");
 
+    var list = firebase.database().ref('/users/' + uid+"/following");
     list.child(key2).remove();
+
+    var val = numlst[2];
+    var list2 = firebase.database().ref('/courses_subscribers/' + val);
+    list2.child(key2).remove();
+
+
+    var refCheck = firebase.database().ref('/courses_subscribers/' + val);
+    refCheck.on('value', function(snapshot) {
+        if (snapshot.exists()){
+      alert ("exist");}
+        else {
+      alert ("not exist");
+      var refDel = firebase.database().ref('/courses/' + val).remove();
+        }
+    });
+
+
 
 }
        // document.getElementById('delete').addEventListener('click', deletes, false);

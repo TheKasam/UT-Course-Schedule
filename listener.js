@@ -1,13 +1,10 @@
 
 var admin = require("firebase-admin");
-
 var serviceAccount = require("./courseschedule-8a816-firebase-adminsdk-jgy6n-2f35d9eaad.json");
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://courseschedule-8a816.firebaseio.com/"
 });
-
 // Import Admin SDK
 var admin = require("firebase-admin");
 
@@ -15,12 +12,6 @@ var admin = require("firebase-admin");
 var db = admin.database();
 var ref = db.ref("validate");
 
-// Attach an asynchronous callback to read the data at our posts reference
-/* ref.on("value", function(snapshot) {
-  console.log(snapshot.val());
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-}); */
 
 console.log("bob the builder")
 
@@ -46,7 +37,15 @@ ref.on("child_added", function(snapshot, prevChildKey) {
 
   });
 
-
+  // var ref2 = db.ref('/courses_subscribers');
+  // ref.on("child_removed", function(snapshot) {
+  //
+  //   var deletedClass = String(snapshot.getPriority());
+  //   var refCourse = db.ref('/courses');
+  //   refCourse.child(deletedClass).remove();
+  //
+  // console.log("The class '" + deletedClass + "' has been deleted");
+  // });
 
 
 

@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Awesome Sauce</title>
+    <title>UT Course Updates</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -1173,9 +1173,11 @@
         });
 
         //adding class to following list for user
-        dataBase.ref('/users/' + uid+"/following").push(classId);
+        var classKey = dataBase.ref('/users/' + uid+"/following").push(classId).key;
         //updating list of people who follow the class
-        dataBase.ref().child('courses_subscribers').child(classId).push(uid);
+        dataBase.ref().child('courses_subscribers').child(classId).update({
+            [classKey]: uid
+        });
     }
 
 
