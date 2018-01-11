@@ -25,6 +25,7 @@ firebase_admin.initialize_app(cred, {
 
 def main():
     while(True):
+        print("new LOOOP")
         ###put out most infinate loop ###
 
         #logging in to course schedule
