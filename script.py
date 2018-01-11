@@ -302,7 +302,8 @@ def stall(sec):
     while end - start < sec:
         end = time.time()
 
-def checkBrowser(b)
+def checkBrowser(b):
+    pass
 
 
 main()
