@@ -143,14 +143,20 @@ def sendUpdate(unique, changed, prev, new):
         service.quit()
 
 def instructorName(instructorLst):
+    print(instructorLst)
+    instructorLstLocal = []
     for x in range(len(instructorLst)):
-        print(instructorLst)
-        if instructorLst[x] == " " or instructorLst[x] == "" :
-            del instructorLst[x]
-    if len(instructorLst) > 1:
-        return (instructorLst[0] + " " + instructorLst[1][0])
+
+        if instructorLst[x] != " " or instructorLst[x] != "" :
+
+            instructorLstLocal.append(x)
+
+    if len(instructorLstLocal) > 1:
+        return (instructorLstLocal[0] + " " + instructorLstLocal[1][0])
+        print(instructorLstLocal)
     else:
-        return  (instructorLst[0])
+        return  (instructorLstLocal[0])
+        print(instructorLstLocal)
 
 #gets data about course and saves it
 def saveUnique(unique,browser):
