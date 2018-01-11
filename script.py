@@ -24,7 +24,18 @@ firebase_admin.initialize_app(cred, {
 
 
 def main():
+    totalTime = 5 * 60
+    startTime = 0
+    endTime = 5 * 60
     while(True):
+
+        timeToSleep = totalTime - (endTime - startTime)
+        print(timeToSleep,"sec")
+        if timeToSleep > 0:
+            time.sleep(timeToSleep)
+
+        startTime = time.time()
+
         print("new LOOOP")
         ###put out most infinate loop ###
 
@@ -43,7 +54,12 @@ def main():
         data = ref.get()
         #print(data)
         #getting a list of keys
-        dataKeysList = data.keys()
+
+        try:
+            dataKeysList = data.keys()
+        except:
+            continue
+
 
         for outerKey in dataKeysList:
             outerDict = data[outerKey]
@@ -79,7 +95,7 @@ def main():
 
             checkForUpdates(outerDict,browser)
 
-
+        endTime = time.time()
         print(dataKeysList)
 
 def checkForUpdates(checkDict,browser):
@@ -130,7 +146,7 @@ def sendUpdate(unique, changed, prev, new):
         msg = MIMEMultipart()
         msg['From'] = "saikasam98@gmail.com"
         msg['To'] = recept
-        msg['Subject'] = "Your Course Unique has changed"
+        msg['Subject'] = "Your Course " + Unique +" has changed.\n"
         body = "Your course " + unique + " has changed. "
         for i in range(len(changed)):
             body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
