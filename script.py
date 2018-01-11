@@ -111,7 +111,7 @@ def checkForUpdates(checkDict,browser):
         sendUpdate(unique, changed, webDict, checkDict) ### send emails ###
         print(changed)
 
-def sendUpdate(unique, changed, prev , new):
+def sendUpdate(unique, changed, prev, new):
     ref = db.reference('courses_subscribers/' + unique)
     #print(ref.get())
     values = ref.get().values()
@@ -123,8 +123,8 @@ def sendUpdate(unique, changed, prev , new):
         msg = MIMEMultipart()
         msg['From'] = "saikasam98@gmail.com"
         msg['To'] = recept
-        msg['Subject'] = "COURSE CHANGED!"
-        body = "Your course " + unique + ", its " + changed + " has changed! Please log in to check your status."
+        msg['Subject'] = "Your Course Unique has changed"
+        body = "Your course " + unique + ", its " + changed + " has changed from " + prev + " to " + new + "! Please log in to check your status."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
