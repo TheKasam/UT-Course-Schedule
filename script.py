@@ -151,7 +151,7 @@ def sendUpdate(unique, changed, prev, new):
         msg = MIMEMultipart()
         msg['From'] = "saikasam98@gmail.com"
         msg['To'] = recept
-        msg['Subject'] = "Your Course " + Unique +" has changed.\n"
+        msg['Subject'] = "Your Course " + unique +" has changed.\n"
         body = "Your course " + unique + " has changed. "
         for i in range(len(changed)):
             body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
