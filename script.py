@@ -26,7 +26,7 @@ firebase_admin.initialize_app(cred, {
 def main():
     totalTime = 20
     startTime = 0
-    endTime = 0
+    endTime = 20
     while(True):
 
         timeToSleep = totalTime - (endTime - startTime)
@@ -137,7 +137,7 @@ def checkForUpdates(checkDict,browser):
     if changed:
         print(changed, prev, new)
 
-        sendUpdate(unique, changed, webDict, checkDict) ### send emails ###
+        sendUpdate(unique, changed, prev, new) ### send emails ###
 
 def sendUpdate(unique, changed, prev, new):
     ref = db.reference('courses_subscribers/' + unique)
@@ -153,10 +153,9 @@ def sendUpdate(unique, changed, prev, new):
         msg['To'] = recept
         msg['Subject'] = "Your Course " + unique +" has changed.\n"
         body = "Your course " + unique + " has changed. "
-        print(changed[0],prev[0],new[0])
         for i in range(len(changed)):
             print(i)
-            body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
+            body +=  "Its " + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
         body = body + "Please log in to check your status."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
@@ -164,7 +163,7 @@ def sendUpdate(unique, changed, prev, new):
         service.login("saikasam98@gmail.com", "BetterMan")
         text = msg.as_string()
         try:
-            service.sendmail("saikasam98@gmail.com", recept, "Your mom")
+            service.sendmail("saikasam98@gmail.com", recept, text)
         except:
             service.quit()
             print("This didn't work")
