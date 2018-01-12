@@ -174,8 +174,11 @@
 
     var list = firebase.database().ref('/users/' + uid+"/following");
     list.child(key2).remove();
+    var re = new RegExp(',', 'g');
+    var val = numlst.slice(2).toString().replace(re,' ');
 
-    var val = numlst[2];
+    alert(val);
+    alert(key2);
     var list2 = firebase.database().ref('/courses_subscribers/' + val);
     list2.child(key2).remove();
 

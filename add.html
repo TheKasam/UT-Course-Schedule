@@ -10,7 +10,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
 
     <title>UT Course Updates</title>
 
@@ -1205,6 +1205,12 @@
         else if (number=="") {
             document.getElementById('course-error').innerHTML = 'Can not leave feilds empty';
             document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
+            return
+        }
+        else if (number.split(" ").length>1) {
+            document.getElementById('course-error').innerHTML = 'Can not have more than one word';
+            document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
+            return
         }
         else if (number.length > 5) {
             document.getElementById('course-error').innerHTML = 'Number must be less than 5 characters';
