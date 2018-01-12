@@ -153,7 +153,9 @@ def sendUpdate(unique, changed, prev, new):
         msg['To'] = recept
         msg['Subject'] = "Your Course " + unique +" has changed.\n"
         body = "Your course " + unique + " has changed. "
+        print(changed[0],prev[0],new[0])
         for i in range(len(changed)):
+            print(i)
             body = body + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
         body = body + "Please log in to check your status."
         msg.attach(MIMEText(body, 'plain'))
