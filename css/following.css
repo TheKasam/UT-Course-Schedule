@@ -202,3 +202,27 @@ border: none;
   padding: 1rem;
   text-align: center;
 }
+
+.footer2 {
+  position: absolute;
+  text-align: center;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+}
+.sign3{
+    background-color: #F3903C;
+  border: none;
+  color: darkorange;
+  padding: 0;
+  background: none;
+}
+.sign3:hover{
+    color: blue;
+}
+.contact2{
+text-align: left;
+padding-right: .5%;
+border: none;
+}
