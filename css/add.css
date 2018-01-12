@@ -275,6 +275,8 @@ border: none;
 }
 
 .footer2 {
+  width: 20vw;
+
   position: absolute;
   text-align: center;
   right: 0;

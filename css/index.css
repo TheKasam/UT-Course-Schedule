@@ -371,6 +371,7 @@ border: none;
 }
 .footer2 {
   position: absolute;
+  width: 20vw;
   text-align: center;
   right: 0;
   bottom: 0;
