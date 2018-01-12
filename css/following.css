@@ -8,11 +8,33 @@
   user-select: none;
 }
 
+@media only screen and (max-width: 801px) {
+    .hi {
+background: none !important
+    }
+    .mobileHeader:before{
+        content: "UT Course Updater";
+        color: white;
+        font-size: 5vw;
+        padding-left: 20%;
+    }
+
+
+}
+
 /* Show it is fixed to the top */
 .navbar-static-top.navbar{
    background-color: #333F48;
  }
+ .icon-bar {
+   color: white;
+   border-color: white;
+   background-color: white;
+ }
 
+.initial{
+    text-align: center;
+}
 .nav.navbar-nav li a  {
 
   color: white;

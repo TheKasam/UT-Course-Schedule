@@ -1,5 +1,30 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300');
 
+@media only screen and (max-width: 801px) {
+.text-item{
+    display: none;
+}
+.spacer{
+    display: none;
+}
+
+.mobileHeader:before{
+    content: "UT Course Updater";
+    color: white;
+    font-size: 5vw;
+    padding-left: 20%;
+
+}
+
+
+}
+.icon-bar {
+  color: white;
+  border-color: white;
+  background-color: white;
+}
+
+
 * {
   margin: 0;
   padding: 0;

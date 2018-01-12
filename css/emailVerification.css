@@ -8,6 +8,30 @@
   user-select: initial;
 }
 
+
+@media only screen and (max-width: 801px) {
+.text-item{
+    display: none;
+}
+.spacer{
+    display: none;
+}
+
+.mobileHeader:before{
+    content: "UT Course Updater";
+    color: white;
+    font-size: 5vw;
+    padding-left: 20%;
+}
+
+
+}
+
+.icon-bar {
+  color: white;
+  border-color: white;
+  background-color: white;
+}
 /* Show it is fixed to the top */
 .navbar-static-top.navbar{
    background-color: #333F48;
