@@ -972,28 +972,7 @@
 
         </div>
 
-        <div class='prof-item item'>
-            <div class='item-header'>
-            <h2>3. primary instructor</h2>
-            <p id='prof-error'></p>
-            </div>
-            <div class="item-spacer">
-                <p></p>
-            </div>
-            <div class='item-items'>
-            <p class='form-label'>instructor last name</p>
-            <input id='prof-id-last' type="text" class="form-control"  placeholder="Mcconaughey">
-            <button id='add-prof-btn-hidden'type="button" class="btn btn-primary btn-hidden">Follow</button>
-            <video width="20" id='spinner-prof-hidden' class="spinner spinner-hidden" height="20" src="assets/spiner.mov"></video>
-            </div>
 
-            <div class='item-items two-two'>
-            <p class='form-label'>first initial</p>
-            <input id='prof-id-first' type="text" class="form-control prof-form" placeholder="M">
-            <button id='add-prof-btn'type="button" class="btn btn-primary">Follow</button>
-            <video width="20" id='spinner-prof' class="spinner spinner-hidden" height="20" src="assets/spinner.mov"></video>
-            </div>
-        </div>
 
 
 
@@ -1130,13 +1109,8 @@
 
     //tunns border red
     function borderRed(type){
-        if (type == 'prof'){
-            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
-            document.getElementById('prof-id-last').className = document.getElementById('prof-id-first').className + ' error';
-            document.getElementById('prof-error').innerHTML = 'Could not find professor';
 
-        }
-        else if (type == 'course'){
+        if (type == 'course'){
             document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
             document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
             document.getElementById('course-error').innerHTML = 'Could not find course';
@@ -1148,12 +1122,6 @@
 
         }
 
-        else if (type == 'profd'){
-            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
-            document.getElementById('prof-id-last').className = document.getElementById('prof-id-first').className + ' error';
-            document.getElementById('prof-error').innerHTML = 'Professor is already added.';
-
-        }
         else if (type == 'coursed'){
             document.getElementById('course-id').className = document.getElementById('course-id').className + ' error';
             document.getElementById('sel1').className = document.getElementById('sel1').className + ' error';
@@ -1249,38 +1217,7 @@
 
     });
 
-    document.getElementById("add-prof-btn").addEventListener("click", function() {
-        //error resetting
-        document.getElementById('prof-id-first').className = 'form-control';
-        document.getElementById('prof-id-last').className ='form-control';
-        document.getElementById('prof-error').innerHTML = '';
 
-        var last = document.getElementById('prof-id-last').value;
-        var first = document.getElementById('prof-id-first').value;
-        var input = last + " " + first;
-
-        if (last == "" ){
-
-            document.getElementById('prof-id-last').className = document.getElementById('prof-id-last').className + ' error';
-            document.getElementById('prof-error').innerHTML = 'Can not leave field empty';
-            return
-        }
-         else if (first =="") {
-            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
-            document.getElementById('prof-error').innerHTML = 'Can not leave field empty';
-            return
-         }
-
-        else if (first.length != 1) {
-            document.getElementById('prof-error').innerHTML = 'Only one character for first initial';
-            document.getElementById('prof-id-first').className = document.getElementById('prof-id-first').className + ' error';
-
-            return
-        }
-
-        validate('prof',input);
-
-    });
 
 
     </script>

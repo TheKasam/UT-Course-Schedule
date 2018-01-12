@@ -89,7 +89,7 @@ def main():
                         endTime = time.time()
                         continue
                     innerDict = data[outerKey][innerKey]
-                    checkForUpdates(innerDict,browser)
+                    checkForUpdates(innerDict,browser,outerKey)
                 endTime = time.time()
                 continue
 
@@ -98,12 +98,12 @@ def main():
                 endTime = time.time()
                 continue
 
-            checkForUpdates(outerDict,browser)
+            checkForUpdates(outerDict,browser,False)
 
         endTime = time.time()
         print(dataKeysList)
 
-def checkForUpdates(checkDict,browser):
+def checkForUpdates(checkDict,browser,outerKey):
     unique = checkDict['unique']
 
     ### GET SOUP ###
@@ -136,6 +136,34 @@ def checkForUpdates(checkDict,browser):
             prev.append(checkDict[key])
     if changed:
         print(changed, prev, new)
+
+        if outerKey:
+            newCouseId = ""
+            for x in range(len(outerKey)):
+
+                if x == 1 and outerKey[x] == " ":
+                    newCouseId += '+'
+                    continue
+                else:
+                    newCouseId += outerKey[x]
+            courseId = newCouseId
+
+            db.reference().child('courses').child(courseId).child(unique).update({
+                'days':webDict['days'],
+                'hour':webDict['hour'],
+                'room':webDict['room'],
+                'instructor':webDict['instructor'],
+                'status':webDict['status'],
+            })
+        else:
+            db.reference().child('courses').child(unique).update({
+                'days':webDict['days'],
+                'hour':webDict['hour'],
+                'room':webDict['room'],
+                'instructor':webDict['instructor'],
+                'status':webDict['status'],
+            })
+
 
         sendUpdate(unique, changed, prev, new) ### send emails ###
 
