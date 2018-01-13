@@ -114,16 +114,35 @@ def checkForUpdates(checkDict,browser,outerKey):
     course_tr = course_a.parent.parent
 
     webDict = {}
-    webDict['days'] = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
-    webDict['hour'] = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
-    webDict['room'] = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
-    instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split()
+
+    try:
+        webDict['days'] = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+    except:
+        webDict['days'] = " "
+    try:
+        webDict['hour'] = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+    except:
+        webDict['hour'] = " "
+    try:
+        webDict['room'] = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+    except:
+        webDict['room'] = " "
+    try:
+        instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+    except:
+        instructorLst = ["None",'N']
+
+    if instructorLst == ['']:
+        instructorLst = ['None','N']
+    print(instructorLst)
     instructor = instructorName(instructorLst)
 
     webDict['instructor'] = instructor
 
-
-    webDict['status'] = course_tr.find('td',{'data-th':'Status'}).text
+    try:
+        webDict['status'] = course_tr.find('td',{'data-th':'Status'}).text
+    except:
+        webDict['status'] = " "
     webDict['unique'] = unique
 
     changed = []
@@ -232,13 +251,30 @@ def saveUnique(unique,browser):
     course_a = soup.find(text=unique).parent
     course_tr = course_a.parent.parent
 
-    days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
-    hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
-    room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
-    instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.split(" ")
-    instructor = instructorName(instructorLst)
+    try:
+        days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+    except:
+        days = " "
 
-    status = course_tr.find('td',{'data-th':'Status'}).text
+    try:
+        hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+    except:
+        hour = " "
+    try:
+        room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+    except:
+        room = " "
+    try:
+        instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+    except:
+        instructorLst = ['None','N']
+    if instructorLst == ['']:
+        instructorLst = ['None','N']
+    instructor = instructorName(instructorLst)
+    try:
+        status = course_tr.find('td',{'data-th':'Status'}).text
+    except:
+        status = " "
     print("bob")
     print(instructor)
 
@@ -278,13 +314,34 @@ def saveCourse(courseId,browser):
         course_a = soup.find(text=unique).parent
         course_tr = course_a.parent.parent
 
-        days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
-        hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
-        room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
-        instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.split(" ")
+        try:
+            days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+        except:
+            days = " "
+        try:
+            hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+        except:
+            hour = " "
+        try:
+            room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+        except:
+            room = " "
+        try:
+            instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+
+
+
+        except:
+            instructorLst = ['None','N']
+        if instructorLst == ['']:
+            instructorLst = ['None','N']
+
         instructor = instructorName(instructorLst)
 
-        status = course_tr.find('td',{'data-th':'Status'}).text
+        try:
+            status = course_tr.find('td',{'data-th':'Status'}).text
+        except:
+            status = " "
 
         db.reference().child('courses').child(courseId).child(unique).update({
             'unique':unique,
