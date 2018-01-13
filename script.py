@@ -211,6 +211,8 @@ def sendUpdate(unique, changed, prev, new,courseId):
             print(i)
             body +=  "Its " + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
         body = body + "\nPlease log in and remove all courses at utcourseupdates.com or reply to this email to stop receiving emails."
+        body = body + "\n\nThanks!"
+        body = body + "\nUt Course Updates"
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
