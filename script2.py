@@ -17,7 +17,7 @@ sys.setrecursionlimit(50000)
 def main():
     with open("browser.pickle","rb") as f:
         browser = pickle.load(f)
-        checkBrowserBool = checkBrowser(browser)
+
 
 
     feild = "bio"
