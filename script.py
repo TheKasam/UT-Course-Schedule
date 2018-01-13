@@ -312,50 +312,57 @@ def saveCourse(courseId,browser):
 
     course_a = soup.find('td',{'class':'course_header'}) #dont need
 
-    b = soup.find_all('a',{'title':'Unique number'})
-    for uniqueNum in b:
-        unique = uniqueNum.text
-        course_a = soup.find(text=unique).parent
-        course_tr = course_a.parent.parent
+    nextPage = True
+    while nextPage:
+        print("PAge")
+        b = soup.find_all('a',{'title':'Unique number'})
+        for uniqueNum in b:
+            unique = uniqueNum.text
+            course_a = soup.find(text=unique).parent
+            course_tr = course_a.parent.parent
 
-        try:
-            days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
-        except:
-            days = " "
-        try:
-            hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
-        except:
-            hour = " "
-        try:
-            room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
-        except:
-            room = " "
-        try:
-            instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+            try:
+                days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+            except:
+                days = " "
+            try:
+                hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+            except:
+                hour = " "
+            try:
+                room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+            except:
+                room = " "
+            try:
+                instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+            except:
+                instructorLst = ['None','N']
+            if instructorLst == ['']:
+                instructorLst = ['None','N']
 
+            instructor = instructorName(instructorLst)
 
+            try:
+                status = course_tr.find('td',{'data-th':'Status'}).text
+            except:
+                status = " "
 
-        except:
-            instructorLst = ['None','N']
-        if instructorLst == ['']:
-            instructorLst = ['None','N']
-
-        instructor = instructorName(instructorLst)
-
-        try:
-            status = course_tr.find('td',{'data-th':'Status'}).text
-        except:
-            status = " "
-
-        db.reference().child('courses').child(courseId).child(unique).update({
-            'unique':unique,
-            'days':days,
-            'hour':hour,
-            'room':room,
-            'instructor':instructor,
-            'status':status,
-        })
-        print("saved course")
+            db.reference().child('courses').child(courseId).child(unique).update({
+                'unique':unique,
+                'days':days,
+                'hour':hour,
+                'room':room,
+                'instructor':instructor,
+                'status':status,
+            })
+            print("saved course")
+            try:
+                nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
+                nextPage = True
+                browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/"+nextPageUrl)
+                soup = browser.get_current_page()
+            except:
+                nextPage = False
 def saveProf(prof,browser):
 
     name = prof.split()
