@@ -32,12 +32,25 @@ def main():
     nextPage = True
 
     while nextPage:
+        print("PAge")
         b = soup.find_all('a',{'title':'Unique number'})
         for uniqueNum in b:
             unique = uniqueNum.text
             course_a = soup.find(text=unique).parent
             course_tr = course_a.parent.parent
-            print(course_tr)
+            print(unique)
+            try:
+                days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+            except:
+                days = " "
+            try:
+                hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+            except:
+                hour = " "
+            try:
+                room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+            except:
+                room = " "
 
         try:
             nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
