@@ -105,7 +105,7 @@ def main():
 
 def checkForUpdates(checkDict,browser,outerKey):
     unique = checkDict['unique']
-
+    print("checking",outerKey,unique)
     ### GET SOUP ###
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/" + unique  + "/")
     soup = browser.get_current_page()
