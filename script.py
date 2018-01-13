@@ -134,7 +134,6 @@ def checkForUpdates(checkDict,browser,outerKey):
 
     if instructorLst == ['']:
         instructorLst = ['None','N']
-    print(instructorLst)
     instructor = instructorName(instructorLst)
 
     webDict['instructor'] = instructor
@@ -224,20 +223,16 @@ def sendUpdate(unique, changed, prev, new,courseId):
         service.quit()
 
 def instructorName(instructorLst):
-    print(instructorLst)
     instructorLstLocal = []
     for x in range(len(instructorLst)):
 
         if instructorLst[x] != " " and instructorLst[x] != "" :
             instructorLstLocal.append(instructorLst[x].replace(",",""))
-            print(instructorLstLocal)
 
     if len(instructorLstLocal) > 1:
-        print(instructorLstLocal)
 
         return (instructorLstLocal[0] + " " + instructorLstLocal[1][0])
     else:
-        print(instructorLstLocal)
         return  (instructorLstLocal[0])
 
 
@@ -276,7 +271,6 @@ def saveUnique(unique,browser):
     except:
         status = " "
     print("bob")
-    print(instructor)
 
     db.reference().child('courses').child(unique).update({
         'unique':unique,
