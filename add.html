@@ -1151,11 +1151,9 @@
         var user = firebase.auth().currentUser;
         var uid = user.uid;
         var dataBase = firebase.database();
-
         //adding a couse child and initing with type
         if (classId.substring(1,2) == '+'){
                 classId = classId.replace('+',' ');}
-
         dataBase.ref().child('courses').child(classId).update({
         queryType: type
         });

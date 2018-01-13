@@ -153,18 +153,15 @@ def checkForUpdates(checkDict,browser,outerKey):
             new.append(webDict[key])
             prev.append(checkDict[key])
     if changed:
-        print(changed, prev, new)
+        print(changed, prev, new,outerKey,checkDict)
 
         if outerKey:
-            newCouseId = ""
-            for x in range(len(outerKey)):
 
-                if x == 1 and outerKey[x] == " ":
-                    newCouseId += '+'
-                    continue
-                else:
-                    newCouseId += outerKey[x]
-            courseId = newCouseId
+            courseId = outerKey
+
+            print("Sent update")
+            sendUpdate(unique, changed, prev, new,courseId) ### send emails ###
+            print("Sent succesful")
 
             db.reference().child('courses').child(courseId).child(unique).update({
                 'days':webDict['days'],
@@ -173,7 +170,13 @@ def checkForUpdates(checkDict,browser,outerKey):
                 'instructor':webDict['instructor'],
                 'status':webDict['status'],
             })
+            print("Saved")
         else:
+            print("Sent update")
+            courseId = unique
+            sendUpdate(unique, changed, prev, new,courseId) ### send emails ###
+            print("Sent succesful")
+
             db.reference().child('courses').child(unique).update({
                 'days':webDict['days'],
                 'hour':webDict['hour'],
@@ -181,9 +184,8 @@ def checkForUpdates(checkDict,browser,outerKey):
                 'instructor':webDict['instructor'],
                 'status':webDict['status'],
             })
+            print("Saved")
 
-        print("Sent update")
-        sendUpdate(unique, changed, prev, new,courseId) ### send emails ###
 
 def sendUpdate(unique, changed, prev, new,courseId):
     print(courseId)
@@ -270,7 +272,7 @@ def saveUnique(unique,browser):
         status = course_tr.find('td',{'data-th':'Status'}).text
     except:
         status = " "
-    print("bob")
+
 
     db.reference().child('courses').child(unique).update({
         'unique':unique,
@@ -280,28 +282,27 @@ def saveUnique(unique,browser):
         'instructor':instructor,
         'status':status,
     })
-    return(status)
+    print("saved unique")
 
 def saveCourse(courseId,browser):
-    feild = courseId.split(" ")[0]
-    number = courseId.split(" ")[1]
+
     newCouseId = ""
-
-    if len(courseId.split(" "))> 2:
+    if len(courseId.split(" ")) > 2:
         for x in range(len(courseId)):
-
             if x == 1 and courseId[x] == " ":
                 newCouseId += '+'
-                continue
             else:
                 newCouseId += courseId[x]
 
 
-
-    courseIdLst= newCouseId.split(" ")
-    if "+" in newCouseId:
+    if newCouseId:
+        courseIdLst= newCouseId.split(" ")
         feild = courseIdLst[0]
         number = courseIdLst[1]
+    else:
+        feild = courseId.split(" ")[0]
+        number = courseId.split(" ")[1]
+
 
     ### GET SOUP ###
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=COURSE&fos_cn=" + feild+ "&course_number="+number)
@@ -352,7 +353,7 @@ def saveCourse(courseId,browser):
             'instructor':instructor,
             'status':status,
         })
-
+        print("saved course")
 def saveProf(prof,browser):
 
     name = prof.split()
