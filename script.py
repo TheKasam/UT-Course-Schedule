@@ -24,9 +24,9 @@ firebase_admin.initialize_app(cred, {
 
 
 def main():
-    totalTime = 10 * 60
+    totalTime = 30
     startTime = 0
-    endTime = 10 * 60
+    endTime = 30
     while(True):
 
         timeToSleep = totalTime - (endTime - startTime)
@@ -289,6 +289,8 @@ def saveUnique(unique,browser):
     return(status)
 
 def saveCourse(courseId,browser):
+    feild = courseId.split(" ")[0]
+    number = courseId.split(" ")[1]
     newCouseId = ""
     for x in range(len(courseId)):
 
@@ -299,8 +301,8 @@ def saveCourse(courseId,browser):
             newCouseId += courseId[x]
     courseId = newCouseId
     courseIdLst= courseId.split(" ")
-    feild = courseIdLst[0]
-    number = courseIdLst[1]
+    #feild = courseIdLst[0]
+    #number = courseIdLst[1]
 
     ### GET SOUP ###
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=COURSE&fos_cn=" + feild+ "&course_number="+number)
