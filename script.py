@@ -24,9 +24,9 @@ firebase_admin.initialize_app(cred, {
 
 
 def main():
-    totalTime = 30
+    totalTime = 60 * 5
     startTime = 0
-    endTime = 30
+    endTime = 60 * 5
     while(True):
 
         timeToSleep = totalTime - (endTime - startTime)
