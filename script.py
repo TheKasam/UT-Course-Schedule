@@ -299,10 +299,13 @@ def saveCourse(courseId,browser):
             continue
         else:
             newCouseId += courseId[x]
+
+
     courseId = newCouseId
     courseIdLst= courseId.split(" ")
-    #feild = courseIdLst[0]
-    #number = courseIdLst[1]
+    if "+" in newCouseId:
+        feild = courseIdLst[0]
+        number = courseIdLst[1]
 
     ### GET SOUP ###
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=COURSE&fos_cn=" + feild+ "&course_number="+number)
