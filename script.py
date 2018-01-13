@@ -356,13 +356,13 @@ def saveCourse(courseId,browser):
                 'status':status,
             })
             print("saved course")
-            try:
-                nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
-                nextPage = True
-                browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/"+nextPageUrl)
-                soup = browser.get_current_page()
-            except:
-                nextPage = False
+        try:
+            nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
+            nextPage = True
+            browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/"+nextPageUrl)
+            soup = browser.get_current_page()
+        except:
+            nextPage = False
 def saveProf(prof,browser):
 
     name = prof.split()
