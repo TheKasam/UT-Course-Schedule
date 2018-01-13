@@ -355,7 +355,6 @@ border: 1px solid rgba(0,0,0,0);
 
 .contact{
 text-align: right;
-padding-right: .5%;
 border: none;
 }
 
@@ -368,8 +367,9 @@ border: none;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 1rem;
-  text-align: center;
+  text-align: left;
+
+width: 30vw;
 }
 .footer2 {
   position: absolute;
@@ -379,6 +379,8 @@ border: none;
   bottom: 0;
   left: 0;
   padding: 1rem;
+  z-index: 0;
+
 }
 .sign3{
     background-color: #F3903C;
