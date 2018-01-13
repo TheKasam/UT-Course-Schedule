@@ -1007,37 +1007,11 @@
 
 
 
-    function checkDup(type, input){
-        var dataBase = firebase.database();
-        var user = firebase.auth().currentUser;
 
-        var uid2 = user.uid;
-        var ref = dataBase.ref("users/"+uid2+"/following");
-
-        ref.once('value', function(snapshot) {
-            var bob =  snapshot.forEach(function(childSnapshot) {
-              var childKey = childSnapshot.key;
-              var childData = childSnapshot.val();
-              if (input === childData){
-                  var ans2 = '2';
-
-                  document.getElementById("spinner-"+type).className = document.getElementById("spinner-"+type).className + " spinner-hidden";
-                  document.getElementById('test1').innerHTML = 'sucks';
-                  borderRed(type);
-                  var dup = true;
-                  return dup;
-
-              }
-
-            });
-            alert(bob);
-
-          });
-
-    }
 
     function validate(type,input){
-
+        if (input.substring(1,2) == '+'){
+                input = input.replace('+',' ');}
 
         document.getElementById("spinner-"+type).className = 'spinner';
         var vid = document.getElementById("spinner-"+type);
