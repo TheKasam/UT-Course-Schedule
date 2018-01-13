@@ -264,6 +264,7 @@
 
                     user.sendEmailVerification().then(function() {
                       // Email sent.
+                      alert("sent");
                       saveData('emailVerification.html');
 
                     }).catch(function(error) {

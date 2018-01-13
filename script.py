@@ -297,8 +297,8 @@ def saveCourse(courseId,browser):
                 newCouseId += courseId[x]
 
 
-    courseId = newCouseId
-    courseIdLst= courseId.split(" ")
+
+    courseIdLst= newCouseId.split(" ")
     if "+" in newCouseId:
         feild = courseIdLst[0]
         number = courseIdLst[1]
