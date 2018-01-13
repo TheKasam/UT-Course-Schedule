@@ -25,7 +25,11 @@ def main():
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=COURSE&fos_cn=" + feild+ "&course_number="+number)
     soup = browser.get_current_page()
 
-    nextPageUrl = soup.find('a',{'id':'next_nav_link'})
-    print(nextPageUrl['href'])
+    nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
 
+    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/"+nextPageUrl)
+    soup = browser.get_current_page()
+    course_a = soup.find('td',{'class':'course_header'})
+    b = soup.find_all('a',{'title':'Unique number'})
+    print(b)
 main()
