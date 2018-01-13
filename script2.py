@@ -38,20 +38,7 @@ def main():
             course_a = soup.find(text=unique).parent
             course_tr = course_a.parent.parent
             print(course_tr)
-            try:
-                days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
-            except:
-                days = " "
-            try:
-                hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
-            except:
-                hour = " "
-            try:
-                room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
-            except:
-                room = " "
-            try:
-                instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+
         try:
             nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
             nextPage = True
