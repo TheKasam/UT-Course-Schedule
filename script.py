@@ -286,18 +286,20 @@ def saveCourse(courseId,browser):
     feild = courseId.split(" ")[0]
     number = courseId.split(" ")[1]
     newCouseId = ""
-    for x in range(len(courseId)):
 
-        if x == 1 and courseId[x] == " ":
-            newCouseId += '+'
-            continue
-        else:
-            newCouseId += courseId[x]
+    if len(courseId.split(" "))> 2:
+        for x in range(len(courseId)):
+
+            if x == 1 and courseId[x] == " ":
+                newCouseId += '+'
+                continue
+            else:
+                newCouseId += courseId[x]
 
 
     courseId = newCouseId
     courseIdLst= courseId.split(" ")
-    if "+" in newCouseId and len(courseIdLst) > 2:
+    if "+" in newCouseId:
         feild = courseIdLst[0]
         number = courseIdLst[1]
 
