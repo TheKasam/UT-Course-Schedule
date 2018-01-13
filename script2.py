@@ -25,11 +25,37 @@ def main():
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=COURSE&fos_cn=" + feild+ "&course_number="+number)
     soup = browser.get_current_page()
 
-    nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
+    # browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/"+nextPageUrl)
+    # soup = browser.get_current_page()
 
-    browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/"+nextPageUrl)
-    soup = browser.get_current_page()
     course_a = soup.find('td',{'class':'course_header'})
-    b = soup.find_all('a',{'title':'Unique number'})
+    nextPage = True
+
+    while nextPage:
+        b = soup.find_all('a',{'title':'Unique number'})
+        for uniqueNum in b:
+            unique = uniqueNum.text
+            course_a = soup.find(text=unique).parent
+            course_tr = course_a.parent.parent
+            print(course_tr)
+            try:
+                days = course_tr.find('td',{'data-th':'Days'}).select_one('span').text
+            except:
+                days = " "
+            try:
+                hour = course_tr.find('td',{'data-th':'Hour'}).select_one('span').text
+            except:
+                hour = " "
+            try:
+                room = course_tr.find('td',{'data-th':'Room'}).select_one('span').text
+            except:
+                room = " "
+            try:
+                instructorLst = course_tr.find('td',{'data-th':'Instructor'}).text.strip().split(" ")
+        try:
+            nextPageUrl = soup.find('a',{'id':'next_nav_link'})['href']
+            nextPage = True
+        except:
+            nextPage = False
 
 main()
