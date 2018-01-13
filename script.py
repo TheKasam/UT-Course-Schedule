@@ -24,9 +24,9 @@ firebase_admin.initialize_app(cred, {
 
 
 def main():
-    totalTime = 30
+    totalTime = 20
     startTime = 0
-    endTime = 30
+    endTime = 20
     while(True):
 
         timeToSleep = totalTime - (endTime - startTime)
@@ -164,13 +164,19 @@ def checkForUpdates(checkDict,browser,outerKey):
                 'status':webDict['status'],
             })
 
+        print("Sent update")
+        sendUpdate(unique, changed, prev, new,courseId) ### send emails ###
 
-        sendUpdate(unique, changed, prev, new) ### send emails ###
+def sendUpdate(unique, changed, prev, new,courseId):
+    print(courseId)
+    ref = db.reference('courses_subscribers/' + courseId)
 
-def sendUpdate(unique, changed, prev, new):
-    ref = db.reference('courses_subscribers/' + unique)
-    #print(ref.get())
-    values = ref.get().values()
+    try:
+        values = ref.get().values()
+    except:
+        print("line 176ish")
+        return
+
     print(values)
     for each in values:
         refe = db.reference('users/' + each + "/email")
@@ -184,7 +190,7 @@ def sendUpdate(unique, changed, prev, new):
         for i in range(len(changed)):
             print(i)
             body +=  "Its " + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
-        body = body + "Please log in to check your status."
+        body = body + "\nPlease log in and remove all courses at utcourseupdates.com or reply to this email to stop receiving emails."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
