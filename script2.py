@@ -26,6 +26,6 @@ def main():
     soup = browser.get_current_page()
 
     nextPageUrl = soup.find('a',{'id':'next_nav_link'})
-    print(nextPageUrl.text)
+    print(nextPageUrl.href)
 
 main()
