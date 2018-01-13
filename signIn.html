@@ -30,6 +30,17 @@
         <!--  height = 100x no of pages -->
 
     <meta name="google-site-verification" content="NXlFLJXSy3VPsvdA4io3prWv0zIqIUibzw-eHnt9N9U" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-92992776-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-92992776-2');
+    </script>
+
   </head>
 
   <body>
@@ -60,8 +71,8 @@
 
     <div class='container b'>
       <div class='text-item'>
-          <p id='initial' class='body-a'><strong>Need To Stay Updated With
-            <br>The Course Schedule?</strong><br>
+          <p id='initial' class='body-a'><strong>Need To Stay Updated
+            <br>With a Class?</strong><br>
             <br>We'll Keep Track of Your Unique IDs and or Classes<br>
             <br>And Let You Know if a Class Opens Up or Anything Changes.</p>
         </div>
@@ -251,7 +262,7 @@
          if (user) {
              var emailVerified = user.emailVerified;
              if (emailVerified == false){
-                 document.location.href = 'signIn.html';
+                 document.location.href = 'emailVerification.html';
 
             }
 
