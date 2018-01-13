@@ -116,7 +116,9 @@ body {
   order:1;
   width: 70vh;
 }
-
+.text-item2{
+  order:1;
+}
 .spacer{
   order: 2;
   width: 200px;
@@ -397,7 +399,7 @@ border: none;
 
 
 .body-a2{
-    font-size: 1vw;
+    font-size: 7vw;
     color: black;
     font-weight: 300;
     text-align: center;

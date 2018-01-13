@@ -177,8 +177,7 @@
     var re = new RegExp(',', 'g');
     var val = numlst.slice(2).toString().replace(re,' ');
 
-    alert(val);
-    alert(key2);
+
     var list2 = firebase.database().ref('/courses_subscribers/' + val);
     list2.child(key2).remove();
 
