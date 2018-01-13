@@ -20,7 +20,7 @@ def main():
 
 
 
-    feild = "mis"
+    feild = "bio"
     number = '325'
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/results/?ccyys=20182&search_type_main=COURSE&fos_cn=" + feild+ "&course_number="+number)
     soup = browser.get_current_page()
