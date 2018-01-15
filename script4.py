@@ -1,0 +1,35 @@
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+import bs4 as bs
+import re
+import mechanicalsoup
+import time
+import pickle
+import sys
+import smtplib
+from email.mime.multipart import MIMEMultipart
+
+from email.mime.text import MIMEText
+sys.setrecursionlimit(50000)
+#firebase-adminsdk-jgy6n@courseschedule-8a816.iam.gserviceaccount.com
+# Fetch the service account key JSON file contents
+cred = credentials.Certificate('courseschedule-8a816-firebase-adminsdk-jgy6n-2f35d9eaad.json')
+
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://courseschedule-8a816.firebaseio.com/'
+})
+
+
+def main():
+
+
+
+    emailFile = open("emailList1.txt",'r')
+    sennt = emailFile.read().split(" ")
+
+    print(sennt)
+
+
+main()
