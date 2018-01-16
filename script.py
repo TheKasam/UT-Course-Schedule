@@ -404,8 +404,8 @@ def logIn():
     # Fill-in the form
     browser.select_form('form[name="Login"]')
     #browser.get_current_form().print_summary()
-    browser["IDToken1"] = "mj27877"
-    browser["IDToken2"] = "Sai1baba"
+    browser["IDToken1"] = "mj27879"
+    browser["IDToken2"] = "Touchstone789"
 
     browser.submit_selected(btnName="Login.Submit")
 
