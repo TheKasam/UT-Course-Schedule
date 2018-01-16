@@ -26,10 +26,19 @@ def main():
 
 
 
-    emailFile = open("emailList1.txt",'r')
-    sennt = emailFile.read().split(" ")
+    ref = db.reference('courses')
+    data = ref.get()
 
-    print(sennt)
+    ref = db.reference('courses_subscribers')
+    data2 = ref.get()
+
+    print(len(data),len(data2))
+    for x in data:
+
+        if x not in data2:
+            print(x)
+
+
 
 
 main()
