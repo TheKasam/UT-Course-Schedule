@@ -46,7 +46,7 @@ def main():
 
 
     sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-    from_email = Email("utcourseupdates")
+    from_email = Email("staff@utcourseupdates")
     to_email = Email("support@utcourseupdates.com")
     subject = "Ut Course Updates"
     content = Content("text/plain", "and easy to do anywhere, even with Python")
