@@ -219,7 +219,7 @@ def sendUpdate(unique, changed, prev, new,courseId):
         body = body + "\n\nThanks!"
         body = body + "\nHelp at Ut Course Updates"
 
-        content = Content(body)
+        content = Content("text/plain",body)
         mail = Mail(from_email, subject, to_email, content)
         response = sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
