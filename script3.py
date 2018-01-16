@@ -14,7 +14,7 @@ from email.mime.text import MIMEText
 sys.setrecursionlimit(50000)
 #firebase-adminsdk-jgy6n@courseschedule-8a816.iam.gserviceaccount.com
 # Fetch the service account key JSON file contents
-cred = credentials.Certificate('courseschedule-8a816-firebase-adminsdk-jgy6n-2f35d9eaad.json')
+cred = credentials.Certificate('CourseSchedule-3bcfcbe9da61.json')
 
 # Initialize the app with a service account, granting admin privileges
 firebase_admin.initialize_app(cred, {
