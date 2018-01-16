@@ -215,7 +215,7 @@ def sendUpdate(unique, changed, prev, new,courseId):
         for i in range(len(changed)):
             print(i)
             body +=  "Its " + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
-        body = body + "\nPlease log in and remove all courses at utcourseupdates.com or reply to this email to stop receiving emails."
+        body = body + "\nPlease log in and remove all courses at utcourseupdates.com or reply to this email to stop receiving emails. Please check spam if you dont see future emails."
         body = body + "\n\nThanks!"
         body = body + "\nHelp at Ut Course Updates"
 
