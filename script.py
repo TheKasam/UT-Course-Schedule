@@ -41,13 +41,13 @@ def main():
         ###put out most infinate loop ###
 
         #logging in to course schedule
-        with open("browser.pickle","rb") as f:
-            browser = pickle.load(f)
-            checkBrowserBool = checkBrowser(browser)
-            if  checkBrowserBool == False:
-                browser = logIn()
+        # with open("browser.pickle","rb") as f:
+        #     browser = pickle.load(f)
+        #     checkBrowserBool = checkBrowser(browser)
+        #     if  checkBrowserBool == False:
+        #         browser = logIn()
 
-
+        browser = logIn()
 
 
         #getting firebase data
@@ -404,7 +404,7 @@ def logIn():
     # Fill-in the form
     browser.select_form('form[name="Login"]')
     #browser.get_current_form().print_summary()
-    browser["IDToken1"] = "jc86846"
+    browser["IDToken1"] = "mj27877"
     browser["IDToken2"] = "Sai1baba"
 
     browser.submit_selected(btnName="Login.Submit")
