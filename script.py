@@ -13,6 +13,10 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 sys.setrecursionlimit(50000)
 
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
+
 #firebase-adminsdk-jgy6n@courseschedule-8a816.iam.gserviceaccount.com
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('courseschedule-8a816-firebase-adminsdk-jgy6n-2f35d9eaad.json')
@@ -202,10 +206,11 @@ def sendUpdate(unique, changed, prev, new,courseId):
         refe = db.reference('users/' + each + "/email")
         print(refe.get())
         recept = refe.get()
-        msg = MIMEMultipart()
-        msg['From'] = "help@utcourseupdates.com"
-        msg['To'] = recept
-        msg['Subject'] = "Your Course " + unique +" has changed.\n"
+
+        sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+        from_email = Email("staff@utcourseupdates.com")
+        to_email = Email(recept)
+        subject = "Your Course " + unique +" has changed."
         body = "Your course " + unique + " has changed. "
         for i in range(len(changed)):
             print(i)
@@ -213,19 +218,15 @@ def sendUpdate(unique, changed, prev, new,courseId):
         body = body + "\nPlease log in and remove all courses at utcourseupdates.com or reply to this email to stop receiving emails."
         body = body + "\n\nThanks!"
         body = body + "\nHelp at Ut Course Updates"
-        msg.attach(MIMEText(body, 'plain'))
-        service = smtplib.SMTP('smtp.gmail.com', 587)
-        service.starttls()
-        service.login("help@utcourseupdates.com", "updatescourseut")
-        text = msg.as_string()
-        try:
-            service.sendmail("help@utcourseupdates.com", recept, text)
-        except:
-            service.quit()
-            print("This didn't work")
-            service.sendmail("help@utcourseupdates.com", 'saikasam98@gmail.com', text)
-            continue
-        service.quit()
+
+        content = Content(body)
+        mail = Mail(from_email, subject, to_email, content)
+        response = sg.client.mail.send.post(request_body=mail.get())
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+
+
 
 def instructorName(instructorLst):
     instructorLstLocal = []
