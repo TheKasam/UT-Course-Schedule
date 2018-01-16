@@ -40,7 +40,7 @@ def main():
         print("new LOOOP")
         ###put out most infinate loop ###
 
-        logging in to course schedule
+        #logging in to course schedule
         with open("browser.pickle","rb") as f:
             browser = pickle.load(f)
             checkBrowserBool = checkBrowser(browser)
