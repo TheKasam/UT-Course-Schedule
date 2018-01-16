@@ -203,7 +203,7 @@ def sendUpdate(unique, changed, prev, new,courseId):
         print(refe.get())
         recept = refe.get()
         msg = MIMEMultipart()
-        msg['From'] = "support@utcourseupdates.com"
+        msg['From'] = "help@utcourseupdates.com"
         msg['To'] = recept
         msg['Subject'] = "Your Course " + unique +" has changed.\n"
         body = "Your course " + unique + " has changed. "
@@ -212,17 +212,18 @@ def sendUpdate(unique, changed, prev, new,courseId):
             body +=  "Its " + changed[i] + " has changed from " + prev[i] + " to " + new[i] + ".\n"
         body = body + "\nPlease log in and remove all courses at utcourseupdates.com or reply to this email to stop receiving emails."
         body = body + "\n\nThanks!"
-        body = body + "\nUt Course Updates"
+        body = body + "\nHelp at Ut Course Updates"
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
-        service.login("support@utcourseupdates.com", "updatescourseut")
+        service.login("help@utcourseupdates.com", "updatescourseut")
         text = msg.as_string()
         try:
-            service.sendmail("support@utcourseupdates.com", recept, text)
+            service.sendmail("help@utcourseupdates.com", recept, text)
         except:
             service.quit()
             print("This didn't work")
+            service.sendmail("help@utcourseupdates.com", 'saikasam98@gmail.com', text)
             continue
         service.quit()
 
