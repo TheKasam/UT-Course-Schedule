@@ -21,7 +21,6 @@ def main():
 
 
 
-main()
 
 def logIn():
     # Connect to Google
@@ -70,3 +69,6 @@ def checkBrowser(browser):
     except:
         print(False)
         return False
+
+
+main()
