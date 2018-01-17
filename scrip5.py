@@ -2,6 +2,7 @@ import pickle
 import mechanicalsoup
 import sys
 import time
+sys.setrecursionlimit(50000)
 
 def main():
 
