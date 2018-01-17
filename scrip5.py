@@ -5,13 +5,13 @@ import time
 
 def main():
 
-    with open("browser.pickle","rb") as f:
-        browser = pickle.load(f)
-        checkBrowserBool = checkBrowser(browser)
-        if  checkBrowserBool == False:
-            browser = logIn()
+    # with open("browser.pickle","rb") as f:
+    #     browser = pickle.load(f)
+    #     checkBrowserBool = checkBrowser(browser)
+    #     if  checkBrowserBool == False:
+    #         browser = logIn()
 
-
+    browser = logIn()
     sleepSec = 6 * 60
     print(sleepSec)
     time.sleep(sleepSec)
