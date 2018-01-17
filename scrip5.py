@@ -1,6 +1,7 @@
 import pickle
 import mechanicalsoup
 import sys
+import time
 
 def main():
 
