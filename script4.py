@@ -32,29 +32,29 @@ def main():
 
 
 
-    # ref = db.reference('courses')
-    # data = ref.get()
-    #
-    # ref = db.reference('courses_subscribers')
-    # data2 = ref.get()
-    #
-    # print(len(data),len(data2))
-    # for x in data:
-    #
-    #     if x not in data2:
-    #         print(x)
+    ref = db.reference('courses')
+    data = ref.get()
+
+    ref = db.reference('courses_subscribers')
+    data2 = ref.get()
+
+    print(len(data),len(data2))
+    for x in data:
+
+        if x not in data2:
+            print(x)
 
 
-    sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-    from_email = Email("staff@utcourseupdates")
-    to_email = Email("support@utcourseupdates.com")
-    subject = "Ut Course Updates"
-    content = Content("text/plain", "and easy to do anywhere, even with Python")
-    mail = Mail(from_email, subject, to_email, content)
-    response = sg.client.mail.send.post(request_body=mail.get())
-    print(response.status_code)
-    print(response.body)
-    print(response.headers)
+    # sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+    # from_email = Email("staff@utcourseupdates")
+    # to_email = Email("support@utcourseupdates.com")
+    # subject = "Ut Course Updates"
+    # content = Content("text/plain", "and easy to do anywhere, even with Python")
+    # mail = Mail(from_email, subject, to_email, content)
+    # response = sg.client.mail.send.post(request_body=mail.get())
+    # print(response.status_code)
+    # print(response.body)
+    # print(response.headers)
 
 
 main()
