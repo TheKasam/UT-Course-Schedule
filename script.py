@@ -436,6 +436,7 @@ def stall(sec):
 def checkBrowser(browser):
 
     ### GET SOUP ###
+    time.sleep(0.01)
     browser.open("https://utdirect.utexas.edu/apps/registrar/course_schedule/20182/" + '12345'  + "/")
     soup = browser.get_current_page()
     try:
