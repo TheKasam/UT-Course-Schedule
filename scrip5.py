@@ -1,5 +1,6 @@
-import time
-
+import pickle
+import mechanicalsoup
+import sys
 
 def main():
 
@@ -56,7 +57,7 @@ def stall(sec):
     end = time.time()
     while end - start < sec:
         end = time.time()
-        
+
 def checkBrowser(browser):
 
     ### GET SOUP ###
