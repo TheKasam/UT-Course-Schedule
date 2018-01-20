@@ -24,48 +24,49 @@ firebase_admin.initialize_app(cred, {
 
 def main():
 
+
+    emailList = [ 'madalyn4@gmail.com', 'adamjbressler@yahoo.com', 'skyler.cheyenne.jennings@gmail.com', 'daniellehyde@utexas.edu', 'kristinmobryan@gmail.com', 'faria.khimani@utexas.edu', 'tranmyle12@gmail.com', 'stevenehuang@gmail.com', 'aaronbkwok@gmail.com', 'parimi.nehal@gmail.com', 'natitribaldos@gmail.com', 'anirudh.vadrevu@gmail.com', 'vince.sluss@yahoo.com', 'saikasam98@gmail.com']
+
     # emailFile = open("emailList1.txt",'r')
     # sennt = emailFile.read().split(" ")
-    #
+
 
     # ref = db.reference()
     # data = ref.get()
-    # print(data)
     # ref = db.reference('users')
     # data = ref.get()
     # print(len(data))
-    emailList = []
+    # emailList = []
     # for x in data:
     #     # if data[x]['email'] not in sennt:
     #     try:
     #         data[x]['following']
-    #     except:
-    #
     #         emailList.append(data[x]['email'])
-
-
-    emailList.append('saikasam98@gmail.com')
-    # emailList.remove('ikunge@utexas.edu')
-    # emailList.remove('chuffithetugboatcoach37@gmail.com')
+    #     except:
+    #         print("rip")
+    #
+    #
+    # emailList.append('saikasam98@gmail.com')
+    #
     # print(len(emailList))
-    # emailFile = open("emailList2.txt",'w')
+    # emailFile = open("emailList23.txt",'w')
 
-
+    print(emailList)
     for email in emailList:
         # emailFile.write(email)
         print(email)
         msg = MIMEMultipart()
         msg['From'] = "help@utcourseupdates.com"
         msg['To'] = email
-        msg['Subject'] = "Ut Course Updates"
-        body = "Hello!\n 33675 went from waitlisted to closed."
+        msg['Subject'] = "Ut Course Updates is Shutting down for the semester"
+        body = "Hello!"
+        body = body + "\n Thank you all for using this service this year, had a few issues from the UT Computational Service at the end but hopefully by next semester we'll get in touch with them and have the kinks ironed out!"
         body = body + "\n\nThanks!"
         body = body + "\nHelp at Ut Course Updates"
-        body = body + "\n\nReply to this email requesting to delete your account to stop receiving emails."
         msg.attach(MIMEText(body, 'plain'))
         service = smtplib.SMTP('smtp.gmail.com', 587)
         service.starttls()
-        service.login("help@utcourseupdates.com", "updatescourseut")
+        service.login("support@utcourseupdates.com", "updatescourseut")
         text = msg.as_string()
         service.sendmail("help@utcourseupdates.com", email, text)
         print('sent')
