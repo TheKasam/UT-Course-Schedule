@@ -1,5 +1,7 @@
 # UT Course Updates
 
+site access: http://ut-course-updates.s3-website.us-east-2.amazonaws.com/
+
 UT Course Updates was a service I made for UT Students to get an email and text updates when ever a waitlist spot opened up.
 
 ## Useage
