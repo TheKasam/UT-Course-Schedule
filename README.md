@@ -35,4 +35,4 @@ python3 script.py
 
 ## Project Success
 
-Over 1100 UT Students Used this service before being requested to be taken down by UT IT Admin. Database is currently not functional.
+Over 1100 UT Students Used this service before being requested to be taken down by UT IT Admin due to load on their servers. Database is currently not functional.
