@@ -1,6 +1,6 @@
 # UT Course Updates
 
-site access: http://ut-course-updates.s3-website.us-east-2.amazonaws.com/
+Wireframe: https://github.com/TheKasam/UT-Course-Schedule/blob/master/Wire%20Frames/Wire%20Frame.png
 
 UT Course Updates was a service I made for UT Students to get an email and text updates when ever a waitlist spot opened up.
 
